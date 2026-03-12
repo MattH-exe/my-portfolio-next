@@ -1607,7 +1607,7 @@ function Modal({ project, onClose }) {
         </div>
 
         <div style={{ padding: mobile ? "20px 20px 36px" : "28px 36px 44px" }}>
-          /* Role & team context */
+          {/* Role & team context */}
           {project.role && (
             <div
               style={{

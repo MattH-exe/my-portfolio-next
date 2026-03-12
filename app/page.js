@@ -133,7 +133,7 @@ const PROJECTS = [
     color: "#7c3aed",
     emoji: "⚡",
     heroImage: null,
-    role: "Design Systems Lead · Collaborated with iOS engineers, web engineers, and product designers across three product teams",
+    role: "Puckboard Logging SME (cross-functional team) · Collaborated with iOS engineers, web engineers, and product designers across three product teams",
     contributions: [
       "Token-based color, typography, and spacing foundation across iOS and web",
       "42+ Figma component library with full variant and state coverage",

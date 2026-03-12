@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Matthew Henning — Product Designer",
+  title: "Hi, I'm Matt",
   description:
     "Research-driven design for systems that matter. M.S. HCI, University of Michigan. Based in Chicago.",
 };

@@ -223,7 +223,7 @@ const PROJECTS = [
     color: "#10b981",
     emoji: "🌲",
     heroImage: null,
-    role: "Solo UX Designer & Researcher · Academic project, University of Michigan HCI program",
+    role: "UX Designer & Researcher (Team of 3) · Academic project, University of Michigan HCI program",
     contributions: [
       "12 user interviews with elderly and mobility-impaired participants",
       "Persona development and journey mapping across 3 distinct user archetypes",
@@ -316,7 +316,7 @@ const PROJECTS = [
     emoji: "📐",
     heroImage:
       "https://images.squarespace-cdn.com/content/v1/611298f29aedd7131a46a751/90597d37-7686-4ca0-b102-9e007aaca2c8/Case+Study+Template_Page_01.jpg",
-    role: "Solo UX Designer & Researcher · Client project for Pearson Education · Delivered research through hi-fi prototype in one summer",
+    role: "Intern UX Designer & Researcher · Client project for Pearson Education · Delivered research & handed off 'snap-my-math' & calculator UI designs through hi-fi prototype screens in one summer",
     contributions: [
       "Discovery interviews with undergraduate calculus students",
       "Service blueprint of the full student learning experience across all touchpoints",

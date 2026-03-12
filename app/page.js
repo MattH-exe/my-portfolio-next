@@ -1228,7 +1228,9 @@ function Modal({ project, onClose }) {
       )}
     </div>
   );
-}({ onClose, onMaster, caught, setCaught }) {
+}
+
+function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
   const [current, setCurrent] = useState(() => {
     const remaining = POKEMON.filter(p => !caught.some(c => c.id === p.id));
     const pool = remaining.length > 0 ? remaining : POKEMON;

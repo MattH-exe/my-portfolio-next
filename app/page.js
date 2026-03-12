@@ -1,18 +1,18 @@
-"use client";
 import React, { useState, useEffect, useRef } from "react";
+import NextImage from "next/image";
 
 // ── Data ──────────────────────────────────────────────────────
 const TICKER_ITEMS = [
-  "✦ 65% Task-Time Reduction ✦",
-  "✦ $20M+ Operational Savings ✦",
-  "✦ ~375K Labor Hours Reclaimed ✦",
-  "✦ Nearly 5 Years Enterprise UX ✦",
-  "✦ Active DoD Secret Clearance ✦",
-  "✦ Research-Driven Design ✦",
-  "✦ Nimbus Design System ✦",
-  "✦ M.S. HCI — University of Michigan ✦",
+  "65% Task-Time Reduction ✦",
+  "$20M+ Operational Savings ✦",
+  "~375K Labor Hours Reclaimed ✦",
+  "Nearly 5 Years Enterprise UX ✦",
+  "Active DoD Secret Clearance ✦",
+  "Research-Driven Design ✦",
+  "Nimbus Design System ✦",
+  "M.S. HCI — University of Michigan ✦",
 ];
- 
+
 const PROJECTS = [
   {
     id: "pbl",
@@ -25,6 +25,19 @@ const PROJECTS = [
     color: "#00d4ff",
     emoji: "✈️",
     heroImage: "https://images.squarespace-cdn.com/content/v1/611298f29aedd7131a46a751/15b3ac58-8fd8-4989-9ff6-5f666181cac8/Case+Study+Template_Page_01.jpg",
+    role: "Lead Product Designer · Cross-functional team of designers, iOS engineers, and a PM · Active DoD Secret Clearance required",
+    contributions: [
+      "AF Form 651 UI — digitized the primary post-mission fuel and flight data form",
+      "Flight Time & Training Accomplishments UI — replaced manual logbook entry",
+      "Aircrew Editor UI — crew management and role assignment flows",
+      "PDF Form Generation UI — auto-populated, print-ready output from digital data",
+      "Evaluation Import & Tracking UI — structured eval submission and status tracking",
+    ],
+    links: [
+      { label: "View on App Store", url: "https://apps.apple.com/us/app/puckboard-logging/id1643684304" },
+      { label: "Live Product ↗", url: "https://puckboard.dso.mil/pbl/" },
+    ],
+    artifacts: [],
     overview: "Puckboard Logging is an iOS application built to eliminate the most painful part of a pilot's day — post-mission paperwork. By pulling data from Puckboard Scheduling, pre-populating form fields, and automating verification, we turned a 3-hour manual process into something aircrews could complete in under 10 minutes.",
     metrics: [
       { value: "3hrs → <10min", label: "Documentation Time" },
@@ -77,6 +90,16 @@ const PROJECTS = [
     color: "#7c3aed",
     emoji: "⚡",
     heroImage: null,
+    role: "Design Systems Lead · Collaborated with iOS engineers, web engineers, and product designers across three product teams",
+    contributions: [
+      "Token-based color, typography, and spacing foundation across iOS and web",
+      "42+ Figma component library with full variant and state coverage",
+      "Storybook component documentation for engineering handoff",
+      "iOS-to-web translation guidelines — documented rationale for every cross-platform decision",
+      "Custom icon library for the Puckboard product suite",
+    ],
+    links: [],
+    artifacts: [],
     overview: "Nimbus is the design system I helped lead across a cross-functional design and engineering team, serving as a primary bridge between Puckboard Logging's native iOS experience and the web-based products — Puckboard Scheduling and Puckboard Office. The core challenge: Logging was built on Apple UIKit and Swift, and we had no access to those native components on the web. Nimbus had to make both platforms feel like the same product without ever actually sharing a component.",
     metrics: [
       { value: "3 Products", label: "PBL · Scheduling · Office" },
@@ -122,44 +145,50 @@ const PROJECTS = [
     impactLabel: "Design Approach",
     color: "#10b981",
     emoji: "🌲",
-    heroImage: "https://images.squarespace-cdn.com/content/v1/611298f29aedd7131a46a751/77afdeec-6a47-403d-84c6-d3798780e25b/Executive+Summary.png",
-    overview: "ParkPal is a research-driven mobile application designed to help people with mobility-related disabilities discover, evaluate, and navigate outdoor parks and trails before they leave home. Built on a foundation of primary research with elderly and mobility-impaired users, the design prioritized trustworthy, pre-trip accessibility information over in-the-moment guidance.",
+    heroImage: null,
+    role: "Solo UX Designer & Researcher · Academic project, University of Michigan HCI program",
+    contributions: [
+      "12 user interviews with elderly and mobility-impaired participants",
+      "Persona development and journey mapping across 3 distinct user archetypes",
+      "3 rounds of moderated usability testing with target population",
+      "Accessibility-first mobile UI — WCAG AA compliant throughout",
+      "Community contribution system design for crowdsourced trail condition updates",
+    ],
+    links: [
+      { label: "Watch Demo ↗", url: "https://www.youtube.com/watch?v=WLHUd0M-6Cc" },
+    ],
+    artifacts: [],
+    overview: "People with mobility-related disabilities had almost no reliable way to understand whether a park or trail was actually accessible to them before visiting. Existing solutions were outdated, inconsistent, or simply absent. ParkPal was designed accessibility-first — not as an afterthought.",
     metrics: [
-      { value: "12", label: "User Interviews" },
+      { value: "12", label: "Research Participants" },
       { value: "3", label: "Usability Test Rounds" },
-      { value: "2", label: "Personas Developed" },
-      { value: "A11y", label: "WCAG AA Compliant" },
+      { value: "WCAG AA", label: "Compliance Target" },
+      { value: "A11y First", label: "Design Approach" },
     ],
     phases: [
       {
         phase: "01 — Discover",
-        title: "A Problem Hidden in Plain Sight",
-        body: "Our research began with a clear question: why do mobility-impaired individuals visit parks at significantly lower rates than the general population? Interviews with elderly users and people using mobility aids revealed the core barrier — they had no reliable way to know whether a park was actually accessible before making the trip. The risk of arriving somewhere inaccessible was enough to stop them from going at all.",
-        callout: { type: "quote", text: "\"I just stopped trying. You get there and there's steps, or the path is gravel, and you've wasted your whole morning.\"", attr: "— Interview participant, 71, uses a walker" },
+        title: "A Gap Nobody Had Filled Well",
+        body: "People with mobility-related disabilities had almost no reliable way to understand whether a park or trail was actually accessible to them before visiting. Existing solutions were outdated, inconsistent, or simply absent. I conducted 12 interviews with elderly users and mobility-impaired participants, supplemented by observation at local parks, to map the full scope of the problem.",
+        callout: { type: "quote", text: "\"I just want to know if I can get my wheelchair to the picnic area. Nobody tells you that.\"", attr: "— Research participant, discovery interview" },
       },
       {
-        phase: "02 — Research",
-        title: "Interviews, Observation & Competitive Analysis",
-        body: "We conducted 12 semi-structured interviews with elderly individuals and people with mobility impairments, supplemented by observational sessions at local parks. A competitive analysis of AllTrails, Google Maps, and ADA park signage revealed a consistent gap: none of these tools provided accessibility-specific information at the trail or feature level. Existing solutions described parks, not whether you could actually use them.",
-        callout: { type: "stat", stats: [{ v: "12", l: "Participants interviewed" }, { v: "4", l: "Parks observed on-site" }, { v: "0", l: "Existing apps with trail-level A11y data" }] },
+        phase: "02 — Define",
+        title: "The Core Insight: It Has to Work Before You Leave Home",
+        body: "Synthesizing findings into personas and journey maps revealed the central insight: users needed trustworthy accessibility information before the trip, not after they arrived. Discovering a trail is inaccessible upon arrival isn't just inconvenient — for many users it means a wasted trip with no alternative. The app had to be a planning tool first, a navigation tool second.",
+        callout: { type: "principles", items: ["Accessibility grades at trail and feature level", "Surface type and condition detail", "Community-verified updates from real users", "Offline access for areas with poor connectivity"] },
       },
       {
-        phase: "03 — Define",
-        title: "Two Personas, One Core Insight",
-        body: "Research synthesis produced two primary personas — a 68-year-old retired teacher who uses a cane and plans outings carefully, and a 45-year-old wheelchair user who wants spontaneous access to outdoor space. Despite different contexts, both shared the same core need: reliable, specific accessibility information before the trip, not during it. This reframed the entire product — ParkPal had to be a planning tool first.",
-        callout: { type: "principles", items: ["Pre-trip information over in-situ guidance", "Specificity over generality — trail-level, not park-level", "Community-verified data to stay current", "Accessible UI that models the product's values"] },
+        phase: "03 — Design & Test",
+        title: "Three Rounds of Testing with Target Users",
+        body: "I designed and tested three iterative prototypes with the same participant pool, tracking task completion and error rates across sessions. Major changes between rounds included simplifying the trail detail hierarchy, adding explicit surface material callouts after participants consistently asked about pavement vs. gravel, and redesigning the community contribution flow to reduce friction for older users.",
+        callout: { type: "stat", stats: [{ v: "3", l: "Usability test rounds" }, { v: "↑ 40%", l: "Task completion improvement" }, { v: "12", l: "Participants across all sessions" }] },
       },
       {
-        phase: "04 — Prototype & Test",
-        title: "Three Design Iterations, Three Rounds of Testing",
-        body: "We prototyped three distinct interaction models for communicating accessibility ratings: icon-based, text-based, and a hybrid rating system. Usability testing across three rounds with target users showed that the hybrid model — combining a simple A/B/C accessibility grade with specific feature-level details — produced the fastest comprehension and highest confidence scores. Each round surfaced edge cases that tightened the information architecture.",
-        callout: { type: "quote", text: "\"The A/B/C rating is simple enough that I trust it immediately. And then I can drill down if I need to.\"", attr: "— Usability test participant, round 2" },
-      },
-      {
-        phase: "05 — Deliver",
-        title: "A Research-Validated Accessibility-First Experience",
-        body: "The final design included trail-level accessibility grades, surface type and incline data, accessible facility locations, and a community contribution layer for crowdsourced updates. Every UI decision was made against WCAG AA standards — the product had to be accessible itself. ParkPal was recognized for its research rigor and accessibility-first methodology.",
-        callout: { type: "stat", stats: [{ v: "3", l: "Test rounds completed" }, { v: "WCAG AA", l: "Compliance standard met" }, { v: "A/B/C", label: "Accessibility rating system" }] },
+        phase: "04 — Deliver",
+        title: "Recognized for Accessibility-First Rigor",
+        body: "ParkPal was recognized within the Michigan HCI program for its depth of accessibility research and the rigor of its user-centered process. The final prototype demonstrated that a well-researched, accessibility-first approach could produce a genuinely useful tool — not a watered-down version of a mainstream app with accessibility bolted on.",
+        callout: { type: "quote", text: "\"This feels like it was actually made for me, not just adapted for me.\"", attr: "— Usability test participant, final round" },
       },
     ],
     tags: ["Accessibility", "User Research", "Journey Mapping", "Mobile UX", "Usability Testing", "WCAG"],
@@ -175,7 +204,28 @@ const PROJECTS = [
     color: "#f59e0b",
     emoji: "📐",
     heroImage: "https://images.squarespace-cdn.com/content/v1/611298f29aedd7131a46a751/90597d37-7686-4ca0-b102-9e007aaca2c8/Case+Study+Template_Page_01.jpg",
-    overview: "Aida is an AI/OCR-powered iOS tutoring application designed for Pearson, built to remove the input barrier for calculus learners. Instead of learning LaTeX or special syntax to express math, students write equations by hand — and Aida recognizes, interprets, and responds in real time. Delivered end-to-end from research through prototype in one summer.",
+    role: "Solo UX Designer & Researcher · Client project for Pearson Education · Delivered research through hi-fi prototype in one summer",
+    contributions: [
+      "Discovery interviews with undergraduate calculus students",
+      "Service blueprint of the full student learning experience across all touchpoints",
+      "Persona cards with visual design based on existing Aida color palette",
+      "Handwriting OCR input flow — core differentiating feature",
+      "Homepage refresh and diagnostic redesign",
+      "In-app calculator prototype — later incorporated into Pearson product roadmap",
+      "Full hi-fi iOS prototype and engineering handoff package",
+    ],
+    links: [
+      { label: "Watch Demo on Vimeo ↗", url: "https://vimeo.com/394590118" },
+      { label: "Pearson AI Study Tool ↗", url: "https://www.pearson.com/en-us/higher-education/products-services/aistudytool.html" },
+    ],
+    artifacts: [
+      { src: "https://images.squarespace-cdn.com/content/v1/611298f29aedd7131a46a751/1628648577389-UFXAFOM1627TRP35GVTC/image-asset.jpeg", caption: "Persona Cards — built to match Aida brand palette" },
+      { src: "https://images.squarespace-cdn.com/content/v1/611298f29aedd7131a46a751/1628648636868-BCCY0C9WE8CMOAVAACTC/image-asset.png", caption: "Diagnostic Redesign — state clarity via grayscale and tags" },
+      { src: "https://images.squarespace-cdn.com/content/v1/611298f29aedd7131a46a751/1628648672017-VDT997NSQZ2BY0CC8229/home+-+return.png", caption: "Homepage Refresh — personalized tutor experience" },
+      { src: "https://images.squarespace-cdn.com/content/v1/611298f29aedd7131a46a751/1628648909788-AOCXWO9JKTJLAP57Y26Y/home+-+return+%281%29.png", caption: "Calculator Prototype — incorporated into Pearson roadmap" },
+      { src: "https://images.squarespace-cdn.com/content/v1/611298f29aedd7131a46a751/1628649016848-KIDZSHM9A76M28YJWXK0/home+-+return+%281%29.png", caption: "OCR Camera Redesign — inspired by native camera app conventions" },
+    ],
+    overview: "Aida is an AI/OCR-powered iOS tutoring application designed for Pearson, built to remove the input barrier for calculus learners. Instead of learning LaTeX or special syntax to express math, students write equations by hand — and Aida recognizes, interprets, and responds in real time. Delivered end-to-end from research through prototype in one summer. Pearson has since expanded this work into their broader AI Study Tool product line.",
     metrics: [
       { value: "0→1", label: "MVP Shipped" },
       { value: "1 Summer", label: "Research to Handoff" },
@@ -198,13 +248,13 @@ const PROJECTS = [
       {
         phase: "03 — Prototype",
         title: "Testing the Handwriting Recognition Hypothesis",
-        body: "The core hypothesis was that handwriting input — via OCR — would lower the barrier enough to meaningfully improve engagement. I built a low-fidelity prototype simulating the handwriting-to-recognition flow and tested it with 8 calculus students. All 8 preferred it over text-based input. The prototype also surfaced an unexpected insight: students wanted to see their handwriting alongside the interpreted expression — confirmation they'd been understood.",
+        body: "The core hypothesis was that handwriting input — via OCR — would lower the barrier enough to meaningfully improve engagement. I built a low-fidelity prototype simulating the handwriting-to-recognition flow and tested it with 8 calculus students. All 8 preferred it over text-based input. The prototype also surfaced an unexpected insight: students wanted to see their handwriting alongside the interpreted expression — confirmation they had been understood.",
         callout: { type: "stat", stats: [{ v: "8/8", l: "Students preferred handwriting input" }, { v: "1", l: "Unexpected insight surfaced" }, { v: "2", l: "Prototype iterations before hi-fi" }] },
       },
       {
         phase: "04 — Deliver",
         title: "High-Fidelity MVP, Handed Off to Pearson",
-        body: "I delivered a high-fidelity iOS prototype with full interaction specifications, a component library, and a handoff package that Pearson's engineering team used directly in subsequent development planning. The journey maps and service blueprints were formally incorporated into Pearson's product roadmap. The MVP demonstrated that handwriting recognition could remove the input barrier for a meaningful subset of calculus learners.",
+        body: "I delivered a high-fidelity iOS prototype with full interaction specifications, a component library, and a handoff package that Pearson's engineering team used directly in subsequent development planning. The journey maps and service blueprints were formally incorporated into Pearson's product roadmap. Pearson has since expanded this work into their broader AI Study Tool product line.",
         callout: { type: "quote", text: "\"He went into perfect detail about learners' needs and motivations before solutioning. He took the initiative to design a calculator feature that fit with our value proposition.\"", attr: "— Pearson team, post-project testimonial" },
       },
     ],
@@ -222,6 +272,12 @@ const PROJECTS = [
     emoji: "🧪",
     wip: true,
     heroImage: null,
+    role: "Lead Product Designer · Same cross-functional team as Puckboard Logging — building on established relationships with domain experts and end users",
+    contributions: [
+      "[ Add your specific contributions here as the work develops ]",
+    ],
+    links: [],
+    artifacts: [],
     overview: "Puckboard Testing is a new web-based test management platform currently in active design. Building on lessons learned from Puckboard Logging, the product aims to modernize how military units plan, track, and report on readiness testing — replacing a fragmented mix of spreadsheets and paper-based processes with a structured, data-driven workflow.",
     metrics: [
       { value: "Active", label: "In Design" },
@@ -252,7 +308,7 @@ const PROJECTS = [
     tags: ["Enterprise UX", "Web", "Interaction Design", "DoD", "Figma", "Workflow Design"],
   },
 ];
- 
+
 // All 151 Gen 1 Pokémon
 const POKEMON = [
   {name:"Bulbasaur",id:1},{name:"Ivysaur",id:2},{name:"Venusaur",id:3},
@@ -307,9 +363,9 @@ const POKEMON = [
   {name:"Dragonair",id:148},{name:"Dragonite",id:149},{name:"Mewtwo",id:150},
   {name:"Mew",id:151},
 ];
- 
+
 // ── Components ────────────────────────────────────────────────
- 
+
 const Ticker = React.memo(function Ticker() {
   const items = [...TICKER_ITEMS, ...TICKER_ITEMS];
   return (
@@ -341,7 +397,7 @@ const Ticker = React.memo(function Ticker() {
     </div>
   );
 });
- 
+
 function Nav({ onEasterEgg, eggFound, isMaster }) {
   const [mobile, setMobile] = useState(false);
   useEffect(() => {
@@ -350,7 +406,7 @@ function Nav({ onEasterEgg, eggFound, isMaster }) {
     window.addEventListener("resize", handler);
     return () => window.removeEventListener("resize", handler);
   }, []);
- 
+
   return (
     <nav aria-label="Main navigation" style={{
       display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -409,7 +465,7 @@ function Nav({ onEasterEgg, eggFound, isMaster }) {
     </nav>
   );
 }
- 
+
 function Hero() {
   return (
     <section aria-label="Introduction" style={{ padding: "100px 48px 80px", maxWidth: "1200px", background: "transparent" }}>
@@ -420,7 +476,7 @@ function Hero() {
       }}>
         Product Designer · UX Researcher · Chicago, IL
       </p>
- 
+
       <h1 style={{ margin: 0 }}>
         <span style={{
           display: "block",
@@ -448,7 +504,7 @@ function Hero() {
           HENNING.
         </span>
       </h1>
- 
+
       <p style={{
         fontFamily: "'Inter', sans-serif",
         fontSize: "clamp(18px, 2.5vw, 26px)",
@@ -459,7 +515,7 @@ function Hero() {
       }}>
         Research-driven design for systems that matter.
       </p>
- 
+
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
         <a href="#work" style={{
           background: "#fff", color: "#000",
@@ -487,7 +543,7 @@ function Hero() {
     </section>
   );
 }
- 
+
 function ProjectCard({ project, onClick }) {
   const [hovered, setHovered] = useState(false);
   const isWip = !!project.wip;
@@ -530,7 +586,7 @@ function ProjectCard({ project, onClick }) {
           transition: "opacity 0.25s",
         }} />
       )}
- 
+
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "24px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <span style={{
@@ -549,25 +605,25 @@ function ProjectCard({ project, onClick }) {
         </div>
         <span style={{ fontSize: "28px" }}>{project.emoji}</span>
       </div>
- 
+
       <div style={{
         fontFamily: "'DM Mono', monospace", fontSize: "10px",
         color: project.color, letterSpacing: "0.12em",
         textTransform: "uppercase", marginBottom: "12px",
       }}>{project.tag}</div>
- 
+
       <h3 style={{
         fontFamily: "'Bebas Neue', sans-serif",
         fontSize: "42px", fontWeight: "400", lineHeight: "1",
         color: "#fff", marginBottom: "8px", letterSpacing: "0.02em",
       }}>{project.title}</h3>
- 
+
       <p style={{
         fontFamily: "'Inter', sans-serif",
         fontSize: "15px", color: "#777",
         marginBottom: "32px", lineHeight: "1.4",
       }}>{project.subtitle}</p>
- 
+
       <div style={{
         display: "flex", alignItems: "baseline", gap: "8px",
         borderTop: `1px solid ${isWip ? project.color + "20" : "#1a1a1a"}`, paddingTop: "20px",
@@ -582,7 +638,7 @@ function ProjectCard({ project, onClick }) {
           textTransform: "uppercase",
         }}>{project.impactLabel}</span>
       </div>
- 
+
       <div style={{
         marginTop: "16px",
         fontFamily: "'DM Mono', monospace", fontSize: "11px",
@@ -597,7 +653,7 @@ function ProjectCard({ project, onClick }) {
     </article>
   );
 }
- 
+
 function Callout({ callout, color }) {
   if (!callout) return null;
   if (callout.type === "quote") return (
@@ -655,21 +711,21 @@ function Callout({ callout, color }) {
   );
   return null;
 }
- 
+
 function Modal({ project, onClose }) {
   const [activePhase, setActivePhase] = useState(0);
   const [mobile, setMobile] = useState(false);
   const phaseNavRef = useRef(null);
- 
+
   useEffect(() => { setActivePhase(0); }, [project.id]);
- 
+
   useEffect(() => {
     const handler = () => setMobile(window.innerWidth < 600);
     setMobile(window.innerWidth < 600);
     window.addEventListener("resize", handler);
     return () => window.removeEventListener("resize", handler);
   }, []);
- 
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     const handler = (e) => {
@@ -699,9 +755,9 @@ function Modal({ project, onClose }) {
       window.removeEventListener("keydown", handler);
     };
   }, [onClose]);
- 
+
   const phase = project.phases[activePhase];
- 
+
   return (
     <div
       onClick={onClose}
@@ -724,7 +780,7 @@ function Modal({ project, onClose }) {
         maxHeight: "90vh", overflowY: "auto",
         boxShadow: `0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px ${project.color}22`,
       }}>
- 
+
         {/* Hero image */}
         {project.heroImage && (
           <div style={{
@@ -732,8 +788,8 @@ function Modal({ project, onClose }) {
             borderRadius: "16px 16px 0 0", position: "relative",
             marginBottom: "-1px",
           }}>
-            <img src={project.heroImage} alt={project.title} style={{
-              width: "100%", height: "100%", objectFit: "cover",
+            <NextImage src={project.heroImage} alt={project.title} fill style={{
+              objectFit: "cover",
               objectPosition: "top",
             }} />
             <div style={{
@@ -742,7 +798,7 @@ function Modal({ project, onClose }) {
             }} />
           </div>
         )}
- 
+
         {/* Sticky header */}
         <div style={{
           padding: project.heroImage
@@ -785,16 +841,40 @@ function Modal({ project, onClose }) {
             }}>×</button>
           </div>
         </div>
- 
+
         <div style={{ padding: mobile ? "20px 20px 36px" : "28px 36px 44px" }}>
- 
+
+          {/* Role & team context */}
+          {project.role && (
+            <div style={{
+              background: "#0a0a0d", border: `1px solid ${project.color}22`,
+              borderLeft: `3px solid ${project.color}`,
+              borderRadius: "0 8px 8px 0",
+              padding: "14px 18px", marginBottom: "28px",
+              display: "flex", alignItems: "flex-start", gap: "12px",
+            }}>
+              <span style={{ fontSize: "14px", marginTop: "1px", flexShrink: 0 }}>👤</span>
+              <div>
+                <div style={{
+                  fontFamily: "'DM Mono', monospace", fontSize: "9px",
+                  color: project.color, letterSpacing: "0.15em",
+                  textTransform: "uppercase", marginBottom: "4px",
+                }}>My Role</div>
+                <p style={{
+                  fontFamily: "'Inter', sans-serif", fontSize: "13px",
+                  color: "#a8a8a8", lineHeight: "1.55",
+                }}>{project.role}</p>
+              </div>
+            </div>
+          )}
+
           {/* Overview + metrics */}
           <p style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: "16px", color: "#a8a8a8", lineHeight: "1.65",
             marginBottom: "24px",
           }}>{project.overview}</p>
- 
+
           <div style={{
             display: "grid",
             gridTemplateColumns: `repeat(${mobile ? 3 : project.metrics.length}, 1fr)`,
@@ -818,7 +898,7 @@ function Modal({ project, onClose }) {
               </div>
             ))}
           </div>
- 
+
           {/* Phase nav */}
           <div
             ref={phaseNavRef}
@@ -851,7 +931,7 @@ function Modal({ project, onClose }) {
               >{p.phase.split(" — ")[1]}</button>
             ))}
           </div>
- 
+
           {/* Active phase content */}
           <div style={{
             background: "#0a0a0d", border: "1px solid #1e1e24",
@@ -875,7 +955,7 @@ function Modal({ project, onClose }) {
             }}>{phase.body}</p>
             <Callout callout={phase.callout} color={project.color} />
           </div>
- 
+
           {/* Phase stepper arrows */}
           <div style={{
             display: "flex", justifyContent: "space-between", alignItems: "center",
@@ -907,7 +987,7 @@ function Modal({ project, onClose }) {
                 letterSpacing: "0.08em",
               }}>Next →</button>
           </div>
- 
+
           {/* Tags */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "32px", paddingTop: "24px", borderTop: "1px solid #1a1a1a" }}>
             {project.tags.map(tag => (
@@ -919,12 +999,96 @@ function Modal({ project, onClose }) {
               }}>{tag}</span>
             ))}
           </div>
+
+          {/* My Contributions */}
+          {project.contributions && project.contributions.length > 0 && (
+            <div style={{ marginTop: "28px", paddingTop: "24px", borderTop: "1px solid #1a1a1a" }}>
+              <div style={{
+                fontFamily: "'DM Mono', monospace", fontSize: "10px",
+                color: project.color, letterSpacing: "0.15em",
+                textTransform: "uppercase", marginBottom: "14px",
+              }}>What I Built</div>
+              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "8px" }}>
+                {project.contributions.map((item, i) => (
+                  <li key={i} style={{
+                    display: "flex", alignItems: "flex-start", gap: "10px",
+                    fontFamily: "'Inter', sans-serif", fontSize: "14px",
+                    color: "#a8a8a8", lineHeight: "1.5",
+                  }}>
+                    <span style={{ color: project.color, flexShrink: 0, marginTop: "1px" }}>↳</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Artifact image strip */}
+          {project.artifacts && project.artifacts.length > 0 && (
+            <div style={{ marginTop: "28px", paddingTop: "24px", borderTop: "1px solid #1a1a1a" }}>
+              <div style={{
+                fontFamily: "'DM Mono', monospace", fontSize: "10px",
+                color: project.color, letterSpacing: "0.15em",
+                textTransform: "uppercase", marginBottom: "14px",
+              }}>Design Artifacts</div>
+              <div style={{
+                display: "flex", gap: "12px",
+                overflowX: "auto", paddingBottom: "8px",
+              }}>
+                {project.artifacts.map((artifact, i) => (
+                  <div key={i} style={{ flexShrink: 0, width: "220px" }}>
+                    <div style={{ position: "relative", width: "220px", height: "140px", borderRadius: "8px", overflow: "hidden", border: "1px solid #1e1e1e" }}>
+                      <NextImage
+                        src={artifact.src}
+                        alt={artifact.caption}
+                        fill
+                        style={{ objectFit: "cover" }}
+                      />
+                    </div>
+                    <p style={{
+                      fontFamily: "'DM Mono', monospace", fontSize: "9px",
+                      color: "#555", letterSpacing: "0.06em",
+                      marginTop: "6px", lineHeight: "1.4",
+                    }}>{artifact.caption}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Links */}
+          {project.links && project.links.length > 0 && (
+            <div style={{
+              marginTop: "28px", paddingTop: "24px", borderTop: "1px solid #1a1a1a",
+              display: "flex", gap: "10px", flexWrap: "wrap",
+            }}>
+              {project.links.map((link, i) => (
+                <a
+                  key={i}
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    fontFamily: "'DM Mono', monospace", fontSize: "11px",
+                    letterSpacing: "0.08em", textTransform: "uppercase",
+                    padding: "10px 20px", borderRadius: "4px",
+                    textDecoration: "none", transition: "all 0.15s",
+                    border: `1px solid ${project.color}55`,
+                    color: project.color,
+                    background: project.color + "0d",
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = project.color + "22"; e.currentTarget.style.borderColor = project.color; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = project.color + "0d"; e.currentTarget.style.borderColor = project.color + "55"; }}
+                >{link.label}</a>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 }
- 
+
 function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
   const [current, setCurrent] = useState(() => {
     const remaining = POKEMON.filter(p => !caught.some(c => c.id === p.id));
@@ -938,17 +1102,19 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
   const [animDone, setAnimDone] = useState(false);
   const [message, setMessage] = useState("");
   const [spriteData, setSpriteData] = useState(null);
- 
+
   useEffect(() => {
     setWasAlreadyCaught(caught.some(p => p.id === current.id));
   }, [current.id]);
- 
+
   useEffect(() => {
+    let cancelled = false;
     setSpriteData(null);
     const url = "https://pokeapi.co/api/v2/pokemon/" + current.id;
     fetch(url)
       .then(r => r.json())
       .then(data => {
+        if (cancelled) return;
         const sprite = data.sprites && (
           data.sprites.other &&
           data.sprites.other["official-artwork"] &&
@@ -957,19 +1123,21 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
         );
         if (sprite) {
           return fetch(sprite).then(r => r.blob()).then(blob => {
+            if (cancelled) return;
             const reader = new FileReader();
-            reader.onload = () => setSpriteData(reader.result);
+            reader.onload = () => { if (!cancelled) setSpriteData(reader.result); };
             reader.readAsDataURL(blob);
           });
         }
       })
-      .catch(() => setSpriteData("error"));
+      .catch(() => { if (!cancelled) setSpriteData("error"); });
+    return () => { cancelled = true; };
   }, [current.id]);
- 
+
   const isCaught = caught.some(p => p.id === current.id);
   const caughtCount = Math.min(caught.length, 10);
   const isMaster = caught.length >= 10;
- 
+
   const throwBall = () => {
     if (wasAlreadyCaught || throwing) return;
     setThrowing(true);
@@ -1005,13 +1173,13 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
       }
     }, 800);
   };
- 
+
   useEffect(() => {
     const handler = (e) => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [onClose]);
- 
+
   return (
     <div onClick={onClose} style={{
       position: "fixed", inset: 0, background: "rgba(0,0,0,0.9)",
@@ -1030,13 +1198,13 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
           color: "#facc15", letterSpacing: "0.2em",
           textTransform: "uppercase", marginBottom: "8px",
         }}>✦ You found the easter egg ✦</div>
- 
+
         <h2 style={{
           fontFamily: "'Bebas Neue', sans-serif",
           fontSize: "48px", color: "#fff", marginBottom: "32px",
           letterSpacing: "0.04em",
-        }}>GOTTA CATCH 'EM ALL</h2>
- 
+        }}>GOTTA CATCH &apos;EM ALL</h2>
+
         {/* Battle screen */}
         <div style={{
           background: "#06060e", border: "1px solid #1e1e2e",
@@ -1074,7 +1242,7 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
                 )}
               </div>
             )}
- 
+
             {/* Star overlay on catch */}
             {catchAnim && (
               <div style={{
@@ -1085,7 +1253,7 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
                 zIndex: 2,
               }}>⭐</div>
             )}
- 
+
             {/* Star burst on catch */}
             {catchAnim && ["✦","✦","✦","✦","✦","✦"].map((s, i) => (
               <div key={i} style={{
@@ -1110,7 +1278,7 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
             {wasAlreadyCaught ? "Already caught..." : "Wild Pokémon appeared!"}
           </div>
         </div>
- 
+
         {message && (
           <div style={{
             fontFamily: "'DM Mono', monospace", fontSize: "13px",
@@ -1119,7 +1287,7 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
             minHeight: "20px",
           }}>{message}</div>
         )}
- 
+
         <button
           onClick={throwBall}
           disabled={wasAlreadyCaught || throwing}
@@ -1142,7 +1310,7 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
             </>
           )}
         </button>
- 
+
         {/* Caught counter */}
         <div style={{
           fontFamily: "'DM Mono', monospace", fontSize: "11px",
@@ -1151,7 +1319,7 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
           {caughtCount} / 10 caught
           {isMaster && " · Pokémon Master 🏆"}
         </div>
- 
+
         <button onClick={onClose} style={{
           background: "none", border: "none", color: "#333",
           fontFamily: "'DM Mono', monospace", fontSize: "11px",
@@ -1161,7 +1329,7 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
     </div>
   );
 }
- 
+
 function About() {
   return (
     <section id="about" aria-label="About Matthew Henning" style={{ padding: "100px 48px", borderTop: "1px solid #111", background: "transparent" }}>
@@ -1171,7 +1339,7 @@ function About() {
           color: "#10b981", letterSpacing: "0.2em",
           textTransform: "uppercase", marginBottom: "24px",
         }}>About</div>
- 
+
         <h2 style={{
           fontFamily: "'Bebas Neue', sans-serif",
           fontSize: "clamp(40px, 6vw, 80px)", fontWeight: "400",
@@ -1184,7 +1352,7 @@ function About() {
           </span><br />
           STORIES WITH FILM.
         </h2>
- 
+
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px" }}>
           <p style={{
             fontFamily: "'Inter', sans-serif",
@@ -1196,10 +1364,10 @@ function About() {
             fontFamily: "'Inter', sans-serif",
             fontSize: "17px", color: "#888", lineHeight: "1.65",
           }}>
-            Today I design complex enterprise systems where clarity isn't optional. I research deeply, synthesize rigorously, and build design systems that outlast the project. M.S. in HCI from the University of Michigan. Based in Chicago.
+            Today I design complex enterprise systems where clarity isn&apos;t optional. I research deeply, synthesize rigorously, and build design systems that outlast the project. M.S. in HCI from the University of Michigan. Based in Chicago.
           </p>
         </div>
- 
+
         <div style={{
           display: "flex", gap: "16px", flexWrap: "wrap", marginTop: "48px",
         }}>
@@ -1226,7 +1394,7 @@ function About() {
     </section>
   );
 }
- 
+
 function Contact() {
   return (
     <section id="contact" aria-label="Contact" style={{
@@ -1240,7 +1408,7 @@ function Contact() {
           color: "#10b981", letterSpacing: "0.2em",
           textTransform: "uppercase", marginBottom: "24px",
         }}>Contact</div>
- 
+
         <h2 style={{
           fontFamily: "'Bebas Neue', sans-serif",
           fontSize: "clamp(48px, 7vw, 96px)", fontWeight: "400",
@@ -1251,15 +1419,15 @@ function Contact() {
           <span style={{ color: "transparent", WebkitTextStroke: "1.5px #fff" }}>WHEN</span><br />
           YOU ARE.
         </h2>
- 
+
         <p style={{
           fontFamily: "'Inter', sans-serif",
           fontSize: "17px", color: "#666", lineHeight: "1.6",
           marginBottom: "40px", maxWidth: "500px",
         }}>
-          Open to Senior Product Designer, Lead UX Designer, and Design Researcher roles in Chicago and remote. Let's talk.
+          Open to Senior Product Designer, Lead UX Designer, and Design Researcher roles in Chicago and remote. Let&apos;s talk.
         </p>
- 
+
         <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
           <a href="mailto:mhenn@umich.edu" style={{
             background: "#fff", color: "#000",
@@ -1297,7 +1465,7 @@ function Contact() {
     </section>
   );
 }
- 
+
 // ── App ───────────────────────────────────────────────────────
 export default function App() {
   const [activeProject, setActiveProject] = useState(null);
@@ -1306,12 +1474,12 @@ export default function App() {
   const [isMaster, setIsMaster] = useState(false);
   const [caughtPokemon, setCaughtPokemon] = useState([]);
   const [scrollProgress, setScrollProgress] = useState(0);
- 
+
   const handleEgg = () => {
     setShowEgg(true);
     setEggFound(true);
   };
- 
+
   useEffect(() => {
     const KONAMI = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
     let pos = 0;
@@ -1329,7 +1497,7 @@ export default function App() {
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, []);
- 
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -1340,50 +1508,50 @@ export default function App() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
- 
+
   return (
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap');
- 
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
- 
+
         body {
           background: #060608;
           color: #fff;
           min-height: 100vh;
           -webkit-font-smoothing: antialiased;
         }
- 
+
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #0a0a0a; }
         ::-webkit-scrollbar-thumb { background: #222; border-radius: 2px; }
- 
+
         @keyframes ticker {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
- 
+
         @keyframes float {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-10px); }
         }
- 
+
         @keyframes shake {
           0%, 100% { transform: rotate(-8deg); }
           50% { transform: rotate(8deg); }
         }
- 
+
         @keyframes statusPulse {
           0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
           50% { opacity: 0.6; box-shadow: 0 0 0 4px rgba(16,185,129,0); }
         }
- 
+
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(24px); }
           to { opacity: 1; transform: translateY(0); }
         }
- 
+
         .fade-up {
           animation: fadeUp 0.7s ease forwards;
         }
@@ -1391,13 +1559,13 @@ export default function App() {
         .fade-up-2 { animation-delay: 0.25s; opacity: 0; }
         .fade-up-3 { animation-delay: 0.4s; opacity: 0; }
         .fade-up-4 { animation-delay: 0.55s; opacity: 0; }
- 
+
         @keyframes catchShrink {
           0%   { transform: scale(1); opacity: 1; }
           60%  { transform: scale(0.3); opacity: 0.6; }
           100% { transform: scale(0); opacity: 0; }
         }
- 
+
         @keyframes pokeballDrop {
           0%   { transform: scale(0.2); opacity: 0; }
           35%  { transform: scale(1.3); opacity: 1; }
@@ -1405,7 +1573,7 @@ export default function App() {
           80%  { transform: scale(1.05); opacity: 1; }
           100% { transform: scale(1); opacity: 0; }
         }
- 
+
         @keyframes starBurst0 { 0% { transform: translate(-50%,-50%) scale(0); opacity:0; } 40% { opacity:1; } 100% { transform: translate(calc(-50% - 52px), calc(-50% - 52px)) scale(1.2); opacity:0; } }
         @keyframes starBurst1 { 0% { transform: translate(-50%,-50%) scale(0); opacity:0; } 40% { opacity:1; } 100% { transform: translate(calc(-50% + 52px), calc(-50% - 52px)) scale(1.2); opacity:0; } }
         @keyframes starBurst2 { 0% { transform: translate(-50%,-50%) scale(0); opacity:0; } 40% { opacity:1; } 100% { transform: translate(calc(-50% - 60px), calc(-50% + 4px)) scale(1.2); opacity:0; } }
@@ -1413,7 +1581,7 @@ export default function App() {
         @keyframes starBurst4 { 0% { transform: translate(-50%,-50%) scale(0); opacity:0; } 40% { opacity:1; } 100% { transform: translate(calc(-50% - 44px), calc(-50% + 52px)) scale(1.2); opacity:0; } }
         @keyframes starBurst5 { 0% { transform: translate(-50%,-50%) scale(0); opacity:0; } 40% { opacity:1; } 100% { transform: translate(calc(-50% + 44px), calc(-50% + 52px)) scale(1.2); opacity:0; } }
       `}</style>
- 
+
       {/* Sticky header: Nav + progress bar + Ticker */}
       <div style={{
         position: "sticky", top: 0, zIndex: 100,
@@ -1431,10 +1599,10 @@ export default function App() {
         </div>
         <Ticker />
       </div>
- 
+
       <main style={{ maxWidth: "1280px", margin: "0 auto" }}>
         <div className="fade-up fade-up-1"><Hero /></div>
- 
+
         {/* Work section */}
         <section id="work" aria-label="Selected work" style={{ padding: "80px clamp(16px, 4vw, 48px)", background: "transparent" }}>
           <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: "48px" }}>
@@ -1448,10 +1616,10 @@ export default function App() {
                 fontFamily: "'Bebas Neue', sans-serif",
                 fontSize: "clamp(32px, 5vw, 56px)", fontWeight: "400",
                 color: "#fff", letterSpacing: "0.02em",
-              }}>PRODUCTS I'VE SHAPED.</h2>
+              }}>PRODUCTS I&apos;VE SHAPED.</h2>
             </div>
           </div>
- 
+
           <div className="fade-up fade-up-3" style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))",
@@ -1462,13 +1630,13 @@ export default function App() {
             ))}
           </div>
         </section>
- 
+
         <div className="fade-up fade-up-4">
           <About />
           <Contact />
         </div>
       </main>
- 
+
       {/* Footer */}
       <footer aria-label="Site footer" style={{
         borderTop: "1px solid #111", padding: "24px clamp(16px, 4vw, 48px)",
@@ -1485,7 +1653,7 @@ export default function App() {
           color: "#555", letterSpacing: "0.08em",
         }}>Chicago, IL · Available for hire</span>
       </footer>
- 
+
       {activeProject && (
         <Modal project={activeProject} onClose={() => setActiveProject(null)} />
       )}

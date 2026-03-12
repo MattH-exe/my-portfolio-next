@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect, useRef } from "react";
 import NextImage from "next/image";
 
@@ -1652,7 +1653,6 @@ function Modal({ project, onClose }) {
               </div>
             </div>
           )}
-
           {/* Overview + metrics */}
           <p
             style={{
@@ -1665,7 +1665,6 @@ function Modal({ project, onClose }) {
           >
             {project.overview}
           </p>
-
           <div
             style={{
               display: "grid",
@@ -1713,7 +1712,6 @@ function Modal({ project, onClose }) {
                 </div>
               ))}
           </div>
-
           {/* Phase nav */}
           <div
             ref={phaseNavRef}
@@ -1761,7 +1759,6 @@ function Modal({ project, onClose }) {
               </button>
             ))}
           </div>
-
           {/* Active phase content */}
           <div
             style={{
@@ -1809,7 +1806,6 @@ function Modal({ project, onClose }) {
             </p>
             <Callout callout={phase.callout} color={project.color} />
           </div>
-
           {/* Phase stepper arrows */}
           <div
             style={{
@@ -1872,7 +1868,6 @@ function Modal({ project, onClose }) {
               Next →
             </button>
           </div>
-
           {/* Tags */}
           <div
             style={{
@@ -1902,7 +1897,6 @@ function Modal({ project, onClose }) {
               </span>
             ))}
           </div>
-
           {/* My Contributions */}
           {project.contributions && project.contributions.length > 0 && (
             <div
@@ -1960,7 +1954,6 @@ function Modal({ project, onClose }) {
               </ul>
             </div>
           )}
-
           {/* Artifact image strip */}
           {project.artifacts && project.artifacts.length > 0 && (
             <div
@@ -2078,7 +2071,6 @@ function Modal({ project, onClose }) {
               </div>
             </div>
           )}
-
           {/* Links */}
           {project.links && project.links.length > 0 && (
             <div

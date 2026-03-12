@@ -40,7 +40,7 @@ const PROJECTS = [
         label: "View on App Store",
         url: "https://apps.apple.com/us/app/puckboard-logging/id1643684304",
       },
-      { label: "Live Product ↗", url: "https://puckboard.dso.mil/pbl/" },
+      { label: "Product Website ↗", url: "https://puckboard.dso.mil/pbl/" },
     ],
     artifacts: [],
     overview:

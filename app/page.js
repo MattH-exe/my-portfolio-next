@@ -1295,8 +1295,8 @@ function LightboxModal({ src, caption, onClose }) {
   }, [onClose]);
 
   return (
-    <div
-      onClick={onClose}
+<div
+      onClick={(e) => { e.stopPropagation(); onClose(); }}
       role="dialog"
       aria-modal="true"
       aria-label={caption}

@@ -623,7 +623,7 @@ const Ticker = React.memo(function Ticker() {
 });
 
 function Nav({ onEasterEgg, eggFound }) {
-  const [mobile, setMobile] = useState(window.innerWidth < 600);
+  const [mobile, setMobile] = useState(false);
   useEffect(() => {
     const handler = () => setMobile(window.innerWidth < 600);
     window.addEventListener("resize", handler);

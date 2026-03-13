@@ -27,7 +27,7 @@ const PROJECTS = [
     emoji: "✈️",
     heroImage:
       "https://images.squarespace-cdn.com/content/v1/611298f29aedd7131a46a751/15b3ac58-8fd8-4989-9ff6-5f666181cac8/Case+Study+Template_Page_01.jpg",
-    role: "Lead Product Designer · Cross-functional team of designers, iOS engineers, and a PM · Active DoD Secret Clearance required",
+    role: "Product Designer · Cross-functional team of designers, iOS engineers, and a PM · Active DoD Secret Clearance required",
     contributions: [
       "AF Form 651 UI — digitized the primary post-mission fuel and flight data form",
       "Flight Time & Training Accomplishments UI — replaced manual logbook entry",
@@ -142,7 +142,7 @@ const PROJECTS = [
     color: "#7c3aed",
     emoji: "⚡",
     heroImage: null,
-    role: "Design Systems Lead · Collaborated with iOS engineers, web engineers, and product designers across three product teams",
+    role: "Lead iOS Design Contributor · Collaborated with iOS engineers, web engineers, and product designers across multi-product suite",
     contributions: [
       "Token-based color, typography, and spacing foundation across iOS and web",
       "42+ Figma component library with full variant and state coverage",
@@ -232,11 +232,13 @@ const PROJECTS = [
     color: "#10b981",
     emoji: "🌲",
     heroImage: null,
-    role: "Solo UX Designer & Researcher · Academic project, University of Michigan HCI program",
+    role: "UX Designer & Researcher · Capstone Project, University of Michigan School of Information",
     contributions: [
       "12 user interviews with elderly and mobility-impaired participants",
       "Persona development and journey mapping across 3 distinct user archetypes",
-      "3 rounds of moderated usability testing with target population",
+      "Moderated usability testing with target populations",
+      "On-Site Research of local park accessibility affordances",
+      "competitive analysis across similar products (AllTrails, Google Maps, etc.)",
       "Accessibility-first mobile UI — WCAG AA compliant throughout",
       "Community contribution system design for crowdsourced trail condition updates",
     ],
@@ -2584,8 +2586,8 @@ function About() {
           >
             Today I design complex enterprise systems where clarity isn&apos;t
             optional. I research deeply, synthesize rigorously, and build design
-            systems that outlast the project. M.S. in HCI from the University of
-            Michigan. Based in Chicago.
+            systems that outlast the project. M.S. in UX Research & Design & User-Centered Agile Development (HCI)
+            from the University of Michigan School of Information. Based in Chicago.
           </p>
         </div>
 
@@ -2686,8 +2688,8 @@ function Contact() {
             maxWidth: "500px",
           }}
         >
-          Open to Senior Product Designer, Lead UX Designer, and Design
-          Researcher roles in Chicago and remote. Let&apos;s talk.
+          Open to Product Design, UX Design, Team Leadership & UX
+          Research roles in Chicago and remote. Let&apos;s talk.
         </p>
 
         <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>

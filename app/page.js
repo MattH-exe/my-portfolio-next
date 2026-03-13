@@ -1282,21 +1282,14 @@ function Callout({ callout, color }) {
 }
 
 function LightboxModal({ src, caption, onClose }) {
-  const eggModalRef = useRef(null);
+  const closeBtnRef = useRef(null);
   useEffect(() => {
-    // Focus first button on open
-    if (eggModalRef.current) {
-      const first = eggModalRef.current.querySelector('button');
-      if (first) first.focus();
-    }
+    if (closeBtnRef.current) closeBtnRef.current.focus();
     const handler = (e) => {
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", handler);
-    return () => {
-      window.removeEventListener("keydown", handler);
-      if (triggerRef && triggerRef.current) triggerRef.current.focus();
-    };
+    return () => window.removeEventListener("keydown", handler);
   }, [onClose]);
 
   return (
@@ -2234,12 +2227,20 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught, triggerRef }) {
     }, 800);
   };
 
+  const eggModalRef = useRef(null);
   useEffect(() => {
+    if (eggModalRef.current) {
+      const first = eggModalRef.current.querySelector("button");
+      if (first) first.focus();
+    }
     const handler = (e) => {
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
+    return () => {
+      window.removeEventListener("keydown", handler);
+      if (triggerRef && triggerRef.current) triggerRef.current.focus();
+    };
   }, [onClose]);
 
   return (

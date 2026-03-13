@@ -104,7 +104,7 @@ const PROJECTS = [
         body: "Prototypes were tested in two rounds with active-duty aircrew. Round one surfaced issues with form hierarchy and terminology — we were using civilian language in a military context. Round two validated the revised flow and confirmed that pre-population from Puckboard Scheduling was the single highest-value feature. Both rounds were conducted on-site at operational squadrons.",
         callout: {
           type: "quote",
-          text: "\"Probably the best aspect of Form 8s [in Pucboard] that we've had so far is it allows commanders to sign Form 8s on the road and they don't have to be at their desk... We were able to fill & sign a Form 8 in 12 minutes whereas G/TIMS takes 12 minutes probably just to sign in.\"",
+          text: '"Probably the best aspect of Form 8s [in Pucboard] that we\'ve had so far is it allows commanders to sign Form 8s on the road and they don\'t have to be at their desk... We were able to fill & sign a Form 8 in 12 minutes whereas G/TIMS takes 12 minutes probably just to sign in."',
           attr: "— C-17 Loadmaster, usability test session",
         },
       },
@@ -746,14 +746,12 @@ function Nav({ onEasterEgg, eggFound, isMaster }) {
         }}
       >
         <span
-          href="#"
-          aria-label="Matthew W. Henning — back to top"
+          aria-label="Matthew W. Henning"
           style={{
             fontFamily: "'Bebas Neue', sans-serif",
             fontSize: "22px",
             letterSpacing: "0.08em",
             color: "#fff",
-            textDecoration: "none",
           }}
         >
           MWH
@@ -1299,11 +1297,8 @@ function LightboxModal({ src, caption, onClose }) {
   }, [onClose]);
 
   return (
-    <div
-      onClick={(e) => {
-        e.stopPropagation();
-        onClose();
-      }}
+<div
+      onClick={(e) => { e.stopPropagation(); onClose(); }}
       role="dialog"
       aria-modal="true"
       aria-label={caption}
@@ -2591,9 +2586,8 @@ function About() {
           >
             Today I design complex enterprise systems where clarity isn&apos;t
             optional. I research deeply, synthesize rigorously, and build design
-            systems that outlast the project. M.S. in UX Research & Design &
-            User-Centered Agile Development (HCI) from the University of
-            Michigan School of Information. Based in Chicago.
+            systems that outlast the project. M.S. in UX Research & Design & User-Centered Agile Development (HCI)
+            from the University of Michigan School of Information. Based in Chicago.
           </p>
         </div>
 
@@ -2694,8 +2688,8 @@ function Contact() {
             maxWidth: "500px",
           }}
         >
-          Open to Product Design, UX Design & UX Research roles in Chicago and
-          remote. Let&apos;s talk.
+          Open to Product Design, UX Design & UX
+          Research roles in Chicago and remote. Let&apos;s talk.
         </p>
 
         <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>

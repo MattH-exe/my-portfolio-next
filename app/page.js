@@ -2688,7 +2688,7 @@ function Contact() {
             maxWidth: "500px",
           }}
         >
-          Open to Product Design, UX Design, Team Leadership & UX
+          Open to Product Design, UX Design & UX
           Research roles in Chicago and remote. Let&apos;s talk.
         </p>
 

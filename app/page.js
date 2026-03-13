@@ -164,7 +164,7 @@ const PROJECTS = [
       {
         phase: "01 — Audit",
         title: "Quantifying the Inconsistency Problem",
-        body: "Before designing anything, I led an audit of the existing product suite across all three platforms. We catalogued every unique color value, type style, spacing unit, and component pattern in use. The result was sobering: significant visual drift between the iOS app and web products, no shared tokens, and engineering teams on each surface making independent decisions about how to interpret the same UI patterns.",
+        body: "Before designing anything, I contrubuted to an audit of the existing product suite across all platforms. We catalogued every unique color value, type style, spacing unit, and component pattern in use. The result was sobering: significant visual drift between the iOS app and web products, no shared tokens, and engineering teams on each surface making independent decisions about how to interpret the same UI patterns.",
         callout: {
           type: "stat",
           stats: [

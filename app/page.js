@@ -17,7 +17,7 @@ const TICKER_ITEMS = [
 const PROJECTS = [
   {
     id: "pbl",
-    year: "2022–Present",
+    year: "2022–2023",
     tag: "iOS · Enterprise UX",
     title: "Puckboard Logging",
     subtitle: "The future of post-mission paperwork.",
@@ -133,7 +133,7 @@ const PROJECTS = [
   },
   {
     id: "nimbus",
-    year: "2022–Present",
+    year: "2023",
     tag: "Design Systems · Web + iOS",
     title: "Nimbus Design System",
     subtitle: "One system. Every surface.",
@@ -142,7 +142,7 @@ const PROJECTS = [
     color: "#7c3aed",
     emoji: "⚡",
     heroImage: null,
-    role: "Lead iOS Design Contributor · Collaborated with iOS engineers, web engineers, and product designers across multi-product suite",
+    role: "Product Designer · Collaborated with iOS engineers, web engineers, and product designers across multi-product suite",
     contributions: [
       "Token-based color, typography, and spacing foundation across iOS and web",
       "42+ Figma component library with full variant and state coverage",
@@ -153,7 +153,7 @@ const PROJECTS = [
     links: [],
     artifacts: [],
     overview:
-      "Nimbus is the design system I helped lead across a cross-functional design and engineering team, serving as a primary bridge between Puckboard Logging's native iOS experience and the web-based products — Puckboard Scheduling and Puckboard Office. The core challenge: Logging was built on Apple UIKit and Swift, and we had no access to those native components on the web. Nimbus had to make both platforms feel like the same product without ever actually sharing a component.",
+      "Nimbus is the design system I helped champion across a cross-functional design and engineering team, serving as a primary bridge between Puckboard Logging's native iOS experience and the web-based products — Puckboard Scheduling and Puckboard Office. The core challenge: Logging was built on Apple UIKit and Swift, and we had no access to those native components on the web. Nimbus had to make both platforms feel like the same product without ever actually sharing a component.",
     metrics: [
       { value: "3 Products", label: "PBL · Scheduling · Office" },
       { value: "iOS + Web", label: "Platform Parity" },

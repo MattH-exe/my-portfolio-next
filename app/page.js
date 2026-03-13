@@ -135,7 +135,7 @@ const PROJECTS = [
     subtitle: "One system. Every surface.",
     impact: "2 Platforms",
     impactLabel: "Web + iOS",
-    color: "#7c3aed",
+    color: "#8b5cf6",
     emoji: "⚡",
     heroImage: null,
     role: "Product Designer · Collaborated with iOS engineers, web engineers, and product designers across multi-product suite",
@@ -689,7 +689,7 @@ const Ticker = React.memo(function Ticker() {
               fontFamily: "'DM Mono', monospace",
               fontSize: "11px",
               letterSpacing: "0.12em",
-              color: "#888",
+              color: "#909090",
               padding: "0 32px",
               textTransform: "uppercase",
             }}
@@ -702,7 +702,7 @@ const Ticker = React.memo(function Ticker() {
   );
 });
 
-function Nav({ onEasterEgg, eggFound, isMaster }) {
+function Nav({ onEasterEgg, eggFound, isMaster, eggButtonRef }) {
   const [mobile, setMobile] = useState(false);
   useEffect(() => {
     const handler = () => setMobile(window.innerWidth < 600);
@@ -793,14 +793,14 @@ function Nav({ onEasterEgg, eggFound, isMaster }) {
               style={{
                 fontFamily: "'DM Mono', monospace",
                 fontSize: "12px",
-                color: "#666",
+                color: "#7d7d7d",
                 textDecoration: "none",
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
                 transition: "color 0.15s",
               }}
               onMouseEnter={(e) => (e.target.style.color = "#fff")}
-              onMouseLeave={(e) => (e.target.style.color = "#666")}
+              onMouseLeave={(e) => (e.target.style.color = "#7d7d7d")}
             >
               {link}
             </a>
@@ -812,6 +812,7 @@ function Nav({ onEasterEgg, eggFound, isMaster }) {
               ? "Pokémon Master — easter egg unlocked"
               : "Easter egg — try the Konami code"
           }
+          ref={eggButtonRef}
           aria-pressed={eggFound}
           title={
             isMaster
@@ -822,7 +823,7 @@ function Nav({ onEasterEgg, eggFound, isMaster }) {
             background: "none",
             border: `1px solid ${isMaster ? "#f59e0b" : eggFound ? "#facc1566" : "#222"}`,
             borderRadius: "6px",
-            color: isMaster ? "#f59e0b" : eggFound ? "#facc15" : "#333",
+            color: isMaster ? "#f59e0b" : eggFound ? "#facc15" : "#606060",
             cursor: "pointer",
             padding: "6px 10px",
             fontSize: "14px",
@@ -897,7 +898,7 @@ function Hero() {
         style={{
           fontFamily: "'Inter', sans-serif",
           fontSize: "clamp(18px, 2.5vw, 26px)",
-          color: "#aaa",
+          color: "#b2b2b2",
           maxWidth: "560px",
           lineHeight: "1.5",
           marginBottom: "48px",
@@ -951,7 +952,7 @@ function Hero() {
             e.target.style.borderColor = "#fff";
           }}
           onMouseLeave={(e) => {
-            e.target.style.borderColor = "#333";
+            e.target.style.borderColor = "#606060";
           }}
         >
           Get in Touch
@@ -966,7 +967,7 @@ function ProjectCard({ project, onClick }) {
   const isWip = !!project.wip;
   return (
     <article
-      onClick={() => onClick(project)}
+      onClick={(e) => onClick(project, e.currentTarget)}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
@@ -975,6 +976,8 @@ function ProjectCard({ project, onClick }) {
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
       tabIndex={0}
       role="button"
       aria-label={`${project.title} — ${project.subtitle}. ${isWip ? "Work in progress." : "Click to open case study."}`}
@@ -992,6 +995,10 @@ function ProjectCard({ project, onClick }) {
           ? `0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px ${project.color}22`
           : "none",
         opacity: isWip ? 0.85 : 1,
+        outline: "none",
+      }}
+      onKeyUp={(e) => {
+        // Handled in onKeyDown, this suppresses any residual
       }}
     >
       {isWip ? (
@@ -1035,7 +1042,7 @@ function ProjectCard({ project, onClick }) {
             style={{
               fontFamily: "'DM Mono', monospace",
               fontSize: "10px",
-              color: "#555",
+              color: "#7b7b7b",
               letterSpacing: "0.12em",
               textTransform: "uppercase",
             }}
@@ -1094,7 +1101,7 @@ function ProjectCard({ project, onClick }) {
         style={{
           fontFamily: "'Inter', sans-serif",
           fontSize: "15px",
-          color: "#777",
+          color: "#8a8a8a",
           marginBottom: "32px",
           lineHeight: "1.4",
         }}
@@ -1125,7 +1132,7 @@ function ProjectCard({ project, onClick }) {
           style={{
             fontFamily: "'DM Mono', monospace",
             fontSize: "10px",
-            color: "#555",
+            color: "#7b7b7b",
             letterSpacing: "0.1em",
             textTransform: "uppercase",
           }}
@@ -1139,7 +1146,7 @@ function ProjectCard({ project, onClick }) {
           marginTop: "16px",
           fontFamily: "'DM Mono', monospace",
           fontSize: "11px",
-          color: hovered ? project.color : "#444",
+          color: hovered ? project.color : "#7b7b7b",
           letterSpacing: "0.08em",
           transition: "color 0.2s",
         }}
@@ -1230,7 +1237,7 @@ function Callout({ callout, color }) {
               style={{
                 fontFamily: "'DM Mono', monospace",
                 fontSize: "9px",
-                color: "#666",
+                color: "#7d7d7d",
                 letterSpacing: "0.08em",
                 marginTop: "4px",
                 textTransform: "uppercase",
@@ -1275,12 +1282,21 @@ function Callout({ callout, color }) {
 }
 
 function LightboxModal({ src, caption, onClose }) {
+  const eggModalRef = useRef(null);
   useEffect(() => {
+    // Focus first button on open
+    if (eggModalRef.current) {
+      const first = eggModalRef.current.querySelector('button');
+      if (first) first.focus();
+    }
     const handler = (e) => {
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
+    return () => {
+      window.removeEventListener("keydown", handler);
+      if (triggerRef && triggerRef.current) triggerRef.current.focus();
+    };
   }, [onClose]);
 
   return (
@@ -1303,6 +1319,7 @@ function LightboxModal({ src, caption, onClose }) {
       }}
     >
       <button
+        ref={closeBtnRef}
         onClick={(e) => { e.stopPropagation(); onClose(); }}
         aria-label="Close image preview"
         style={{
@@ -1311,7 +1328,7 @@ function LightboxModal({ src, caption, onClose }) {
           right: "20px",
           background: "rgba(255,255,255,0.08)",
           border: "1px solid rgba(255,255,255,0.12)",
-          color: "#aaa",
+          color: "#b2b2b2",
           cursor: "pointer",
           borderRadius: "8px",
           width: "36px",
@@ -1358,7 +1375,7 @@ function LightboxModal({ src, caption, onClose }) {
           style={{
             fontFamily: "'DM Mono', monospace",
             fontSize: "11px",
-            color: "#555",
+            color: "#7b7b7b",
             letterSpacing: "0.08em",
             marginTop: "16px",
             textAlign: "center",
@@ -1372,7 +1389,7 @@ function LightboxModal({ src, caption, onClose }) {
         style={{
           fontFamily: "'DM Mono', monospace",
           fontSize: "10px",
-          color: "#333",
+          color: "#606060",
           letterSpacing: "0.08em",
           marginTop: "8px",
         }}
@@ -1383,11 +1400,12 @@ function LightboxModal({ src, caption, onClose }) {
   );
 }
 
-function Modal({ project, onClose }) {
+function Modal({ project, onClose, triggerRef }) {
   const [activePhase, setActivePhase] = useState(0);
   const [mobile, setMobile] = useState(false);
   const [lightbox, setLightbox] = useState(null);
   const phaseNavRef = useRef(null);
+  const modalRef = useRef(null);
 
   useEffect(() => {
     setActivePhase(0);
@@ -1402,6 +1420,13 @@ function Modal({ project, onClose }) {
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    // Move focus into modal on open
+    if (modalRef.current) {
+      const firstFocusable = modalRef.current.querySelector(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (firstFocusable) firstFocusable.focus();
+    }
     const handler = (e) => {
       if (e.key === "Escape") {
         onClose();
@@ -1429,6 +1454,8 @@ function Modal({ project, onClose }) {
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", handler);
+      // Restore focus to trigger element on close
+      if (triggerRef && triggerRef.current) triggerRef.current.focus();
     };
   }, [onClose]);
 
@@ -1453,6 +1480,7 @@ function Modal({ project, onClose }) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
+        ref={modalRef}
         role="dialog"
         aria-modal="true"
         aria-label={`${project.title} case study`}
@@ -1571,7 +1599,7 @@ function Modal({ project, onClose }) {
               style={{
                 background: "#1a1a1a",
                 border: "1px solid #2a2a2a",
-                color: "#888",
+                color: "#909090",
                 cursor: "pointer",
                 borderRadius: "8px",
                 width: "36px",
@@ -1624,7 +1652,7 @@ function Modal({ project, onClose }) {
                   style={{
                     fontFamily: "'Inter', sans-serif",
                     fontSize: "13px",
-                    color: "#a8a8a8",
+                    color: "#b0b0b0",
                     lineHeight: "1.55",
                   }}
                 >
@@ -1638,7 +1666,7 @@ function Modal({ project, onClose }) {
             style={{
               fontFamily: "'Inter', sans-serif",
               fontSize: "16px",
-              color: "#a8a8a8",
+              color: "#b0b0b0",
               lineHeight: "1.65",
               marginBottom: "24px",
             }}
@@ -1682,7 +1710,7 @@ function Modal({ project, onClose }) {
                     style={{
                       fontFamily: "'DM Mono', monospace",
                       fontSize: "9px",
-                      color: "#555",
+                      color: "#7b7b7b",
                       letterSpacing: "0.08em",
                       marginTop: "4px",
                       textTransform: "uppercase",
@@ -1724,7 +1752,7 @@ function Modal({ project, onClose }) {
                   border: `1px solid ${i === activePhase ? project.color : "#2a2a2a"}`,
                   background:
                     i === activePhase ? project.color + "18" : "transparent",
-                  color: i === activePhase ? project.color : "#555",
+                  color: i === activePhase ? project.color : "#7b7b7b",
                   transition: "all 0.15s",
                   outline: "none",
                   boxShadow: "none",
@@ -1803,7 +1831,7 @@ function Modal({ project, onClose }) {
               style={{
                 fontFamily: "'DM Mono', monospace",
                 fontSize: "11px",
-                color: activePhase === 0 ? "#2a2a2a" : "#666",
+                color: activePhase === 0 ? "#2a2a2a" : "#7d7d7d",
                 background: "none",
                 border: "none",
                 cursor: activePhase === 0 ? "default" : "pointer",
@@ -1816,7 +1844,7 @@ function Modal({ project, onClose }) {
               style={{
                 fontFamily: "'DM Mono', monospace",
                 fontSize: "10px",
-                color: "#333",
+                color: "#606060",
                 letterSpacing: "0.1em",
               }}
             >
@@ -1866,7 +1894,7 @@ function Modal({ project, onClose }) {
                 style={{
                   fontFamily: "'DM Mono', monospace",
                   fontSize: "10px",
-                  color: "#666",
+                  color: "#7d7d7d",
                   background: "#141414",
                   border: "1px solid #222",
                   borderRadius: "4px",
@@ -1916,7 +1944,7 @@ function Modal({ project, onClose }) {
                       gap: "10px",
                       fontFamily: "'Inter', sans-serif",
                       fontSize: "14px",
-                      color: "#a8a8a8",
+                      color: "#b0b0b0",
                       lineHeight: "1.5",
                     }}
                   >
@@ -2037,7 +2065,7 @@ function Modal({ project, onClose }) {
                       style={{
                         fontFamily: "'DM Mono', monospace",
                         fontSize: "9px",
-                        color: "#555",
+                        color: "#7b7b7b",
                         letterSpacing: "0.06em",
                         marginTop: "6px",
                         lineHeight: "1.4",
@@ -2108,7 +2136,7 @@ function Modal({ project, onClose }) {
   );
 }
 
-function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
+function EasterEggModal({ onClose, onMaster, caught, setCaught, triggerRef }) {
   const [current, setCurrent] = useState(() => {
     const remaining = POKEMON.filter((p) => !caught.some((c) => c.id === p.id));
     const pool = remaining.length > 0 ? remaining : POKEMON;
@@ -2229,6 +2257,7 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
       }}
     >
       <div
+        ref={eggModalRef}
         onClick={(e) => e.stopPropagation()}
         style={{
           background: "#0a0a12",
@@ -2321,7 +2350,7 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
                     style={{
                       fontFamily: "'DM Mono', monospace",
                       fontSize: "11px",
-                      color: "#444",
+                      color: "#7b7b7b",
                     }}
                   >
                     loading...
@@ -2387,7 +2416,7 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
             style={{
               fontFamily: "'DM Mono', monospace",
               fontSize: "11px",
-              color: "#555",
+              color: "#7b7b7b",
               marginTop: "4px",
             }}
           >
@@ -2415,7 +2444,7 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
           disabled={wasAlreadyCaught || throwing}
           style={{
             background: wasAlreadyCaught || throwing ? "#1a1a1a" : "#facc15",
-            color: wasAlreadyCaught || throwing ? "#444" : "#000",
+            color: wasAlreadyCaught || throwing ? "#7b7b7b" : "#000",
             border: "none",
             borderRadius: "8px",
             fontFamily: "'Bebas Neue', sans-serif",
@@ -2452,7 +2481,7 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
           style={{
             fontFamily: "'DM Mono', monospace",
             fontSize: "11px",
-            color: "#555",
+            color: "#7b7b7b",
             letterSpacing: "0.1em",
           }}
         >
@@ -2465,7 +2494,7 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
           style={{
             background: "none",
             border: "none",
-            color: "#333",
+            color: "#606060",
             fontFamily: "'DM Mono', monospace",
             fontSize: "11px",
             cursor: "pointer",
@@ -2536,7 +2565,7 @@ function About() {
             style={{
               fontFamily: "'Inter', sans-serif",
               fontSize: "17px",
-              color: "#888",
+              color: "#909090",
               lineHeight: "1.65",
             }}
           >
@@ -2549,7 +2578,7 @@ function About() {
             style={{
               fontFamily: "'Inter', sans-serif",
               fontSize: "17px",
-              color: "#888",
+              color: "#909090",
               lineHeight: "1.65",
             }}
           >
@@ -2571,11 +2600,11 @@ function About() {
         >
           {[
             ["Interaction Design", "#10b981"],
-            ["UX Research", "#7c3aed"],
+            ["UX Research", "#8b5cf6"],
             ["Design Systems", "#10b981"],
             ["Accessibility", "#f59e0b"],
             ["Figma", "#10b981"],
-            ["Usability Testing", "#7c3aed"],
+            ["Usability Testing", "#8b5cf6"],
             ["HCI", "#10b981"],
             ["Agile / Scrum", "#f59e0b"],
           ].map(([skill, color]) => (
@@ -2650,7 +2679,7 @@ function Contact() {
           style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: "17px",
-            color: "#666",
+            color: "#7d7d7d",
             lineHeight: "1.6",
             marginBottom: "40px",
             maxWidth: "500px",
@@ -2707,7 +2736,7 @@ function Contact() {
               e.target.style.borderColor = "#fff";
             }}
             onMouseLeave={(e) => {
-              e.target.style.borderColor = "#333";
+              e.target.style.borderColor = "#606060";
             }}
           >
             LinkedIn
@@ -2732,7 +2761,7 @@ function Contact() {
               e.target.style.borderColor = "#fff";
             }}
             onMouseLeave={(e) => {
-              e.target.style.borderColor = "#333";
+              e.target.style.borderColor = "#606060";
             }}
           >
             Resume ↗
@@ -2751,6 +2780,8 @@ export default function App() {
   const [isMaster, setIsMaster] = useState(false);
   const [caughtPokemon, setCaughtPokemon] = useState([]);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const eggButtonRef = useRef(null);
+  const lastCardRef = useRef(null);
 
   const handleEgg = () => {
     setShowEgg(true);
@@ -2847,6 +2878,30 @@ export default function App() {
         .fade-up-3 { animation-delay: 0.4s; opacity: 0; }
         .fade-up-4 { animation-delay: 0.55s; opacity: 0; }
 
+        /* Ticker animation */
+        .ticker-scroll { animation: ticker 30s linear infinite; }
+
+        /* Global focus-visible ring — applies to all interactive elements */
+        :focus-visible {
+          outline: 2px solid #10b981 !important;
+          outline-offset: 3px;
+          border-radius: 3px;
+        }
+
+        /* Respect prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+          .ticker-scroll { animation: none; }
+          .fade-up, .fade-up-1, .fade-up-2, .fade-up-3, .fade-up-4 {
+            animation: none !important;
+            opacity: 1 !important;
+          }
+          * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
+        }
+
         @keyframes catchShrink {
           0%   { transform: scale(1); opacity: 1; }
           60%  { transform: scale(0.3); opacity: 0.6; }
@@ -2878,7 +2933,7 @@ export default function App() {
           backdropFilter: "blur(12px)",
         }}
       >
-        <Nav onEasterEgg={handleEgg} eggFound={eggFound} isMaster={isMaster} />
+        <Nav onEasterEgg={handleEgg} eggFound={eggFound} isMaster={isMaster} eggButtonRef={eggButtonRef} />
         <div
           style={{ position: "relative", height: "1px", background: "#222" }}
         >
@@ -2955,7 +3010,7 @@ export default function App() {
             }}
           >
             {PROJECTS.map((p) => (
-              <ProjectCard key={p.id} project={p} onClick={setActiveProject} />
+              <ProjectCard key={p.id} project={p} onClick={(proj, el) => { lastCardRef.current = el; setActiveProject(proj); }} />
             ))}
           </div>
         </section>
@@ -2984,7 +3039,7 @@ export default function App() {
           style={{
             fontFamily: "'DM Mono', monospace",
             fontSize: "11px",
-            color: "#555",
+            color: "#7b7b7b",
             letterSpacing: "0.08em",
           }}
         >
@@ -2994,7 +3049,7 @@ export default function App() {
           style={{
             fontFamily: "'DM Mono', monospace",
             fontSize: "11px",
-            color: "#555",
+            color: "#7b7b7b",
             letterSpacing: "0.08em",
           }}
         >
@@ -3003,7 +3058,7 @@ export default function App() {
       </footer>
 
       {activeProject && (
-        <Modal project={activeProject} onClose={() => setActiveProject(null)} />
+        <Modal project={activeProject} onClose={() => setActiveProject(null)} triggerRef={lastCardRef} />
       )}
       {showEgg && (
         <EasterEggModal
@@ -3011,6 +3066,7 @@ export default function App() {
           onMaster={() => setIsMaster(true)}
           caught={caughtPokemon}
           setCaught={setCaughtPokemon}
+          triggerRef={eggButtonRef}
         />
       )}
     </>

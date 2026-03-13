@@ -222,7 +222,7 @@ const PROJECTS = [
     year: "2024–2025",
     tag: "Enterprise UX · Web · Personnel",
     title: "My Docs",
-    subtitle: "UNDER CONSTRUCTION - Pardon my Dus",
+    subtitle: "UNDER CONSTRUCTION - Pardon my Dust",
     impact: "0→1",
     impactLabel: "New Feature",
     color: "#a78bfa",

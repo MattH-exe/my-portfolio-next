@@ -47,13 +47,9 @@ const PROJECTS = [
         src: "https://images.squarespace-cdn.com/content/v1/611298f29aedd7131a46a751/15b3ac58-8fd8-4989-9ff6-5f666181cac8/Case+Study+Template_Page_01.jpg",
         caption: "Puckboard Logging — case study overview",
       },
-      // Add more when ready (drop in /public/images/ and update src):
-      // { src: "/images/pbl-workflow-map.png", caption: "Workflow Map — 14-step pre-digitization flow" },
-      // { src: "/images/pbl-form-651.png", caption: "AF Form 651 UI — digitized fuel & flight data" },
-      // { src: "/images/pbl-aircrew-editor.png", caption: "Aircrew Editor — crew management flows" },
     ],
     overview:
-      "Puckboard Logging (iOS - iPad) is a key component the Department of Defense’s first accredited, collaborative flight scheduling application built to eliminate the most painful part of a pilot's day — post-mission paperwork. By pulling data from Puckboard Scheduling, pre-populating form fields, and automating verification, we turned a 3-hour manual process into something aircrews could complete in under 10 minutes.",
+      "Puckboard Logging (iOS - iPad) is a key component the Department of Defense's first accredited, collaborative flight scheduling application built to eliminate the most painful part of a pilot's day — post-mission paperwork. By pulling data from Puckboard Scheduling, pre-populating form fields, and automating verification, we turned a 3-hour manual process into something aircrews could complete in under 10 minutes.",
     metrics: [
       { value: "3hrs → <10min", label: "Documentation Time" },
       { value: "$20M+", label: "Fuel Savings" },
@@ -248,12 +244,7 @@ const PROJECTS = [
         url: "https://www.youtube.com/watch?v=WLHUd0M-6Cc",
       },
     ],
-    artifacts: [
-      // Add your ParkPal artifact images here:
-      // { src: "/images/parkpal-journey-map.png", caption: "Journey Map — pre-trip planning flow" },
-      // { src: "/images/parkpal-wireframes.png", caption: "Mid-fi wireframes — trail detail screen" },
-      // { src: "/images/parkpal-hifi.png", caption: "Hi-fi prototype — accessibility rating UI" },
-    ],
+    artifacts: [],
     overview:
       "People with mobility-related disabilities had almost no reliable way to understand whether a park or trail was actually accessible to them before visiting. Existing solutions were outdated, inconsistent, or simply absent. ParkPal was designed accessibility-first — not as an afterthought.",
     metrics: [
@@ -368,8 +359,7 @@ const PROJECTS = [
       },
       {
         src: "https://images.squarespace-cdn.com/content/v1/611298f29aedd7131a46a751/1628649016848-KIDZSHM9A76M28YJWXK0/home+-+return+%281%29.png",
-        caption:
-          "OCR Camera Redesign — inspired by native camera app conventions",
+        caption: "OCR Camera Redesign — inspired by native camera app conventions",
       },
     ],
     overview:
@@ -455,11 +445,7 @@ const PROJECTS = [
       "[ Add your specific contributions here as the work develops ]",
     ],
     links: [],
-    artifacts: [
-      // Add Testing artifact images here as work develops:
-      // { src: "/images/pbt-workflow-map.png", caption: "Workflow Map — test lifecycle mapping" },
-      // { src: "/images/pbt-wireframes.png", caption: "Early wireframes — coordinator dashboard" },
-    ],
+    artifacts: [],
     overview:
       "Puckboard Testing is a new web-based test management platform currently in active design. Building on lessons learned from Puckboard Logging, the product aims to modernize how military units plan, track, and report on readiness testing — replacing a fragmented mix of spreadsheets and paper-based processes with a structured, data-driven workflow.",
     metrics: [
@@ -745,17 +731,20 @@ function Nav({ onEasterEgg, eggFound, isMaster }) {
           flexShrink: 0,
         }}
       >
-        <span
-          aria-label="Matthew W. Henning"
+        {/* ── MWH logo — clicking scrolls to top ── */}
+        <a
+          href="#"
+          aria-label="Matthew W. Henning — back to top"
           style={{
             fontFamily: "'Bebas Neue', sans-serif",
             fontSize: "22px",
             letterSpacing: "0.08em",
             color: "#fff",
+            textDecoration: "none",
           }}
         >
           MWH
-        </span>
+        </a>
         <span
           aria-label="Currently available for hire"
           role="status"
@@ -1005,7 +994,6 @@ function ProjectCard({ project, onClick }) {
         opacity: isWip ? 0.85 : 1,
       }}
     >
-      {/* Accent line — dashed for WIP */}
       {isWip ? (
         <div
           style={{
@@ -1175,7 +1163,6 @@ function Callout({ callout, color }) {
       <div
         style={{
           borderLeft: `3px solid ${color}`,
-          paddingLeft: "20px",
           margin: "20px 0",
           background: color + "08",
           borderRadius: "0 8px 8px 0",
@@ -1297,7 +1284,7 @@ function LightboxModal({ src, caption, onClose }) {
   }, [onClose]);
 
   return (
-<div
+    <div
       onClick={(e) => { e.stopPropagation(); onClose(); }}
       role="dialog"
       aria-modal="true"
@@ -1316,7 +1303,7 @@ function LightboxModal({ src, caption, onClose }) {
       }}
     >
       <button
-        onClick={onClose}
+        onClick={(e) => { e.stopPropagation(); onClose(); }}
         aria-label="Close image preview"
         style={{
           position: "absolute",
@@ -1399,7 +1386,7 @@ function LightboxModal({ src, caption, onClose }) {
 function Modal({ project, onClose }) {
   const [activePhase, setActivePhase] = useState(0);
   const [mobile, setMobile] = useState(false);
-  const [lightbox, setLightbox] = useState(null); // { src, caption }
+  const [lightbox, setLightbox] = useState(null);
   const phaseNavRef = useRef(null);
 
   useEffect(() => {
@@ -1420,7 +1407,6 @@ function Modal({ project, onClose }) {
         onClose();
         return;
       }
-      // Arrow key nav within phase chips when focus is inside phaseNavRef
       if (!phaseNavRef.current) return;
       const chips = Array.from(phaseNavRef.current.querySelectorAll("button"));
       const focused = document.activeElement;
@@ -1481,7 +1467,6 @@ function Modal({ project, onClose }) {
           boxShadow: `0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px ${project.color}22`,
         }}
       >
-        {/* Hero image */}
         {project.heroImage && (
           <div
             style={{
@@ -1497,10 +1482,7 @@ function Modal({ project, onClose }) {
               src={project.heroImage}
               alt={project.title}
               fill
-              style={{
-                objectFit: "cover",
-                objectPosition: "top",
-              }}
+              style={{ objectFit: "cover", objectPosition: "top" }}
             />
             <div
               style={{
@@ -1512,7 +1494,6 @@ function Modal({ project, onClose }) {
           </div>
         )}
 
-        {/* Sticky header */}
         <div
           style={{
             padding: project.heroImage
@@ -1609,7 +1590,6 @@ function Modal({ project, onClose }) {
         </div>
 
         <div style={{ padding: mobile ? "20px 20px 36px" : "28px 36px 44px" }}>
-          {/* Role & team context */}
           {project.role && (
             <div
               style={{
@@ -1624,9 +1604,7 @@ function Modal({ project, onClose }) {
                 gap: "12px",
               }}
             >
-              <span
-                style={{ fontSize: "14px", marginTop: "1px", flexShrink: 0 }}
-              >
+              <span style={{ fontSize: "14px", marginTop: "1px", flexShrink: 0 }}>
                 👤
               </span>
               <div>
@@ -1655,7 +1633,7 @@ function Modal({ project, onClose }) {
               </div>
             </div>
           )}
-          {/* Overview + metrics */}
+
           <p
             style={{
               fontFamily: "'Inter', sans-serif",
@@ -1667,6 +1645,7 @@ function Modal({ project, onClose }) {
           >
             {project.overview}
           </p>
+
           <div
             style={{
               display: "grid",
@@ -1714,7 +1693,7 @@ function Modal({ project, onClose }) {
                 </div>
               ))}
           </div>
-          {/* Phase nav */}
+
           <div
             ref={phaseNavRef}
             role="tablist"
@@ -1761,7 +1740,7 @@ function Modal({ project, onClose }) {
               </button>
             ))}
           </div>
-          {/* Active phase content */}
+
           <div
             style={{
               background: "#0a0a0d",
@@ -1808,7 +1787,7 @@ function Modal({ project, onClose }) {
             </p>
             <Callout callout={phase.callout} color={project.color} />
           </div>
-          {/* Phase stepper arrows */}
+
           <div
             style={{
               display: "flex",
@@ -1846,7 +1825,7 @@ function Modal({ project, onClose }) {
             <button
               onClick={() =>
                 setActivePhase(
-                  Math.min(project.phases.length - 1, activePhase + 1),
+                  Math.min(project.phases.length - 1, activePhase + 1)
                 )
               }
               disabled={activePhase === project.phases.length - 1}
@@ -1870,7 +1849,7 @@ function Modal({ project, onClose }) {
               Next →
             </button>
           </div>
-          {/* Tags */}
+
           <div
             style={{
               display: "flex",
@@ -1899,7 +1878,7 @@ function Modal({ project, onClose }) {
               </span>
             ))}
           </div>
-          {/* My Contributions */}
+
           {project.contributions && project.contributions.length > 0 && (
             <div
               style={{
@@ -1956,7 +1935,7 @@ function Modal({ project, onClose }) {
               </ul>
             </div>
           )}
-          {/* Artifact image strip */}
+
           {project.artifacts && project.artifacts.length > 0 && (
             <div
               style={{
@@ -2016,8 +1995,7 @@ function Modal({ project, onClose }) {
                         transition: "border-color 0.15s, box-shadow 0.15s",
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.borderColor =
-                          project.color + "88";
+                        e.currentTarget.style.borderColor = project.color + "88";
                         e.currentTarget.style.boxShadow = `0 0 0 1px ${project.color}44`;
                       }}
                       onMouseLeave={(e) => {
@@ -2031,7 +2009,6 @@ function Modal({ project, onClose }) {
                         fill
                         style={{ objectFit: "cover" }}
                       />
-                      {/* Zoom hint overlay */}
                       <div
                         style={{
                           position: "absolute",
@@ -2073,7 +2050,7 @@ function Modal({ project, onClose }) {
               </div>
             </div>
           )}
-          {/* Links */}
+
           {project.links && project.links.length > 0 && (
             <div
               style={{
@@ -2184,7 +2161,6 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
     };
   }, [current.id]);
 
-  const isCaught = caught.some((p) => p.id === current.id);
   const caughtCount = Math.min(caught.length, 10);
   const isMaster = caught.length >= 10;
 
@@ -2207,7 +2183,7 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
           setMessage("Gotcha! " + current.name + " was caught!");
           setTimeout(() => {
             const remaining = POKEMON.filter(
-              (p) => !newCaught.some((c) => c.id === p.id),
+              (p) => !newCaught.some((c) => c.id === p.id)
             );
             if (remaining.length > 0) {
               const next =
@@ -2290,7 +2266,6 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
           GOTTA CATCH &apos;EM ALL
         </h2>
 
-        {/* Battle screen */}
         <div
           style={{
             background: "#06060e",
@@ -2311,7 +2286,6 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
               justifyContent: "center",
             }}
           >
-            {/* Sprite / idle state — hidden once catch animation completes */}
             {!animDone && (
               <div
                 style={{
@@ -2356,7 +2330,6 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
               </div>
             )}
 
-            {/* Star overlay on catch */}
             {catchAnim && (
               <div
                 style={{
@@ -2374,7 +2347,6 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
               </div>
             )}
 
-            {/* Star burst on catch */}
             {catchAnim &&
               ["✦", "✦", "✦", "✦", "✦", "✦"].map((s, i) => (
                 <div
@@ -2476,7 +2448,6 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught }) {
           )}
         </button>
 
-        {/* Caught counter */}
         <div
           style={{
             fontFamily: "'DM Mono', monospace",
@@ -2547,9 +2518,7 @@ function About() {
         >
           I SPENT YEARS
           <br />
-          <span
-            style={{ color: "transparent", WebkitTextStroke: "1.5px #fff" }}
-          >
+          <span style={{ color: "transparent", WebkitTextStroke: "1.5px #fff" }}>
             LEARNING TO TELL
           </span>
           <br />
@@ -2586,8 +2555,9 @@ function About() {
           >
             Today I design complex enterprise systems where clarity isn&apos;t
             optional. I research deeply, synthesize rigorously, and build design
-            systems that outlast the project. M.S. in UX Research & Design & User-Centered Agile Development (HCI)
-            from the University of Michigan School of Information. Based in Chicago.
+            systems that outlast the project. M.S. in UX Research & Design &
+            User-Centered Agile Development (HCI) from the University of Michigan
+            School of Information. Based in Chicago.
           </p>
         </div>
 
@@ -2669,9 +2639,7 @@ function Contact() {
         >
           READY
           <br />
-          <span
-            style={{ color: "transparent", WebkitTextStroke: "1.5px #fff" }}
-          >
+          <span style={{ color: "transparent", WebkitTextStroke: "1.5px #fff" }}>
             WHEN
           </span>
           <br />
@@ -2688,8 +2656,8 @@ function Contact() {
             maxWidth: "500px",
           }}
         >
-          Open to Product Design, UX Design & UX
-          Research roles in Chicago and remote. Let&apos;s talk.
+          Open to Product Design, UX Design & UX Research roles in Chicago and
+          remote. Let&apos;s talk.
         </p>
 
         <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
@@ -2873,9 +2841,7 @@ export default function App() {
           to { opacity: 1; transform: translateY(0); }
         }
 
-        .fade-up {
-          animation: fadeUp 0.7s ease forwards;
-        }
+        .fade-up { animation: fadeUp 0.7s ease forwards; }
         .fade-up-1 { animation-delay: 0.1s; opacity: 0; }
         .fade-up-2 { animation-delay: 0.25s; opacity: 0; }
         .fade-up-3 { animation-delay: 0.4s; opacity: 0; }
@@ -2903,7 +2869,6 @@ export default function App() {
         @keyframes starBurst5 { 0% { transform: translate(-50%,-50%) scale(0); opacity:0; } 40% { opacity:1; } 100% { transform: translate(calc(-50% + 44px), calc(-50% + 52px)) scale(1.2); opacity:0; } }
       `}</style>
 
-      {/* Sticky header: Nav + progress bar + Ticker */}
       <div
         style={{
           position: "sticky",
@@ -2914,7 +2879,6 @@ export default function App() {
         }}
       >
         <Nav onEasterEgg={handleEgg} eggFound={eggFound} isMaster={isMaster} />
-        {/* Progress bar separator */}
         <div
           style={{ position: "relative", height: "1px", background: "#222" }}
         >
@@ -2938,7 +2902,6 @@ export default function App() {
           <Hero />
         </div>
 
-        {/* Work section */}
         <section
           id="work"
           aria-label="Selected work"
@@ -3003,7 +2966,6 @@ export default function App() {
         </div>
       </main>
 
-      {/* Footer */}
       <footer
         aria-label="Site footer"
         style={{

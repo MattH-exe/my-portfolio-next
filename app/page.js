@@ -4,14 +4,14 @@ import NextImage from "next/image";
 
 // ── Data ──────────────────────────────────────────────────────
 const TICKER_ITEMS = [
-  "65% Task-Time Reduction ✦",
-  "$20M+ Operational Savings ✦",
-  "~375K Labor Hours Reclaimed ✦",
-  "Nearly 5 Years Enterprise UX ✦",
-  "Active DoD Secret Clearance ✦",
-  "Research-Driven Design ✦",
-  "Nimbus Design System ✦",
-  "M.S. HCI — University of Michigan ✦",
+  "✦ 65% Task-Time Reduction ✦",
+  "✦ $20M+ Operational Savings ✦",
+  "✦ ~375K Labor Hours Reclaimed ✦",
+  "✦ Nearly 5 Years Enterprise UX ✦",
+  "✦ Active DoD Secret Clearance ✦",
+  "✦ Research-Driven Design ✦",
+  "✦ Nimbus Design System ✦",
+  "✦ M.S. HCI — University of Michigan ✦",
 ];
 
 const PROJECTS = [
@@ -53,7 +53,7 @@ const PROJECTS = [
       // { src: "/images/pbl-aircrew-editor.png", caption: "Aircrew Editor — crew management flows" },
     ],
     overview:
-      "Puckboard Logging is an iOS application built to eliminate the most painful part of a pilot's day — post-mission paperwork. By pulling data from Puckboard Scheduling, pre-populating form fields, and automating verification, we turned a 3-hour manual process into something aircrews could complete in under 10 minutes.",
+      "Puckboard Logging (iOS - iPad) is a key component the Department of Defense’s first accredited, collaborative flight scheduling application built to eliminate the most painful part of a pilot's day — post-mission paperwork. By pulling data from Puckboard Scheduling, pre-populating form fields, and automating verification, we turned a 3-hour manual process into something aircrews could complete in under 10 minutes.",
     metrics: [
       { value: "3hrs → <10min", label: "Documentation Time" },
       { value: "$20M+", label: "Fuel Savings" },

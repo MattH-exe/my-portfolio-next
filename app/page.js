@@ -48,8 +48,9 @@ const PROJECTS = [
         caption: "Puckboard Logging — case study overview",
       },
     ],
+    cuiDisclaimer: "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
     overview:
-      "Puckboard Logging (iOS - iPad) is a key component the Department of Defense's first accredited, collaborative flight scheduling application built to eliminate the most painful part of a pilot's day — post-mission paperwork. By pulling data from Puckboard Scheduling, pre-populating form fields, and automating verification, we turned a 3-hour manual process into something aircrews could complete in under 10 minutes.",
+      "Puckboard Logging (iOS · iPad) is one of four branches in the Puckboard suite — alongside Scheduling, Office, and Personnel — forming the Department of Defense's first accredited, collaborative flight operations platform. Logging tackles the most painful part of a pilot's day: post-mission paperwork. By pulling data from Puckboard Scheduling, pre-populating form fields, and automating verification, we turned a 3-hour manual process into something aircrews could complete in under 10 minutes.",
     metrics: [
       { value: "3hrs → <10min", label: "Documentation Time" },
       { value: "$20M+", label: "Fuel Savings" },
@@ -128,6 +129,186 @@ const PROJECTS = [
     ],
   },
   {
+    id: "pmr",
+    year: "2023–2024",
+    tag: "Enterprise UX · Web · Dashboard",
+    title: "PMR Dashboard",
+    subtitle: "Where mission data becomes a record of truth.",
+    impact: "0→1",
+    impactLabel: "New Feature",
+    color: "#38bdf8",
+    emoji: "📊",
+    wip: false,
+    cuiDisclaimer: "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
+    heroImage: null,
+    role: "Lead Product Designer · Cross-functional team of designers, web engineers, and a PM · Active DoD Secret Clearance required",
+    contributions: [
+      "[ Add your specific contributions here ]",
+      "Post-Mission Review dashboard — central hub routing mission event data to systems of record",
+      "SARM-facing review and submission workflows",
+      "Flight Hours, Training Accomplishments, Form 781, and Form 1522 data review flows",
+      "[ Add additional contributions as you document the work ]",
+    ],
+    links: [],
+    artifacts: [],
+    overview:
+      "[ Add your overview here. ] The PMR Dashboard is the central hub through which all scheduled mission event data — Flight Hours, Training Accomplishments, AF Form 781s, Form 1522s, and more — flows on its way to being entered into systems of record by SARMs (Squadron Aviation Resource Managers). Designed as part of Puckboard Logging, it brings structure and accountability to the final mile of post-mission data entry.",
+    metrics: [
+      { value: "0→1", label: "New Feature" },
+      { value: "Web", label: "Platform" },
+      { value: "SARM", label: "Primary User" },
+      { value: "DoD", label: "Context" },
+    ],
+    phases: [
+      {
+        phase: "01 — Discover",
+        title: "[ Add your discovery narrative here ]",
+        body: "[ Describe what you learned about the SARM workflow — how mission event data was being handled before the PMR Dashboard, what pain points existed, and what research methods you used to uncover them. ]",
+        callout: {
+          type: "quote",
+          text: '"[ Add a representative quote from a SARM or stakeholder interview here. ]"',
+          attr: "— SARM, discovery interview",
+        },
+      },
+      {
+        phase: "02 — Define",
+        title: "[ Add your define narrative here ]",
+        body: "[ Describe how you mapped the full data flow from mission event to system of record — the forms involved, the hand-offs, and the validation requirements. Note any key tensions or constraints that shaped the design direction. ]",
+        callout: {
+          type: "principles",
+          items: [
+            "[ Design principle 1 ]",
+            "[ Design principle 2 ]",
+            "[ Design principle 3 ]",
+            "[ Design principle 4 ]",
+          ],
+        },
+      },
+      {
+        phase: "03 — Design & Test",
+        title: "[ Add your design and testing narrative here ]",
+        body: "[ Describe how you approached the dashboard information architecture, how you iterated on the layout and workflows, and what testing revealed. ]",
+        callout: {
+          type: "stat",
+          stats: [
+            { v: "[ X ]", l: "[ Stat label ]" },
+            { v: "[ X ]", l: "[ Stat label ]" },
+            { v: "[ X ]", l: "[ Stat label ]" },
+          ],
+        },
+      },
+      {
+        phase: "04 — Deliver",
+        title: "[ Add your delivery narrative here ]",
+        body: "[ Describe what shipped, how SARMs responded, and what measurable impact the PMR Dashboard had on the post-mission data entry process. ]",
+        callout: {
+          type: "quote",
+          text: '"[ Add a quote from a SARM or stakeholder after launch. ]"',
+          attr: "— [ Role ], post-launch",
+        },
+      },
+    ],
+    tags: [
+      "Enterprise UX",
+      "Web",
+      "Dashboard Design",
+      "Interaction Design",
+      "DoD",
+      "Figma",
+    ],
+  },
+  {
+    id: "mydocs",
+    year: "2024–2025",
+    tag: "Enterprise UX · Web · Personnel",
+    title: "My Docs",
+    subtitle: "A career's worth of paperwork — always where it needs to be.",
+    impact: "0→1",
+    impactLabel: "New Feature",
+    color: "#a78bfa",
+    emoji: "🗂️",
+    wip: false,
+    cuiDisclaimer: "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
+    heroImage: null,
+    role: "Lead Product Designer · Puckboard Personnel (web) · Active DoD Secret Clearance required · Cross-functional team of designers, web engineers, and a PM",
+    contributions: [
+      "Overall information architecture for the My Docs feature — document taxonomy, folder structure, and access model",
+      "Flight Evaluation Folder (FEF) — structured storage for Form 8s with Annual & Initial Review workflows",
+      "Document deposit system — automatic association of Puckboard-generated paperwork to member profiles",
+      "PCS-persistent document model — ensuring records follow members across unit transfers",
+      "Form 781, Form 8, and Form 1522 storage and retrieval flows",
+      "[ Add additional contributions as you document the work ]",
+    ],
+    links: [],
+    artifacts: [],
+    overview:
+      "My Docs is a secure, centralized document storage feature within Puckboard Personnel — the fourth branch of the Puckboard suite. Before My Docs, critical Air Force career documents — Form 781s, Form 8 evaluations, Form 1522s and more — were stuffed in lockers, scattered across email threads, or simply lost when a member PCS'd to a new unit. My Docs solves this by creating a persistent, profile-bound document home that travels with the member no matter where they're stationed. It also serves as the secure deposit point for all paperwork generated across the Puckboard suite, keeping every document tied to the right person for the life of their career. I led the overarching feature architecture and owned the Flight Evaluation Folder (FEF) — the structured home for Form 8 evaluations, Annual Reviews, and Initial Reviews.",
+    metrics: [
+      { value: "0→1", label: "New Feature" },
+      { value: "PCS-Proof", label: "Records Follow Members" },
+      { value: "FEF", label: "Flight Eval Folder" },
+      { value: "Personnel", label: "Suite Branch" },
+    ],
+    phases: [
+      {
+        phase: "01 — Discover",
+        title: "Lost in the Locker: The Document Problem",
+        body: "Discovery research with aircrew and administrative staff surfaced a problem that was both mundane and consequential: important career documents had no reliable home. Form 8 evaluations sat in physical folders. Form 781 flight data lived in disconnected systems. When a member PCS'd, documents were manually transferred — or lost entirely. The cost wasn't just inconvenience; gaps in evaluation records had real career implications.",
+        callout: {
+          type: "quote",
+          text: '"[ Add a representative quote from a member or admin interview here. ]"',
+          attr: "— Aircrew member, discovery interview",
+        },
+      },
+      {
+        phase: "02 — Define",
+        title: "Architecture First: Designing the Document Model",
+        body: "Before any screens were designed, I focused on the underlying architecture: how documents should be categorized, who owns them, what triggers a deposit, and how access should work across units. The central design decision was making the document model member-centric rather than unit-centric — records belong to the person, not the organization. This became the foundation for PCS persistence and the FEF structure.",
+        callout: {
+          type: "principles",
+          items: [
+            "Member-centric ownership — documents follow the person, not the unit",
+            "Automatic deposit — Puckboard-generated docs associate without manual action",
+            "FEF as structured sub-system — Form 8s with review lifecycle built in",
+            "Role-appropriate access — members, supervisors, and admins see what they need",
+          ],
+        },
+      },
+      {
+        phase: "03 — Design & Test",
+        title: "FEF: Structuring the Evaluation Lifecycle",
+        body: "The Flight Evaluation Folder required the most design investment — it isn't just storage, it's a lifecycle. Form 8s flow in from Puckboard Logging; Annual and Initial Reviews are required at defined intervals; commanders must be able to sign off from any location. I designed the FEF to surface the right review prompts at the right time, make the review status legible at a glance, and reduce the administrative overhead of what had previously been an entirely manual tracking process.",
+        callout: {
+          type: "stat",
+          stats: [
+            { v: "[ X ]", l: "[ Stat label ]" },
+            { v: "[ X ]", l: "[ Stat label ]" },
+            { v: "[ X ]", l: "[ Stat label ]" },
+          ],
+        },
+      },
+      {
+        phase: "04 — Deliver",
+        title: "[ Add your delivery narrative here ]",
+        body: "[ Describe what shipped, how users responded, and what the measurable impact was on document management and career record continuity across PCS moves. ]",
+        callout: {
+          type: "quote",
+          text: '"[ Add a quote from a user or stakeholder after launch. ]"',
+          attr: "— [ Role ], post-launch",
+        },
+      },
+    ],
+    tags: [
+      "Enterprise UX",
+      "Web",
+      "Information Architecture",
+      "Interaction Design",
+      "DoD",
+      "Personnel",
+      "Figma",
+    ],
+  },
+  {
     id: "nimbus",
     year: "2023",
     tag: "Design Systems · Web + iOS",
@@ -149,9 +330,9 @@ const PROJECTS = [
     links: [],
     artifacts: [],
     overview:
-      "Nimbus is the design system I helped champion across a cross-functional design and engineering team, serving as a primary bridge between Puckboard Logging's native iOS experience and the web-based products — Puckboard Scheduling, Puckboard Personnel and Puckboard Office. The core challenge: Logging was built on Apple UIKit and Swift, and we had no access to those native components on the web. Nimbus had to make both platforms feel like the same product without ever actually sharing a component.",
+      "Nimbus is the design system I helped champion across a cross-functional design and engineering team, serving as the shared language across all four Puckboard branches — Logging (iOS), Scheduling, Office, and Personnel (web). The core challenge: Logging was built on Apple UIKit and Swift, and we had no access to those native components on the web. Nimbus had to make every surface feel like one product without ever actually sharing a component.",
     metrics: [
-      { value: "3 Products", label: "PBL · Scheduling · Office" },
+      { value: "4 Products", label: "Logging · Scheduling · Office · Personnel" },
       { value: "iOS + Web", label: "Platform Parity" },
       { value: "Token-based", label: "Foundation" },
       { value: "Storybook", label: "Eng Handoff" },
@@ -446,8 +627,9 @@ const PROJECTS = [
     ],
     links: [],
     artifacts: [],
+    cuiDisclaimer: "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
     overview:
-      "Puckboard Testing is a new web-based test management platform currently in active design. Building on lessons learned from Puckboard Logging, the product aims to modernize how military units plan, track, and report on readiness testing — replacing a fragmented mix of spreadsheets and paper-based processes with a structured, data-driven workflow.",
+      "Puckboard Testing is a new web-based test management platform currently in active design — the fifth product in the growing Puckboard suite. Building on the design language of Nimbus and lessons learned from Puckboard Logging, the product aims to modernize how military units plan, track, and report on readiness testing — replacing a fragmented mix of spreadsheets and paper-based processes with a structured, data-driven workflow.",
     metrics: [
       { value: "Active", label: "In Design" },
       { value: "Web", label: "Platform" },
@@ -2114,6 +2296,34 @@ function Modal({ project, onClose, triggerRef }) {
                   {link.label}
                 </a>
               ))}
+            </div>
+          )}
+
+          {project.cuiDisclaimer && (
+            <div
+              role="note"
+              aria-label="CUI and NDA disclaimer"
+              style={{
+                marginTop: "28px",
+                paddingTop: "20px",
+                borderTop: "1px solid #1a1a1a",
+                display: "flex",
+                alignItems: "flex-start",
+                gap: "10px",
+              }}
+            >
+              <span aria-hidden="true" style={{ fontSize: "13px", flexShrink: 0, marginTop: "1px", color: "#606060" }}>🔒</span>
+              <p
+                style={{
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: "10px",
+                  color: "#606060",
+                  lineHeight: "1.6",
+                  letterSpacing: "0.04em",
+                }}
+              >
+                {project.cuiDisclaimer}
+              </p>
             </div>
           )}
         </div>

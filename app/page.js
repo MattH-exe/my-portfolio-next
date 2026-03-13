@@ -68,7 +68,7 @@ const PROJECTS = [
         callout: {
           type: "quote",
           text: '"We spend more time on paperwork after a flight than we do on the actual debrief."',
-          attr: "— F/A-18 Pilot, contextual interview",
+          attr: "— C-17 Pilot, contextual interview",
         },
       },
       {
@@ -104,8 +104,8 @@ const PROJECTS = [
         body: "Prototypes were tested in two rounds with active-duty aircrew. Round one surfaced issues with form hierarchy and terminology — we were using civilian language in a military context. Round two validated the revised flow and confirmed that pre-population from Puckboard Scheduling was the single highest-value feature. Both rounds were conducted on-site at operational squadrons.",
         callout: {
           type: "quote",
-          text: '"This is the first piece of software I\'ve used that actually understands how we work."',
-          attr: "— Naval Aviator, usability test session",
+          text: '"Probably the best aspect of Form 8s [in Pucboard] that we\'ve had so far is it allows commanders to sign Form 8s on the road and they don\'t have to be at their desk... We were able to fill & sign a Form 8 in 12 minutes whereas G/TIMS takes 12 minutes probably just to sign in.S"',
+          attr: "— C-17 Loadmaster, usability test session",
         },
       },
       {

@@ -149,7 +149,7 @@ const PROJECTS = [
     links: [],
     artifacts: [],
     overview:
-      "Nimbus is the design system I helped champion across a cross-functional design and engineering team, serving as a primary bridge between Puckboard Logging's native iOS experience and the web-based products — Puckboard Scheduling and Puckboard Office. The core challenge: Logging was built on Apple UIKit and Swift, and we had no access to those native components on the web. Nimbus had to make both platforms feel like the same product without ever actually sharing a component.",
+      "Nimbus is the design system I helped champion across a cross-functional design and engineering team, serving as a primary bridge between Puckboard Logging's native iOS experience and the web-based products — Puckboard Scheduling, Puckboard Personnel and Puckboard Office. The core challenge: Logging was built on Apple UIKit and Swift, and we had no access to those native components on the web. Nimbus had to make both platforms feel like the same product without ever actually sharing a component.",
     metrics: [
       { value: "3 Products", label: "PBL · Scheduling · Office" },
       { value: "iOS + Web", label: "Platform Parity" },

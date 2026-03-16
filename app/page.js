@@ -60,9 +60,9 @@ const PROJECTS = [
         note: "Add a Figma export or redacted screen of the Form 651 flow",
       },
       {
-        type: "placeholder",
-        label: "Workflow map — 14-step old flow",
-        note: "Add the workflow audit diagram used for stakeholder alignment",
+        type: "image",
+        src: "public\case-studies\PBL old workflow.jpg",
+        note: "This was the old workflow mapped out for stakeholder alignment",
       },
       {
         type: "placeholder",

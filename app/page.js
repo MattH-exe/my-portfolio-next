@@ -69,6 +69,16 @@ const PROJECTS = [
         label: "PDF generation output",
         note: "Add a redacted example of the auto-populated print-ready form",
       },
+            {
+        type: "placeholder",
+        label: "PDF generation output",
+        note: "Add a redacted example of the auto-populated print-ready form",
+      },
+            {
+        type: "placeholder",
+        label: "PDF generation output",
+        note: "Add a redacted example of the auto-populated print-ready form",
+      },
     ],
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",

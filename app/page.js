@@ -1036,11 +1036,12 @@ function Modal({ project, onClose, triggerRef }) {
             ))}
           </div>
 
-          {/* ── Two-column layout: phases left, media right ── */}
-          <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 340px", gap: "32px", alignItems: "start" }}>
+          {/* ── Two-column layout: left = all narrative content, right = scrollable media panel ── */}
+          <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 340px", gap: "32px", alignItems: "stretch" }}>
 
-            {/* Left: process phases */}
-            <div>
+            {/* LEFT: phases + prev/next + tags + contributions + links + disclaimer */}
+            <div style={{ display: "flex", flexDirection: "column" }}>
+
               {/* Phase tabs */}
               <div ref={phaseNavRef} role="tablist" aria-label="Case study phases"
                 style={{ display: "flex", gap: "6px", flexWrap: "wrap", marginBottom: "20px" }}>
@@ -1055,74 +1056,86 @@ function Modal({ project, onClose, triggerRef }) {
                 ))}
               </div>
 
-              {/* Active phase card */}
-              <div style={{ background: "#0a0a0d", border: "1px solid #1e1e24", borderRadius: "12px", padding: "24px", borderTop: `3px solid ${project.color}` }}>
+              {/* Active phase card — flex-grow fills available vertical space */}
+              <div style={{ flex: "1", background: "#0a0a0d", border: "1px solid #1e1e24", borderRadius: "12px", padding: "24px", borderTop: `3px solid ${project.color}` }}>
                 <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "10px" }}>{phase.phase}</div>
                 <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "26px", color: "#fff", letterSpacing: "0.02em", marginBottom: "12px", fontWeight: "400" }}>{phase.title}</h3>
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "#c8c8c8", lineHeight: "1.65" }}>{phase.body}</p>
                 <Callout callout={phase.callout} color={project.color} />
               </div>
 
-              {/* Prev / next */}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "14px" }}>
+              {/* Prev / next — sits flush below the phase card */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "14px", marginBottom: "0" }}>
                 <button onClick={() => setActivePhase(Math.max(0, activePhase - 1))} disabled={activePhase === 0} aria-label="Previous phase"
                   style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: activePhase === 0 ? "#2a2a2a" : "#7d7d7d", background: "none", border: "none", cursor: activePhase === 0 ? "default" : "pointer", letterSpacing: "0.08em" }}>← Prev</button>
                 <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#606060", letterSpacing: "0.1em" }}>{activePhase + 1} / {project.phases.length}</span>
                 <button onClick={() => setActivePhase(Math.min(project.phases.length - 1, activePhase + 1))} disabled={activePhase === project.phases.length - 1} aria-label="Next phase"
                   style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: activePhase === project.phases.length - 1 ? "#2a2a2a" : project.color, background: "none", border: "none", cursor: activePhase === project.phases.length - 1 ? "default" : "pointer", letterSpacing: "0.08em" }}>Next →</button>
               </div>
-            </div>
 
-            {/* Right: media / artifact panel */}
-            <div style={{ position: mobile ? "static" : "sticky", top: "120px" }}>
-              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "12px" }}>Design Artifacts</div>
-              <MediaPanel media={project.media} color={project.color} onLightbox={setLightbox} />
-            </div>
-          </div>
-
-          {/* Tags */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "36px", paddingTop: "24px", borderTop: "1px solid #1a1a1a" }}>
-            {project.tags.map((tag) => (
-              <span key={tag} style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7d7d7d", background: "#141414", border: "1px solid #222", borderRadius: "4px", padding: "4px 12px", letterSpacing: "0.08em" }}>{tag}</span>
-            ))}
-          </div>
-
-          {/* What I Built */}
-          {project.contributions && project.contributions.length > 0 && (
-            <div style={{ marginTop: "28px", paddingTop: "24px", borderTop: "1px solid #1a1a1a" }}>
-              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "14px" }}>What I Built</div>
-              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "8px" }}>
-                {project.contributions.map((item, i) => (
-                  <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "#b0b0b0", lineHeight: "1.5" }}>
-                    <span style={{ color: project.color, flexShrink: 0, marginTop: "1px" }}>↳</span>
-                    {item}
-                  </li>
+              {/* Tags */}
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "28px", paddingTop: "24px", borderTop: "1px solid #1a1a1a" }}>
+                {project.tags.map((tag) => (
+                  <span key={tag} style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7d7d7d", background: "#141414", border: "1px solid #222", borderRadius: "4px", padding: "4px 12px", letterSpacing: "0.08em" }}>{tag}</span>
                 ))}
-              </ul>
-            </div>
-          )}
+              </div>
 
-          {/* External links */}
-          {project.links && project.links.length > 0 && (
-            <div style={{ marginTop: "28px", paddingTop: "24px", borderTop: "1px solid #1a1a1a", display: "flex", gap: "10px", flexWrap: "wrap" }}>
-              {project.links.map((link, i) => (
-                <a key={i} href={link.url} target="_blank" rel="noreferrer"
-                  style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", letterSpacing: "0.08em", textTransform: "uppercase", padding: "10px 20px", borderRadius: "4px", textDecoration: "none", transition: "all 0.15s", border: `1px solid ${project.color}55`, color: project.color, background: project.color + "0d" }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = project.color + "22"; e.currentTarget.style.borderColor = project.color; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = project.color + "0d"; e.currentTarget.style.borderColor = project.color + "55"; }}>
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          )}
+              {/* What I Built */}
+              {project.contributions && project.contributions.length > 0 && (
+                <div style={{ marginTop: "28px", paddingTop: "24px", borderTop: "1px solid #1a1a1a" }}>
+                  <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "14px" }}>What I Built</div>
+                  <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "8px" }}>
+                    {project.contributions.map((item, i) => (
+                      <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "#b0b0b0", lineHeight: "1.5" }}>
+                        <span style={{ color: project.color, flexShrink: 0, marginTop: "1px" }}>↳</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
-          {/* CUI disclaimer */}
-          {project.cuiDisclaimer && (
-            <div role="note" aria-label="CUI and NDA disclaimer" style={{ marginTop: "28px", paddingTop: "20px", borderTop: "1px solid #1a1a1a", display: "flex", alignItems: "flex-start", gap: "10px" }}>
-              <span aria-hidden="true" style={{ fontSize: "13px", flexShrink: 0, marginTop: "1px", color: "#606060" }}>🔒</span>
-              <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#606060", lineHeight: "1.6", letterSpacing: "0.04em" }}>{project.cuiDisclaimer}</p>
+              {/* External links */}
+              {project.links && project.links.length > 0 && (
+                <div style={{ marginTop: "28px", paddingTop: "24px", borderTop: "1px solid #1a1a1a", display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                  {project.links.map((link, i) => (
+                    <a key={i} href={link.url} target="_blank" rel="noreferrer"
+                      style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", letterSpacing: "0.08em", textTransform: "uppercase", padding: "10px 20px", borderRadius: "4px", textDecoration: "none", transition: "all 0.15s", border: `1px solid ${project.color}55`, color: project.color, background: project.color + "0d" }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = project.color + "22"; e.currentTarget.style.borderColor = project.color; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = project.color + "0d"; e.currentTarget.style.borderColor = project.color + "55"; }}>
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+
+              {/* CUI disclaimer */}
+              {project.cuiDisclaimer && (
+                <div role="note" aria-label="CUI and NDA disclaimer" style={{ marginTop: "28px", paddingTop: "20px", borderTop: "1px solid #1a1a1a", display: "flex", alignItems: "flex-start", gap: "10px" }}>
+                  <span aria-hidden="true" style={{ fontSize: "13px", flexShrink: 0, marginTop: "1px", color: "#606060" }}>🔒</span>
+                  <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#606060", lineHeight: "1.6", letterSpacing: "0.04em" }}>{project.cuiDisclaimer}</p>
+                </div>
+              )}
+
             </div>
-          )}
+
+            {/* RIGHT: scrollable media / artifact panel — matches full height of left column */}
+            <div style={{
+              display: "flex",
+              flexDirection: "column",
+              position: mobile ? "static" : "sticky",
+              top: "120px",
+              maxHeight: mobile ? "none" : "calc(90vh - 180px)",
+              alignSelf: "start",
+            }}>
+              <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "12px", flexShrink: 0 }}>Design Artifacts</div>
+              {/* Scrollable inner container */}
+              <div style={{ overflowY: "auto", flex: "1", paddingRight: "4px" }}>
+                <MediaPanel media={project.media} color={project.color} onLightbox={setLightbox} />
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
 
@@ -1387,7 +1400,7 @@ export default function App() {
               <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(32px, 5vw, 56px)", fontWeight: "400", color: "#fff", letterSpacing: "0.02em" }}>PRODUCTS I&apos;VE SHAPED.</h2>
             </div>
           </div>
-          <div className="fade-up fade-up-3" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))", gap: "16px" }}>
+          <div className="fade-up fade-up-3" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(clamp(280px, 28vw, 420px), 1fr))", gap: "16px" }}>
             {PROJECTS.map((p) => (
               <ProjectCard key={p.id} project={p} onClick={(proj, el) => { lastCardRef.current = el; setActiveProject(proj); }} />
             ))}

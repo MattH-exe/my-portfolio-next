@@ -61,8 +61,8 @@ const PROJECTS = [
       },
       {
         type: "image",
-        src: "public/case-studies/PBL old workflow.jpg",
-        note: "This was the old workflow mapped out for stakeholder alignment",
+        src: "/case-studies/PBL_old_workflow.jpg",
+        caption: "Old post-mission workflow — 14 manual steps mapped for stakeholder alignment",
       },
       {
         type: "placeholder",

@@ -988,7 +988,7 @@ function Modal({ project, onClose, triggerRef }) {
     <div onClick={onClose} role="presentation" aria-hidden="false"
       style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.88)", backdropFilter: "blur(10px)", zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center", padding: "20px" }}>
       <div onClick={(e) => e.stopPropagation()} ref={modalRef} role="dialog" aria-modal="true" aria-label={`${project.title} case study`}
-        style={{ background: "#0e0e12", border: `1px solid ${project.color}44`, borderRadius: "16px", width: "100%", maxWidth: "1160px", maxHeight: "90vh", overflowY: "auto", boxShadow: `0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px ${project.color}22` }}>
+        style={{ background: "#0e0e12", border: `1px solid ${project.color}44`, borderRadius: "16px", width: "100%", maxWidth: "clamp(680px, 88vw, 1280px)", maxHeight: "90vh", overflowY: "auto", boxShadow: `0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px ${project.color}22` }}>
 
         {/* ── Sticky header ── */}
         <div style={{ padding: `28px ${mobile ? "20px" : "40px"} 20px`, borderBottom: "1px solid #1a1a1a", position: "sticky", top: 0, background: "#0e0e12", zIndex: 10 }}>
@@ -1037,7 +1037,7 @@ function Modal({ project, onClose, triggerRef }) {
           </div>
 
           {/* ── Two-column layout: left = all narrative content, right = scrollable media panel ── */}
-          <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 340px", gap: "32px", alignItems: "stretch" }}>
+          <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : `1fr clamp(280px, 28%, 400px)`, gap: "32px", alignItems: "stretch" }}>
 
             {/* LEFT: phases + prev/next + tags + contributions + links + disclaimer */}
             <div style={{ display: "flex", flexDirection: "column" }}>
@@ -1400,7 +1400,7 @@ export default function App() {
               <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(32px, 5vw, 56px)", fontWeight: "400", color: "#fff", letterSpacing: "0.02em" }}>PRODUCTS I&apos;VE SHAPED.</h2>
             </div>
           </div>
-          <div className="fade-up fade-up-3" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(clamp(280px, 28vw, 420px), 1fr))", gap: "16px" }}>
+          <div className="fade-up fade-up-3" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))", gap: "16px" }}>
             {PROJECTS.map((p) => (
               <ProjectCard key={p.id} project={p} onClick={(proj, el) => { lastCardRef.current = el; setActiveProject(proj); }} />
             ))}

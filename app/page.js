@@ -61,7 +61,7 @@ const PROJECTS = [
       },
       {
         type: "image",
-        src: "public\case-studies\PBL old workflow.jpg",
+        src: "public/case-studies/PBL old workflow.jpg",
         note: "This was the old workflow mapped out for stakeholder alignment",
       },
       {

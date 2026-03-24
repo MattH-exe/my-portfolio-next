@@ -516,19 +516,29 @@ const PROJECTS = [
         caption: "Research Process Overview",
       },
       {
-        type: "placeholder",
-        label: "Trail detail screen — accessibility grading",
-        note: "Add a hi-fi screen showing the trail detail view with accessibility grade, surface type, and condition info",
+        type: "image",
+        src: "/case-studies/parkpal/Findings.webp",
+        caption: "Summary of Findings",
       },
       {
-        type: "placeholder",
-        label: "Journey map — pre-trip planning flow",
-        note: "Add the journey map artifact showing the pre-trip planning experience for mobility-impaired users",
+        type: "image",
+        src: "/case-studies/parkpal/Prototyping+and+Evaluation.webp",
+        caption: "From Research to initial prototypes, wireframing & testing",
       },
       {
-        type: "placeholder",
-        label: "Usability test session — round 3",
-        note: "Add a photo or summary artifact from an on-site usability test session",
+        type: "image",
+        src: "/case-studies/parkpal/Design+1.webp",
+        caption: "Hi-Fi: trail detail view with accessibility grade, surface type, and condition info",
+      },
+      {
+        type: "image",
+        src: "/case-studies/parkpal/Design+2.webp",
+        caption: "Hi-Fi: Emergency Services Features",
+      },
+      {
+        type: "image",
+        src: "/case-studies/parkpal/Design+3.webp",
+        caption: "Hi-Fi: Trip-Planning",
       },
     ],
     overview:

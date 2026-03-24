@@ -1333,7 +1333,7 @@ function Contact() {
             onMouseLeave={(e) => { e.target.style.background = "#fff"; e.target.style.color = "#000"; }}>Email Me →</a>
           <a href="https://linkedin.com/in/matthew-henning13" target="_blank" rel="noreferrer" style={{ border: "1px solid #333", color: "#fff", fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", borderRadius: "4px", textDecoration: "none", transition: "all 0.15s" }}
             onMouseEnter={(e) => { e.target.style.borderColor = "#fff"; }} onMouseLeave={(e) => { e.target.style.borderColor = "#606060"; }}>LinkedIn</a>
-          <a href="/docs/Henning_Resume_Portfolio.pdf" target="_blank" rel="noreferrer" style={{ border: "1px solid #333", color: "#fff", fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", borderRadius: "4px", textDecoration: "none", transition: "all 0.15s" }}
+          <a href="/Henning_Resume_Portfolio.pdf" target="_blank" rel="noreferrer" style={{ border: "1px solid #333", color: "#fff", fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", borderRadius: "4px", textDecoration: "none", transition: "all 0.15s" }}
             onMouseEnter={(e) => { e.target.style.borderColor = "#fff"; }} onMouseLeave={(e) => { e.target.style.borderColor = "#606060"; }}>Resume ↗</a>
         </div>
       </div>

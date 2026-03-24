@@ -511,6 +511,11 @@ const PROJECTS = [
     // MEDIA: Replace placeholders with real ParkPal design artifacts
     media: [
       {
+        type: "image",
+        src: "/case-studies/parkpal/Research+Process.webp",
+        caption: "Research Process Overview",
+      },
+      {
         type: "placeholder",
         label: "Trail detail screen — accessibility grading",
         note: "Add a hi-fi screen showing the trail detail view with accessibility grade, surface type, and condition info",

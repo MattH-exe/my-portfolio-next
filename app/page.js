@@ -37,6 +37,7 @@ const PROJECTS = [
     impactLabel: "Task Time",
     color: "#00d4ff",
     emoji: "✈️",
+    wip: true,
     role: "Product Designer · Cross-functional team of designers, iOS engineers, and a PM · Active DoD Secret Clearance required",
     contributions: [
       "AF Form 651 UI — digitized the primary post-mission fuel and flight data form",
@@ -171,7 +172,7 @@ const PROJECTS = [
     impactLabel: "New Feature",
     color: "#38bdf8",
     emoji: "📊",
-    wip: false,
+    wip: true,
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
     role: "Lead Product Designer · Cross-functional team of designers, web engineers, and a PM · Active DoD Secret Clearance required",
@@ -276,7 +277,7 @@ const PROJECTS = [
     impactLabel: "New Feature",
     color: "#a78bfa",
     emoji: "🗂️",
-    wip: false,
+    wip: true,
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
     role: "Lead Product Designer · Puckboard Personnel (web) · Active DoD Secret Clearance required · Cross-functional team of designers, web engineers, and a PM",
@@ -384,6 +385,7 @@ const PROJECTS = [
     impactLabel: "Web + iOS",
     color: "#8b5cf6",
     emoji: "⚡",
+    wip: true,
     role: "Product Designer · Collaborated with iOS engineers, web engineers, and product designers across multi-product suite",
     contributions: [
       "Token-based color, typography, and spacing foundation across iOS and web",

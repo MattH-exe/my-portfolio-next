@@ -66,10 +66,15 @@ const PROJECTS = [
         src: "/case-studies/PBL/PBL_new_workflow.jpg",
         caption: "New Post-Mission workflow with PBL — 8 steps, all leveraging computer-system-based data transport support",
       },
-            {
-        type: "placeholder",
-        label: "PDF generation output",
-        note: "PDF Generation Gif & Workflow",
+      {
+        type: "image",
+        src: "/case-studies/PBL/651.gif",
+        caption: "Form 651 UI Live In-App",
+      },
+      {
+        type: "image",
+        src: "/case-studies/PBL/pdf.gif",
+        caption: "PDF Generation UI Live In-App",
       },
     ],
     cuiDisclaimer:

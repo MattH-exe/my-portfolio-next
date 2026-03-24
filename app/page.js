@@ -68,13 +68,18 @@ const PROJECTS = [
       },
       {
         type: "image",
+        src: "/case-studies/PBL/PBL_PDF_Navigation_V3.pdf",
+        caption: "Designs In-Progress for PDF Generation UI",
+      },
+      {
+        type: "image",
         src: "/case-studies/PBL/651.GIF",
         caption: "Form 651 UI Live In-App",
       },
       {
         type: "image",
         src: "/case-studies/PBL/pdf.GIF",
-        caption: "PDF Generation UI Live In-App",
+        caption: "From V3 -> Final Version Live in App",
       },
     ],
     cuiDisclaimer:

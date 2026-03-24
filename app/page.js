@@ -68,12 +68,12 @@ const PROJECTS = [
       },
       {
         type: "image",
-        src: "/case-studies/PBL/651.gif",
+        src: "/case-studies/PBL/651.GIF",
         caption: "Form 651 UI Live In-App",
       },
       {
         type: "image",
-        src: "/case-studies/PBL/pdf.gif",
+        src: "/case-studies/PBL/pdf.GIF",
         caption: "PDF Generation UI Live In-App",
       },
     ],

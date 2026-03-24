@@ -1010,7 +1010,7 @@ function Modal({ project, onClose, triggerRef }) {
                 <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, letterSpacing: "0.15em", textTransform: "uppercase" }}>{project.tag} · {project.year}</div>
                 {project.wip && (
                   <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase", color: project.color, background: project.color + "15", border: `1px solid ${project.color}40`, borderRadius: "4px", padding: "3px 10px" }}>
-                    ● Work in Progress — Case study being documented as design develops
+                    ● Work in Progress — Case study under active construction
                   </span>
                 )}
               </div>

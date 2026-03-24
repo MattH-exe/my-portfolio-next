@@ -38,42 +38,33 @@ const PROJECTS = [
     color: "#00d4ff",
     emoji: "✈️",
     wip: true,
-    role: "Product Designer · Cross-functional team of designers, iOS engineers, and a PM · Active DoD Secret Clearance required",
+    role: "Product Designer · Cross-functional team of 1 designer, multiple iOS engineers, and a PM · Active DoD Secret Clearance required",
     contributions: [
-      "AF Form 651 UI — digitized the primary post-mission fuel and flight data form",
-      "Flight Time & Training Accomplishments UI — replaced manual logbook entry",
-      "Aircrew Editor UI — crew management and role assignment flows",
-      "PDF Form Generation UI — auto-populated, print-ready output from digital data",
-      "Evaluation Import & Tracking UI — structured eval submission and status tracking",
+      "Owned the design of the AF Form 651 digitization flow — translating a complex, paper-based form into a structured, validated digital experience aligned with real-world aircrew workflows",
+      "Designed and iterated on fuel metrics tracking workflows, improving accuracy of flight data capture and validation, which directly enabled downstream reporting and contributed to $20M+ in operational cost savings",
+      "Contributed to the Aircrew Editor by defining interaction patterns for crew assignment and role management within constrained operational contexts",
+      "Designed the PDF generation experience, ensuring digital inputs translated into accurate, standardized, and print-ready outputs required for compliance",
+      "Improved usability of evaluation import and tracking workflows by aligning system behavior with real-world evaluation processes and terminology",
+      "Collaborated closely with engineers and senior designers to iterate on workflows based on field usability testing and operational feedback",
     ],
     links: [
       {
         label: "View on App Store (iPad)",
-        url: "https://apps.apple.com/us/app/puckboard-logging/id1643684304",
+        url: "https://apps.apple.com/us/app/puckboard-logging/id1525979103",
       },
       { label: "Product Website ↗", url: "https://puckboard.dso.mil/pbl/" },
     ],
     // MEDIA: Replace placeholders with your real screenshots/artifacts
     media: [
       {
-        type: "placeholder",
-        label: "AF Form 651 — digitized form UI",
-        note: "Add a Figma export or redacted screen of the Form 651 flow",
+        type: "image",
+        src: "/case-studies/PBL/PBL_old_workflow.jpg",
+        caption: "Old post-mission workflow — 12 steps mapped out for stakeholder alignment",
       },
       {
         type: "image",
-        src: "/case-studies/PBL_old_workflow.jpg",
-        caption: "Old post-mission workflow — 14 manual steps mapped for stakeholder alignment",
-      },
-      {
-        type: "placeholder",
-        label: "PDF generation output",
-        note: "Add a redacted example of the auto-populated print-ready form",
-      },
-            {
-        type: "placeholder",
-        label: "PDF generation output",
-        note: "Add a redacted example of the auto-populated print-ready form",
+        src: "/case-studies/PBL/PBL_new_workflow.jpg",
+        caption: "New Post-Mission workflow with PBL — 8 steps, all leveraging computer-system-based data transport support",
       },
             {
         type: "placeholder",
@@ -287,7 +278,6 @@ const PROJECTS = [
       "Document deposit system — automatic association of Puckboard-generated paperwork to member profiles",
       "PCS-persistent document model — ensuring records follow members across unit transfers",
       "Form 781, Form 8, and Form 1522 storage and retrieval flows",
-      "[ Add additional contributions as you document the work ]",
     ],
     links: [],
     // MEDIA: Replace placeholders with your real screenshots/artifacts

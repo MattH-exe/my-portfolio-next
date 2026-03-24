@@ -37,7 +37,7 @@ const PROJECTS = [
     impactLabel: "Task Time",
     color: "#00d4ff",
     emoji: "✈️",
-    wip: true,
+    wip: false,
     role: "Product Designer · Cross-functional team of 1 designer, multiple iOS engineers, and a PM · Active DoD Secret Clearance required",
     contributions: [
       "Owned the design of the AF Form 651 digitization flow — translating a complex, paper-based form into a structured, validated digital experience aligned with real-world aircrew workflows",
@@ -69,24 +69,24 @@ const PROJECTS = [
             {
         type: "placeholder",
         label: "PDF generation output",
-        note: "Add a redacted example of the auto-populated print-ready form",
+        note: "PDF Generation Gif & Workflow",
       },
     ],
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
     overview:
-      "Puckboard Logging (iOS · iPad) is one of four branches in the Puckboard suite — alongside Scheduling, Office, and Personnel — forming the Department of Defense's first accredited, collaborative flight operations platform. Logging tackles the most painful part of a pilot's day: post-mission paperwork. By pulling data from Puckboard Scheduling, pre-populating form fields, and automating verification, we turned a 3-hour manual process into something aircrews could complete in under 10 minutes.",
+      "Puckboard Logging is an iPad-based application that digitizes post-mission flight documentation for the U.S. Air Force — replacing a fragmented, manual process that previously required over three hours of paperwork per mission. I joined the team early in the product’s development and contributed to the design of several core workflows, including the digitization of AF Form 651, flight time logging, and PDF form generation. Working closely with senior designers, engineers, and active-duty aircrew, I helped translate a complex, error-prone process into a structured, usable system aligned with real-world operational constraints. While this was my first product at scale, my contributions directly supported a system that ultimately reduced documentation time to under 10 minutes, improved data accuracy, and contributed to significant operational savings across the fleet.",
     metrics: [
       { value: "3hrs → <10min", label: "Documentation Time" },
-      { value: "$20M+", label: "Fuel Savings" },
-      { value: "~375K", label: "Labor Hours Reclaimed" },
-      { value: "Fleet-wide", label: "Adoption" },
+      { value: "$20M+", label: "Operational Fuel Savings" },
+      { value: "~375K & Counting", label: "Labor Hours Reclaimed" },
+      { value: "Air Mobility Command Wide", label: "Adoption" },
     ],
     phases: [
       {
         phase: "01 — Discover",
-        title: "The Old Workflow Was Broken by Design",
-        body: "Aircrew were completing post-mission paperwork using physical forms, manual math verification, and data entry spread across disconnected systems. On-site contextual inquiry with pilots and crew revealed that a single flight debrief could generate 3+ hours of documentation work — pulling people away from operational duties.",
+        title: "Understanding a Workflow Built on Friction",
+        body: "Early in the project, I supported discovery efforts by observing post-mission workflows and reviewing existing documentation processes used by aircrew. The system relied on physical forms, manual calculations, and data entry across multiple disconnected tools. Even at this stage in my career, it was clear that the problem wasn’t just inefficiency — it was systemic friction. Every step introduced opportunities for delay, duplication, or error. Working alongside more senior designers, I helped synthesize these findings into early workflow maps that highlighted where breakdowns occurred and where digital intervention could provide the most value.",
         callout: {
           type: "quote",
           text: '"We spend more time on paperwork after a flight than we do on the actual debrief."',
@@ -95,35 +95,35 @@ const PROJECTS = [
       },
       {
         phase: "02 — Define",
-        title: "Mapping the Workflow End-to-End",
-        body: "I facilitated stakeholder workshops and shadowed crews through the full post-mission process to create a detailed workflow map. The old workflow had 14 distinct manual steps, multiple error-prone hand-offs, and no validation layer. This became the north star artifact that the entire product team aligned around before a single screen was designed.",
+        title: "From Observation to Structured Opportunity Areas",
+        body: "The team mapped the full post-mission workflow, identifying 14 discrete manual steps and multiple system hand-offs. I contributed to breaking down these steps into actionable design opportunities — particularly around data entry, validation, and redundancy reduction. One key takeaway was that much of the workload came from re-entering data that already existed elsewhere. This insight reinforced the importance of system integration and pre-population as core product strategies. This phase shaped how I approached my own design work: focusing not just on interface improvements, but on reducing the need for interaction altogether.",
         callout: {
           type: "stat",
           stats: [
-            { v: "14", l: "Manual steps in old flow" },
+            { v: "12", l: "Manual steps in old flow" },
             { v: "3+", l: "Systems touched per mission" },
-            { v: "0", l: "Automated validation checks" },
+            { v: "High", l: "Error Potential" },
           ],
         },
       },
       {
         phase: "03 — Ideate",
-        title: "Progressive Disclosure & One-Handed Interactions",
-        body: "With constraints clearly mapped — operational gear, field conditions, offline environments — I led ideation sessions focused on three design principles: progressive disclosure to surface only what's needed at each step, offline-first architecture, and a one-handed interaction model. We explored 4 structural concepts before converging on a flow that mirrored pilots' existing mental models.",
+        title: "Designing for Real-World Constraints",
+        body: "I contributed to early design explorations focused on simplifying interaction patterns within constrained environments — including limited connectivity, time pressure, and physical constraints like one-handed use. Within my assigned flows, I emphasized progressive disclosure to reduce cognitive load and worked to align interaction patterns with how aircrew already thought about their workflows. Through collaboration and critique, I learned to balance clarity with efficiency — ensuring that critical inputs were easy to complete while minimizing unnecessary steps.",
         callout: {
           type: "principles",
           items: [
             "Progressive disclosure",
-            "Offline-first architecture",
-            "One-handed interaction model",
-            "Data pre-population from scheduling",
+            "Reduce unnecessary inputs",
+            "Align with existing mental models",
+            "Design for constrained environments",
           ],
         },
       },
       {
         phase: "04 — Prototype & Test",
-        title: "Iterative Testing with Real Users in the Field",
-        body: "Prototypes were tested in two rounds with active-duty aircrew. Round one surfaced issues with form hierarchy and terminology — we were using civilian language in a military context. Round two validated the revised flow and confirmed that pre-population from Puckboard Scheduling was the single highest-value feature. Both rounds were conducted on-site at operational squadrons.",
+        title: "Learning from Real Users in Operational Contexts",
+        body: "Prototypes were tested with active-duty, reserve & guard aircrew, providing direct feedback on usability and terminology. I contributed to iterating on specific flows based on these sessions, particularly around form structure and clarity. One major learning was the importance of domain language — early designs used terminology that didn’t align with how aircrew actually described their tasks. Adjusting this significantly improved usability. I also saw firsthand how impactful pre-populated data was in reducing workload, reinforcing its importance as a core feature across the product.",
         callout: {
           type: "quote",
           text: '"Probably the best aspect of Form 8s [in Puckboard] that we\'ve had so far is it allows commanders to sign Form 8s on the road and they don\'t have to be at their desk... We were able to fill & sign a Form 8 in 12 minutes whereas G/TIMS takes 12 minutes probably just to sign in."',
@@ -132,14 +132,14 @@ const PROJECTS = [
       },
       {
         phase: "05 — Deliver",
-        title: "Fleet-Wide Adoption & Measurable Impact",
-        body: "The shipped product reduced post-mission documentation from 3+ hours to under 10 minutes across thousands of users. The platform's data accuracy improvements directly contributed to $20M+ in operational fuel savings by enabling more precise flight data reporting. Approximately 375,000 labor hours have been reclaimed fleet-wide.",
+        title: "Contributing to a System with Measurable Impact",
+        body: "The final product transformed post-mission documentation from a multi-hour process into a task that could be completed in under 10 minutes. While this was a team effort, my contributions to key workflows and iterative improvements supported a system that significantly reduced manual effort, improved data accuracy, and enabled better downstream reporting. This project was foundational in my growth as a product designer — shaping how I think about workflow reduction, system integration, and designing for high-stakes environments.",
         callout: {
           type: "stat",
           stats: [
             { v: "65%", l: "Task time reduction" },
-            { v: "$20M+", l: "Operational savings" },
-            { v: "375K hrs", l: "Reclaimed annually" },
+            { v: "$20M+", l: "Savings" },
+            { v: "375K+ hrs", l: "Given Back to Users" },
           ],
         },
       },
@@ -263,7 +263,7 @@ const PROJECTS = [
     year: "2024–2025",
     tag: "Enterprise UX · Web · Personnel",
     title: "My Docs",
-    subtitle: "Career documents that follow the mission.",
+    subtitle: "Career documents that follow the mission - and you.",
     impact: "0→1",
     impactLabel: "New Feature",
     color: "#a78bfa",

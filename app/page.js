@@ -68,7 +68,7 @@ const PROJECTS = [
       },
       {
         type: "image",
-        src: "/case-studies/PBL/PBL_PDF_Navigation_V3.pdf",
+        src: "/case-studies/PBL/PBL_PDF Navigation_V3_page-0001.jpg",
         caption: "Designs In-Progress for PDF Generation UI",
       },
       {

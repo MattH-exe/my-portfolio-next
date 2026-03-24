@@ -59,27 +59,27 @@ const PROJECTS = [
       {
         type: "image",
         src: "/case-studies/PBL/PBL_old_workflow.jpg",
-        caption: "Old post-mission workflow — 12 steps mapped out for stakeholder alignment",
+        caption: "Mapped the end-to-end post-mission logging workflow to identify 12 manual steps, redundant data entry, and system hand-offs — directly informing prioritization of automation, pre-population, and workflow consolidation",
       },
       {
         type: "image",
         src: "/case-studies/PBL/PBL_new_workflow.jpg",
-        caption: "New Post-Mission workflow with PBL — 8 steps, all leveraging computer-system-based data transport support",
+        caption: "Compared legacy manual workflows with proposed digital flows to eliminate redundant steps and reduce documentation time from 3+ hours to under 10 minutes",
       },
       {
         type: "image",
         src: "/case-studies/PBL/PBL_PDF Navigation_V3_page-0001.jpg",
-        caption: "Designs In-Progress for PDF Generation UI",
+        caption: "Early design exploration of PDF generation workflows, used to define how structured inputs would translate into standardized, compliance-ready outputs for official records",
       },
       {
         type: "image",
         src: "/case-studies/PBL/651.GIF",
-        caption: "Form 651 UI Live In-App",
+        caption: "Translated AF Form 651 from a paper-based form into a structured digital flow with validated inputs and pre-populated data, reducing ambiguity and minimizing common entry errors observed in manual workflows",
       },
       {
         type: "image",
         src: "/case-studies/PBL/pdf.GIF",
-        caption: "From V3 -> Final Version Live in App",
+        caption: "Final PDF generation workflow, where validated system inputs dynamically produce accurate, standardized outputs — eliminating manual formatting and ensuring consistency across mission records",
       },
     ],
     cuiDisclaimer:

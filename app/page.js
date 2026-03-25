@@ -175,7 +175,7 @@ const PROJECTS = [
     title: "Mission Review Dashboard",
     subtitle: "Every mission accounted for.",
     impact: "1,000,000+",
-    impactLabel: "Monthly Events Tracked",
+    impactLabel: "Events Tracked Monthly",
     color: "#38bdf8",
     emoji: "📊",
     wip: true,

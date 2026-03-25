@@ -101,7 +101,7 @@ const PROJECTS = [
       {
         phase: "01 — Discover",
         title: "Understanding a Workflow Built on Friction",
-        body: "Early in the project, I supported discovery efforts by observing post-mission workflows and reviewing existing documentation processes used by aircrew. The system relied on physical forms, manual calculations, and data entry across multiple disconnected tools. Even at this stage in my career, it was clear that the problem wasn’t just inefficiency — it was systemic friction. Every step introduced opportunities for delay, duplication, or error. Working alongside another designer, I helped synthesize these findings into early workflow maps that highlighted where breakdowns occurred and where digital intervention could provide the most value.",
+        body: "Early in the project, I supported discovery efforts by observing post-mission workflows and reviewing existing documentation processes used by aircrew. The system relied on physical forms, manual calculations, and data entry across multiple disconnected tools. Even at this stage in my career, it was clear that the problem wasn’t just inefficiency — it was systemic friction. Every step introduced opportunities for delay, duplication, or error. Working in an agile scrum team, I synthesized these findings into early workflow maps that highlighted where breakdowns occurred and where digital intervention could provide the most value.",
         callout: {
           type: "quote",
           text: '"We spend more time on paperwork after a flight than we do on the actual debrief."',

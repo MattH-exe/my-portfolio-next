@@ -64,7 +64,7 @@ const PROJECTS = [
       {
         type: "image",
         src: "/case-studies/PBL/PBL_new_workflow.jpg",
-        caption: "Compared legacy manual workflows with proposed digital flows to eliminate redundant steps and reduce documentation time from 3+ hours to under 10 minutes",
+        caption: "Reworked legacy manual workflows with a new digital data-first flow to eliminate redundant steps and reduce documentation time from 3+ hours to under 10 minutes",
       },
       {
         type: "image",

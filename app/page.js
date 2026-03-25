@@ -615,7 +615,7 @@ const PROJECTS = [
   {
     id: "pbt",
     year: "2025–Present",
-    tag: "Enterprise UX · Web",
+    tag: "Enterprise UX · Web · Learning Experience Design",
     title: "Puckboard Testing",
     subtitle: "Bringing test management into the modern era.",
     impact: "In Progress",

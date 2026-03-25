@@ -59,7 +59,7 @@ const PROJECTS = [
       {
         type: "image",
         src: "/case-studies/PBL/PBL_old_workflow.jpg",
-        caption: "Mapped the end-to-end post-mission logging workflow to identify 12 manual steps, redundant data entry, and system hand-offs — directly informing prioritization of automation, pre-population, and workflow consolidation",
+        caption: "Mapped the end-to-end post-mission logging workflow to identify 11 manual steps, redundant data entry, and system hand-offs — directly informing prioritization of automation, pre-population, and workflow consolidation",
       },
       {
         type: "image",

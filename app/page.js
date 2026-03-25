@@ -49,7 +49,7 @@ const PROJECTS = [
     ],
     links: [
       {
-        label: "View on App Store (iPad)",
+        label: "View on App Store (iPad Only)",
         url: "https://apps.apple.com/us/app/puckboard-logging/id1525979103",
       },
       { label: "Product Website ↗", url: "https://puckboard.dso.mil/pbl/" },

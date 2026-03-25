@@ -115,7 +115,7 @@ const PROJECTS = [
         callout: {
           type: "stat",
           stats: [
-            { v: "12", l: "Manual steps in old flow" },
+            { v: "11", l: "Manual steps in old flow" },
             { v: "3+", l: "Systems touched per mission" },
             { v: "High", l: "Error Potential" },
           ],

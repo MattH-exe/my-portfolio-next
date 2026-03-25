@@ -73,6 +73,11 @@ const PROJECTS = [
       },
       {
         type: "image",
+        src: "/case-studies/PBL/AircrewSearch.png",
+        caption: "Final Handed off designs of Aircrew Search, a critical backbone feature of the Puckboard workflow allowing for search queries to be made of unit rosters, as well as official Air Force Databases like ARMS & ARTEMIS",
+      },
+      {
+        type: "image",
         src: "/case-studies/PBL/651.GIF",
         caption: "Translated AF Form 651 from a paper-based form into a structured digital flow with validated inputs and pre-populated data, reducing ambiguity and minimizing common entry errors observed in manual workflows",
       },

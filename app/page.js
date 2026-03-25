@@ -106,7 +106,7 @@ const PROJECTS = [
       {
         phase: "02 — Define",
         title: "From Observation to Structured Opportunity Areas",
-        body: "The team mapped the full post-mission workflow, identifying 14 discrete manual steps and multiple system hand-offs. I contributed to breaking down these steps into actionable design opportunities — particularly around data entry, validation, and redundancy reduction. One key takeaway was that much of the workload came from re-entering data that already existed elsewhere. This insight reinforced the importance of system integration and pre-population as core product strategies. This phase shaped how I approached my own design work: focusing not just on interface improvements, but on reducing the need for interaction altogether.",
+        body: "The team mapped the full post-mission workflow, identifying (at least!) 11 discrete manual steps and multiple system hand-offs. I contributed to breaking down these steps into actionable design opportunities — particularly around data entry, validation, and redundancy reduction. One key takeaway was that much of the workload came from re-entering data that already existed elsewhere. This insight reinforced the importance of system integration and pre-population as core product strategies. This phase shaped how I approached my own design work: focusing not just on interface improvements, but on reducing the need for interaction altogether.",
         callout: {
           type: "stat",
           stats: [

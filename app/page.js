@@ -276,7 +276,7 @@ const PROJECTS = [
   {
     id: "mydocs",
     year: "2024–2025",
-    tag: "Enterprise UX · Web · Document Storage",
+    tag: "Enterprise UX · Web · Secure Document Storage",
     title: "My Docs",
     subtitle: "Career documents that follow the mission - and you.",
     impact: "0→1",

@@ -169,112 +169,6 @@ const PROJECTS = [
     ],
   },
   {
-    id: "pmr",
-    year: "2023–2024",
-    tag: "Enterprise UX · Web · Dashboard",
-    title: "Mission Review Dashboard",
-    subtitle: "Every mission accounted for.",
-    impact: "1,000,000+",
-    impactLabel: "Events Tracked Monthly",
-    color: "#38bdf8",
-    emoji: "📊",
-    wip: true,
-    cuiDisclaimer:
-      "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
-    role: "Lead Product Designer · Cross-functional team of designers, web engineers, and a PM · Active DoD Secret Clearance required",
-    contributions: [
-      "Post-Mission Review dashboard — central hub routing mission event data to systems of record",
-      "SARM-facing review and submission workflows",
-      "Flight Hours, Training Accomplishments, Form 781, and Form 1522 data review flows",
-      "[ Add additional contributions as you document the work ]",
-    ],
-    links: [
-      { label: "R&D 100 Award - 2023 ↗", url: "https://www.rdworldonline.com/rd-100-2023-winner/puckboard/" },
-    ],
-    media: [
-      {
-        type: "placeholder",
-        label: "PMR Dashboard — main hub view",
-        note: "Add a redacted or abstracted screenshot of the dashboard landing state",
-      },
-      {
-        type: "placeholder",
-        label: "SARM review workflow",
-        note: "Add a flow diagram or screen showing the review and submission steps",
-      },
-      {
-        type: "placeholder",
-        label: "Form 781 data review panel",
-        note: "Add a redacted example of the Form 781 review interface",
-      },
-    ],
-    overview:
-      "[ Add your overview here. ] The PMR Dashboard is the central hub through which all scheduled mission event data — Flight Hours, Training Accomplishments, AF Form 781s, Form 1522s, and more — flows on its way to being entered into systems of record by SARMs (Squadron Aviation Resource Managers). Designed as part of Puckboard Logging, it brings structure and accountability to the final mile of post-mission data entry.",
-    metrics: [
-      { value: "0→1", label: "New Feature" },
-      { value: "Web", label: "Platform" },
-      { value: "SARM", label: "Primary User" },
-      { value: "DoD", label: "Context" },
-    ],
-    phases: [
-      {
-        phase: "01 — Discover",
-        title: "[ Add your discovery narrative here ]",
-        body: "[ Describe what you learned about the SARM workflow — how mission event data was being handled before the PMR Dashboard, what pain points existed, and what research methods you used to uncover them. ]",
-        callout: {
-          type: "quote",
-          text: '"[ Add a representative quote from a SARM or stakeholder interview here. ]"',
-          attr: "— SARM, discovery interview",
-        },
-      },
-      {
-        phase: "02 — Define",
-        title: "[ Add your define narrative here ]",
-        body: "[ Describe how you mapped the full data flow from mission event to system of record — the forms involved, the hand-offs, and the validation requirements. Note any key tensions or constraints that shaped the design direction. ]",
-        callout: {
-          type: "principles",
-          items: [
-            "[ Design principle 1 ]",
-            "[ Design principle 2 ]",
-            "[ Design principle 3 ]",
-            "[ Design principle 4 ]",
-          ],
-        },
-      },
-      {
-        phase: "03 — Design & Test",
-        title: "[ Add your design and testing narrative here ]",
-        body: "[ Describe how you approached the dashboard information architecture, how you iterated on the layout and workflows, and what testing revealed. ]",
-        callout: {
-          type: "stat",
-          stats: [
-            { v: "[ X ]", l: "[ Stat label ]" },
-            { v: "[ X ]", l: "[ Stat label ]" },
-            { v: "[ X ]", l: "[ Stat label ]" },
-          ],
-        },
-      },
-      {
-        phase: "04 — Deliver",
-        title: "[ Add your delivery narrative here ]",
-        body: "[ Describe what shipped, how SARMs responded, and what measurable impact the PMR Dashboard had on the post-mission data entry process. ]",
-        callout: {
-          type: "quote",
-          text: '"[ Add a quote from a SARM or stakeholder after launch. ]"',
-          attr: "— [ Role ], post-launch",
-        },
-      },
-    ],
-    tags: [
-      "Enterprise UX",
-      "Web",
-      "Dashboard Design",
-      "Interaction Design",
-      "DoD",
-      "Figma",
-    ],
-  },
-  {
     id: "mydocs",
     year: "2024–2025",
     tag: "Enterprise UX · Web · Secure Document Storage",
@@ -389,6 +283,112 @@ const PROJECTS = [
       "Interaction Design",
       "DoD",
       "Personnel",
+      "Figma",
+    ],
+  },
+   {
+    id: "pmr",
+    year: "2023–2024",
+    tag: "Enterprise UX · Web · Dashboard",
+    title: "Mission Review Dashboard",
+    subtitle: "Every mission accounted for.",
+    impact: "1,000,000+",
+    impactLabel: "Events Tracked Monthly",
+    color: "#38bdf8",
+    emoji: "📊",
+    wip: true,
+    cuiDisclaimer:
+      "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
+    role: "Lead Product Designer · Cross-functional team of designers, web engineers, and a PM · Active DoD Secret Clearance required",
+    contributions: [
+      "Post-Mission Review dashboard — central hub routing mission event data to systems of record",
+      "SARM-facing review and submission workflows",
+      "Flight Hours, Training Accomplishments, Form 781, and Form 1522 data review flows",
+      "[ Add additional contributions as you document the work ]",
+    ],
+    links: [
+      { label: "R&D 100 Award - 2023 ↗", url: "https://www.rdworldonline.com/rd-100-2023-winner/puckboard/" },
+    ],
+    media: [
+      {
+        type: "placeholder",
+        label: "PMR Dashboard — main hub view",
+        note: "Add a redacted or abstracted screenshot of the dashboard landing state",
+      },
+      {
+        type: "placeholder",
+        label: "SARM review workflow",
+        note: "Add a flow diagram or screen showing the review and submission steps",
+      },
+      {
+        type: "placeholder",
+        label: "Form 781 data review panel",
+        note: "Add a redacted example of the Form 781 review interface",
+      },
+    ],
+    overview:
+      "[ Add your overview here. ] The PMR Dashboard is the central hub through which all scheduled mission event data — Flight Hours, Training Accomplishments, AF Form 781s, Form 1522s, and more — flows on its way to being entered into systems of record by SARMs (Squadron Aviation Resource Managers). Designed as part of Puckboard Logging, it brings structure and accountability to the final mile of post-mission data entry.",
+    metrics: [
+      { value: "0→1", label: "New Feature" },
+      { value: "Web", label: "Platform" },
+      { value: "SARM", label: "Primary User" },
+      { value: "DoD", label: "Context" },
+    ],
+    phases: [
+      {
+        phase: "01 — Discover",
+        title: "[ Add your discovery narrative here ]",
+        body: "[ Describe what you learned about the SARM workflow — how mission event data was being handled before the PMR Dashboard, what pain points existed, and what research methods you used to uncover them. ]",
+        callout: {
+          type: "quote",
+          text: '"[ Add a representative quote from a SARM or stakeholder interview here. ]"',
+          attr: "— SARM, discovery interview",
+        },
+      },
+      {
+        phase: "02 — Define",
+        title: "[ Add your define narrative here ]",
+        body: "[ Describe how you mapped the full data flow from mission event to system of record — the forms involved, the hand-offs, and the validation requirements. Note any key tensions or constraints that shaped the design direction. ]",
+        callout: {
+          type: "principles",
+          items: [
+            "[ Design principle 1 ]",
+            "[ Design principle 2 ]",
+            "[ Design principle 3 ]",
+            "[ Design principle 4 ]",
+          ],
+        },
+      },
+      {
+        phase: "03 — Design & Test",
+        title: "[ Add your design and testing narrative here ]",
+        body: "[ Describe how you approached the dashboard information architecture, how you iterated on the layout and workflows, and what testing revealed. ]",
+        callout: {
+          type: "stat",
+          stats: [
+            { v: "[ X ]", l: "[ Stat label ]" },
+            { v: "[ X ]", l: "[ Stat label ]" },
+            { v: "[ X ]", l: "[ Stat label ]" },
+          ],
+        },
+      },
+      {
+        phase: "04 — Deliver",
+        title: "[ Add your delivery narrative here ]",
+        body: "[ Describe what shipped, how SARMs responded, and what measurable impact the PMR Dashboard had on the post-mission data entry process. ]",
+        callout: {
+          type: "quote",
+          text: '"[ Add a quote from a SARM or stakeholder after launch. ]"',
+          attr: "— [ Role ], post-launch",
+        },
+      },
+    ],
+    tags: [
+      "Enterprise UX",
+      "Web",
+      "Dashboard Design",
+      "Interaction Design",
+      "DoD",
       "Figma",
     ],
   },

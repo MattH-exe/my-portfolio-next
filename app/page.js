@@ -314,6 +314,11 @@ const PROJECTS = [
         src: "/case-studies/MyDocs/Artifact5.png",
         caption: "System-level data flow mapping My Docs within the full Puckboard suite — showing how documents generated across PB Logging, PB Office, and PB Scheduling route to the correct member's inbox and archive. Produced during define to align design and engineering on ownership boundaries before any UI work began.",
       },
+      {
+        type: "image",
+        src: "/case-studies/MyDocs/Artifact1.png",
+        caption: "End-to-end FEF workflow map spanning Stan/Eval, Training, & SARM offices as they interact with My Docs & the FEF folder — documenting 14+ discrete actions, branching paths for major vs. minor discrepancies, and cross-product dependencies. Built collaboratively with domain experts to establish a shared source of truth before screens were designed; directly informed the lifecycle states and status model in the shipped product.",
+      },
     ],
     overview:
       "My Docs is a centralized, secure document system within Puckboard Personnel designed to solve a critical failure in how Air Force career records were managed. Prior to this feature, essential documents like Form 8 evaluations and Form 781 flight records were fragmented across physical storage, email, and disconnected systems — often lost during PCS (Permanent Change of Station) transfers. I led the end-to-end design of My Docs, defining the information architecture, ownership model, and system behaviors that ensured documents persist across a service members career. The core shift was moving from a unit-owned model to a member-centric system, where documents are permanently tied to individuals rather than locations. Within this system, I owned the design of the Flight Evaluation Folder (FEF) — a structured subsystem that transforms Form 8 evaluations from static records into an active lifecycle with built-in review workflows, status tracking, and command-level visibility.",

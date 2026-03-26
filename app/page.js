@@ -302,22 +302,17 @@ const PROJECTS = [
       {
         type: "image",
         src: "/case-studies/MyDocs/Artifact3.png",
-        caption: "The corresponding Stan/Eval office view of the same FEF record — same underlying data, entirely different information hierarchy. Officers need aggregate visibility and management controls; members need action clarity. Designing role-appropriate views of shared data was one of the central interaction challenges of the system.",
+        caption: "The corresponding Stan/Eval office user view of the same FEF record — same underlying data, entirely different information hierarchy. Officers need aggregate visibility and management controls; members need action clarity. Designing role-appropriate views of shared data was one of the central interaction challenges of the system.",
       },
       {
         type: "image",
         src: "/case-studies/MyDocs/Artifact7.png",
-        caption: "Early define-phase requirements synthesis across three user groups — Training Office, Stan/Eval Office, and general Puckboard Office needs. This session surfaced the core tension that shaped the system architecture: documents needed to behave differently depending on who owned them, who created them, and where they needed to go. The member-centric ownership model emerged directly from this work.",
+        caption: "Early define-phase requirements synthesis across three user groups — Training, Stan/Eval, and general PBLO needs. This session surfaced the core tension that shaped the system architecture: documents needed to behave differently depending on who owned them, who created them, and where they needed to go. The member-centric ownership model emerged directly from this work.",
       },
       {
         type: "image",
         src: "/case-studies/MyDocs/Artifact5.png",
         caption: "System-level data flow mapping My Docs within the full Puckboard suite — showing how documents generated across PB Logging, PB Office, and PB Scheduling route to the correct member's inbox and archive. Produced during define to align design and engineering on ownership boundaries before any UI work began.",
-      },
-      {
-        type: "image",
-        src: "/case-studies/MyDocs/Artifact1.png",
-        caption: "End-to-end FEF workflow map spanning Stan/Eval, Training, and SARM roles as they interact with My Docs — documenting 14+ discrete actions, branching paths for major vs. minor discrepancies, and cross-product dependencies. Built collaboratively with domain experts to establish a shared source of truth before screens were designed; directly informed the lifecycle states and status model in the shipped product.",
       },
     ],
     overview:
@@ -967,9 +962,9 @@ function LightboxModal({ src, caption, onClose }) {
       style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.95)", backdropFilter: "blur(16px)", zIndex: 2000, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "24px" }}>
       <button ref={closeBtnRef} onClick={(e) => { e.stopPropagation(); onClose(); }} aria-label="Close image preview"
         style={{ position: "absolute", top: "20px", right: "20px", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "#b2b2b2", cursor: "pointer", borderRadius: "8px", width: "36px", height: "36px", fontSize: "18px", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10 }}>×</button>
-      <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", maxWidth: "min(90vw, 1200px)", maxHeight: "80vh", width: "100%", borderRadius: "10px", overflow: "hidden", boxShadow: "0 40px 120px rgba(0,0,0,0.8)" }}>
+      <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", maxWidth: "min(90vw, 1200px)", maxHeight: "80vh", width: "100%" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt={caption} style={{ display: "block", width: "100%", height: "auto", maxHeight: "80vh", objectFit: "contain", borderRadius: "10px" }} />
+        <img src={src} alt={caption} style={{ display: "block", width: "100%", height: "auto", maxHeight: "80vh", objectFit: "contain", borderRadius: "10px", boxShadow: "0 24px 80px rgba(0,0,0,0.8)" }} />
       </div>
       {caption && <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: "#7b7b7b", letterSpacing: "0.08em", marginTop: "16px", textAlign: "center", maxWidth: "600px" }}>{caption}</p>}
       <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#606060", letterSpacing: "0.08em", marginTop: "8px" }}>click anywhere or press esc to close</p>

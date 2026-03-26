@@ -54,7 +54,6 @@ const PROJECTS = [
       },
       { label: "Product Website ↗", url: "https://puckboard.dso.mil/pbl/" },
     ],
-    // MEDIA: Replace placeholders with your real screenshots/artifacts
     media: [
       {
         type: "image",
@@ -90,7 +89,7 @@ const PROJECTS = [
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
     overview:
-      "Puckboard Logging is an iPad-based application that digitizes post-mission flight documentation for the U.S. Air Force — replacing a fragmented, manual process that previously required over three hours of paperwork per mission. I joined the team early in the product’s development and contributed to the design of several core workflows, including the digitization of AF Form 651, flight time logging, and PDF form generation. Working closely with engineers, and active-duty aircrew, I helped translate a complex, error-prone process into a structured, usable system aligned with real-world operational constraints. While this was my first product at scale, my contributions directly supported a system that ultimately reduced documentation time to under 10 minutes, improved data accuracy, and contributed to significant operational savings across the fleet.",
+      "Puckboard Logging is an iPad-based application that digitizes post-mission flight documentation for the U.S. Air Force — replacing a fragmented, manual process that previously required over three hours of paperwork per mission. I joined the team early in the product's development and contributed to the design of several core workflows, including the digitization of AF Form 651, flight time logging, and PDF form generation. Working closely with engineers, and active-duty aircrew, I helped translate a complex, error-prone process into a structured, usable system aligned with real-world operational constraints. While this was my first product at scale, my contributions directly supported a system that ultimately reduced documentation time to under 10 minutes, improved data accuracy, and contributed to significant operational savings across the fleet.",
     metrics: [
       { value: "3hrs → <10min", label: "Documentation Time" },
       { value: "$20M+", label: "Operational Fuel Savings" },
@@ -101,7 +100,7 @@ const PROJECTS = [
       {
         phase: "01 — Discover",
         title: "Understanding a Workflow Built on Friction",
-        body: "Early in the project, I supported discovery efforts by observing post-mission workflows and reviewing existing documentation processes used by aircrew. The system relied on physical forms, manual calculations, and data entry across multiple disconnected tools. Even at this stage in my career, it was clear that the problem wasn’t just inefficiency — it was systemic friction. Every step introduced opportunities for delay, duplication, or error. Working in an agile scrum team, I synthesized these findings into early workflow maps that highlighted where breakdowns occurred and where digital intervention could provide the most value.",
+        body: "Early in the project, I supported discovery efforts by observing post-mission workflows and reviewing existing documentation processes used by aircrew. The system relied on physical forms, manual calculations, and data entry across multiple disconnected tools. Even at this stage in my career, it was clear that the problem wasn't just inefficiency — it was systemic friction. Every step introduced opportunities for delay, duplication, or error. Working in an agile scrum team, I synthesized these findings into early workflow maps that highlighted where breakdowns occurred and where digital intervention could provide the most value.",
         callout: {
           type: "quote",
           text: '"We spend more time on paperwork after a flight than we do on the actual debrief."',
@@ -138,7 +137,7 @@ const PROJECTS = [
       {
         phase: "04 — Prototype & Test",
         title: "Learning from Real Users in Operational Contexts",
-        body: "Prototypes were tested with active-duty, reserve & guard aircrew, providing direct feedback on usability and terminology. I contributed to iterating on specific flows based on these sessions, particularly around form structure and clarity. One major learning was the importance of domain language — early designs used terminology that didn’t align with how aircrew actually described their tasks. Adjusting this significantly improved usability. I also saw firsthand how impactful pre-populated data was in reducing workload, reinforcing its importance as a core feature across the product.",
+        body: "Prototypes were tested with active-duty, reserve & guard aircrew, providing direct feedback on usability and terminology. I contributed to iterating on specific flows based on these sessions, particularly around form structure and clarity. One major learning was the importance of domain language — early designs used terminology that didn't align with how aircrew actually described their tasks. Adjusting this significantly improved usability. I also saw firsthand how impactful pre-populated data was in reducing workload, reinforcing its importance as a core feature across the product.",
         callout: {
           type: "quote",
           text: '"Probably the best aspect of Form 8s [in Puckboard] that we\'ve had so far is it allows commanders to sign Form 8s on the road and they don\'t have to be at their desk... We were able to fill & sign a Form 8 in 12 minutes whereas G/TIMS takes 12 minutes probably just to sign in."',
@@ -189,7 +188,6 @@ const PROJECTS = [
       "[ Add additional contributions as you document the work ]",
     ],
     links: [],
-    // MEDIA: Replace placeholders with your real screenshots/artifacts
     media: [
       {
         type: "placeholder",
@@ -295,7 +293,6 @@ const PROJECTS = [
       "Form 781, Form 8, and Form 1522 storage and retrieval flows",
     ],
     links: [],
-    // MEDIA: Replace placeholders with your real screenshots/artifacts
     media: [
       {
         type: "placeholder",
@@ -361,8 +358,8 @@ const PROJECTS = [
       },
       {
         phase: "04 — Deliver",
-        title: "Establishing a Persistent Record of a Service Member’s Career",
-        body: "My Docs launched as a foundational system within Puckboard Personnel, enabling secure, persistent document storage across a service member’s career. By integrating with other Puckboard products, documents are now automatically deposited and associated with the correct individual, eliminating the need for manual filing and reducing the risk of loss during PCS transitions. The Flight Evaluation Folder introduced a structured, trackable evaluation lifecycle, giving commanders and administrators clear visibility into review status and reducing the administrative burden of compliance tracking. This work transformed document management from a fragmented, manual process into a reliable system of record that supports both operational efficiency and long-term career continuity.",
+        title: "Establishing a Persistent Record of a Service Member's Career",
+        body: "My Docs launched as a foundational system within Puckboard Personnel, enabling secure, persistent document storage across a service member's career. By integrating with other Puckboard products, documents are now automatically deposited and associated with the correct individual, eliminating the need for manual filing and reducing the risk of loss during PCS transitions. The Flight Evaluation Folder introduced a structured, trackable evaluation lifecycle, giving commanders and administrators clear visibility into review status and reducing the administrative burden of compliance tracking. This work transformed document management from a fragmented, manual process into a reliable system of record that supports both operational efficiency and long-term career continuity.",
         callout: {
           type: "quote",
           text: '"We have done multiple Form 8`s and the process was very easy to use. I think the entire process is very seamless... I think this part of your product is very good."',
@@ -400,7 +397,6 @@ const PROJECTS = [
       "Custom icon library for the Puckboard product suite",
     ],
     links: [],
-    // MEDIA: Replace placeholders with real Nimbus documentation exports
     media: [
       {
         type: "placeholder",
@@ -513,7 +509,6 @@ const PROJECTS = [
         url: "https://www.youtube.com/watch?v=WLHUd0M-6Cc",
       },
     ],
-    // MEDIA: Replace placeholders with real ParkPal design artifacts
     media: [
       {
         type: "image",
@@ -630,7 +625,6 @@ const PROJECTS = [
     links: [],
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
-    // MEDIA: Replace placeholders as work develops
     media: [
       {
         type: "placeholder",
@@ -935,7 +929,6 @@ function MediaPanel({ media, color, onLightbox }) {
             </button>
           );
         }
-        // Placeholder tile
         return (
           <div key={i} style={{ width: "100%", aspectRatio: "16/10", borderRadius: "8px", border: `1px dashed ${color}33`, background: color + "05", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "16px", gap: "8px", textAlign: "center" }}>
             <div style={{ fontSize: "22px", opacity: 0.4 }}>🖼</div>
@@ -1020,10 +1013,19 @@ function Modal({ project, onClose, triggerRef }) {
     <div onClick={onClose} role="presentation" aria-hidden="false"
       style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.88)", backdropFilter: "blur(10px)", zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center", padding: "20px" }}>
       <div onClick={(e) => e.stopPropagation()} ref={modalRef} role="dialog" aria-modal="true" aria-label={`${project.title} case study`}
-        style={{ background: "#0e0e12", border: `1px solid ${project.color}44`, borderRadius: "16px", width: "100%", maxWidth: "clamp(680px, 88vw, 1280px)", maxHeight: "90vh", overflowY: "auto", boxShadow: `0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px ${project.color}22` }}>
+        style={{
+          background: "#0e0e12",
+          border: `1px solid ${project.color}44`,
+          borderRadius: "16px",
+          width: "100%",
+          maxWidth: "clamp(680px, 96vw, 1600px)",
+          maxHeight: "90vh",
+          overflowY: "auto",
+          boxShadow: `0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px ${project.color}22`,
+        }}>
 
         {/* ── Sticky header ── */}
-        <div style={{ padding: `28px ${mobile ? "20px" : "40px"} 20px`, borderBottom: "1px solid #1a1a1a", position: "sticky", top: 0, background: "#0e0e12", zIndex: 10 }}>
+        <div style={{ padding: `28px ${mobile ? "20px" : "52px"} 20px`, borderBottom: "1px solid #1a1a1a", position: "sticky", top: 0, background: "#0e0e12", zIndex: 10 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "6px" }}>
@@ -1042,7 +1044,7 @@ function Modal({ project, onClose, triggerRef }) {
         </div>
 
         {/* ── Body ── */}
-        <div style={{ padding: mobile ? "20px 20px 36px" : "32px 40px 48px" }}>
+        <div style={{ padding: mobile ? "20px 20px 36px" : "32px 52px 48px" }}>
 
           {/* Role bar */}
           {project.role && (
@@ -1068,10 +1070,10 @@ function Modal({ project, onClose, triggerRef }) {
             ))}
           </div>
 
-          {/* ── Two-column layout: left = all narrative content, right = scrollable media panel ── */}
+          {/* ── Two-column layout ── */}
           <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : `1fr clamp(280px, 28%, 400px)`, gap: "32px", alignItems: "stretch" }}>
 
-            {/* LEFT: phases + prev/next + tags + contributions + links + disclaimer */}
+            {/* LEFT */}
             <div style={{ display: "flex", flexDirection: "column" }}>
 
               {/* Phase tabs */}
@@ -1088,7 +1090,7 @@ function Modal({ project, onClose, triggerRef }) {
                 ))}
               </div>
 
-              {/* Active phase card — flex-grow fills available vertical space */}
+              {/* Active phase card */}
               <div style={{ flex: "1", background: "#0a0a0d", border: "1px solid #1e1e24", borderRadius: "12px", padding: "24px", borderTop: `3px solid ${project.color}` }}>
                 <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "10px" }}>{phase.phase}</div>
                 <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "26px", color: "#fff", letterSpacing: "0.02em", marginBottom: "12px", fontWeight: "400" }}>{phase.title}</h3>
@@ -1096,8 +1098,8 @@ function Modal({ project, onClose, triggerRef }) {
                 <Callout callout={phase.callout} color={project.color} />
               </div>
 
-              {/* Prev / next — sits flush below the phase card */}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "14px", marginBottom: "0" }}>
+              {/* Prev / next */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "14px" }}>
                 <button onClick={() => setActivePhase(Math.max(0, activePhase - 1))} disabled={activePhase === 0} aria-label="Previous phase"
                   style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: activePhase === 0 ? "#2a2a2a" : "#7d7d7d", background: "none", border: "none", cursor: activePhase === 0 ? "default" : "pointer", letterSpacing: "0.08em" }}>← Prev</button>
                 <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#606060", letterSpacing: "0.1em" }}>{activePhase + 1} / {project.phases.length}</span>
@@ -1151,7 +1153,7 @@ function Modal({ project, onClose, triggerRef }) {
 
             </div>
 
-            {/* RIGHT: scrollable media / artifact panel — matches full height of left column */}
+            {/* RIGHT: media panel */}
             <div style={{
               display: "flex",
               flexDirection: "column",
@@ -1161,7 +1163,6 @@ function Modal({ project, onClose, triggerRef }) {
               alignSelf: "start",
             }}>
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "12px", flexShrink: 0 }}>Design Artifacts</div>
-              {/* Scrollable inner container */}
               <div style={{ overflowY: "auto", flex: "1", paddingRight: "4px" }}>
                 <MediaPanel media={project.media} color={project.color} onLightbox={setLightbox} />
               </div>

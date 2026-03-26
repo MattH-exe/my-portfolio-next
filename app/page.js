@@ -317,7 +317,7 @@ const PROJECTS = [
       {
         type: "image",
         src: "/case-studies/MyDocs/Artifact1.png",
-        caption: "End-to-end FEF workflow map spanning Stan/Eval, My Docs, and SARM roles — documenting 14+ discrete actions, branching paths for major vs. minor discrepancies, and cross-product dependencies. Built collaboratively with domain experts to establish a shared source of truth before screens were designed; directly informed the lifecycle states and status model in the shipped product.",
+        caption: "End-to-end FEF workflow map spanning Stan/Eval, Training, and SARM roles as they interact with My Docs — documenting 14+ discrete actions, branching paths for major vs. minor discrepancies, and cross-product dependencies. Built collaboratively with domain experts to establish a shared source of truth before screens were designed; directly informed the lifecycle states and status model in the shipped product.",
       },
     ],
     overview:

@@ -53,6 +53,7 @@ const PROJECTS = [
         url: "https://apps.apple.com/us/app/puckboard-logging/id1525979103",
       },
       { label: "Product Website ↗", url: "https://puckboard.dso.mil/pbl/" },
+      { label: "R&D 100 Award - 2023 ↗", url: "https://www.rdworldonline.com/rd-100-2023-winner/puckboard/" },
     ],
     media: [
       {
@@ -187,7 +188,9 @@ const PROJECTS = [
       "Flight Hours, Training Accomplishments, Form 781, and Form 1522 data review flows",
       "[ Add additional contributions as you document the work ]",
     ],
-    links: [],
+    links: [
+      { label: "R&D 100 Award - 2023 ↗", url: "https://www.rdworldonline.com/rd-100-2023-winner/puckboard/" },
+    ],
     media: [
       {
         type: "placeholder",
@@ -292,7 +295,9 @@ const PROJECTS = [
       "PCS-persistent document model — ensuring records follow members across unit transfers",
       "Form 781, Form 8, and Form 1522 storage and retrieval flows",
     ],
-    links: [],
+    links: [
+      { label: "R&D 100 Award - 2023 ↗", url: "https://www.rdworldonline.com/rd-100-2023-winner/puckboard/" },
+    ],
     media: [
       {
         type: "image",

@@ -287,6 +287,130 @@ const PROJECTS = [
     ],
   },
    {
+    id: "parkpal",
+    year: "2022",
+    tag: "Accessibility · Mobile",
+    title: "ParkPal",
+    subtitle: "Getting outside shouldn't have barriers.",
+    impact: "A11y First",
+    impactLabel: "Design Approach",
+    color: "#10b981",
+    emoji: "🌲",
+    role: "UX Designer & Researcher · Capstone Project, University of Michigan School of Information",
+    contributions: [
+      "12 user interviews with elderly and mobility-impaired participants",
+      "Persona development and journey mapping across 3 distinct user archetypes",
+      "Moderated usability testing with target populations",
+      "On-site research of local park accessibility affordances",
+      "Competitive analysis across similar products (AllTrails, Google Maps, etc.)",
+      "Accessibility-first mobile UI — WCAG AA compliant throughout",
+      "Community contribution system design for crowdsourced trail condition updates",
+    ],
+    links: [
+      {
+        label: "Watch Demo ↗",
+        url: "https://www.youtube.com/watch?v=WLHUd0M-6Cc",
+      },
+    ],
+    media: [
+      {
+        type: "image",
+        src: "/case-studies/parkpal/Research+Process.webp",
+        caption: "Research Process Overview",
+      },
+      {
+        type: "image",
+        src: "/case-studies/parkpal/Findings.webp",
+        caption: "Summary of Findings",
+      },
+      {
+        type: "image",
+        src: "/case-studies/parkpal/Prototyping+and+Evaluation.webp",
+        caption: "From Research to initial prototypes, wireframing & testing",
+      },
+      {
+        type: "image",
+        src: "/case-studies/parkpal/Design+1.webp",
+        caption: "Hi-Fi: trail detail view with accessibility grade, surface type, and condition info",
+      },
+      {
+        type: "image",
+        src: "/case-studies/parkpal/Design+2.webp",
+        caption: "Hi-Fi: Emergency Services Features",
+      },
+      {
+        type: "image",
+        src: "/case-studies/parkpal/Design+3.webp",
+        caption: "Hi-Fi: Trip-Planning",
+      },
+    ],
+    overview:
+      "People with mobility-related disabilities had almost no reliable way to understand whether a park or trail was actually accessible to them before visiting. Existing solutions were outdated, inconsistent, or simply absent. ParkPal was designed accessibility-first — not as an afterthought.",
+    metrics: [
+      { value: "12", label: "Research Participants" },
+      { value: "3", label: "Usability Test Rounds" },
+      { value: "WCAG AA", label: "Compliance Target" },
+      { value: "A11y First", label: "Design Approach" },
+    ],
+    phases: [
+      {
+        phase: "01 — Discover",
+        title: "A Gap Nobody Had Filled Well",
+        body: "People with mobility-related disabilities had almost no reliable way to understand whether a park or trail was actually accessible to them before visiting. Existing solutions were outdated, inconsistent, or simply absent. I conducted 12 interviews with elderly users and mobility-impaired participants, supplemented by observation at local parks, to map the full scope of the problem.",
+        callout: {
+          type: "quote",
+          text: '"I just want to know if I can get my wheelchair to the picnic area. Nobody tells you that."',
+          attr: "— Research participant, discovery interview",
+        },
+      },
+      {
+        phase: "02 — Define",
+        title: "The Core Insight: It Has to Work Before You Leave Home",
+        body: "Synthesizing findings into personas and journey maps revealed the central insight: users needed trustworthy accessibility information before the trip, not after they arrived. Discovering a trail is inaccessible upon arrival isn't just inconvenient — for many users it means a wasted trip with no alternative. The app had to be a planning tool first, a navigation tool second.",
+        callout: {
+          type: "principles",
+          items: [
+            "Accessibility grades at trail and feature level",
+            "Surface type and condition detail",
+            "Community-verified updates from real users",
+            "Offline access for areas with poor connectivity",
+          ],
+        },
+      },
+      {
+        phase: "03 — Design & Test",
+        title: "Three Rounds of Testing with Target Users",
+        body: "I designed and tested three iterative prototypes with the same participant pool, tracking task completion and error rates across sessions. Major changes between rounds included simplifying the trail detail hierarchy, adding explicit surface material callouts after participants consistently asked about pavement vs. gravel, and redesigning the community contribution flow to reduce friction for older users.",
+        callout: {
+          type: "stat",
+          stats: [
+            { v: "3", l: "Usability test rounds" },
+            { v: "↑ 40%", l: "Task completion improvement" },
+            { v: "12", l: "Participants across all sessions" },
+          ],
+        },
+      },
+      {
+        phase: "04 — Deliver",
+        title: "Recognized for Accessibility-First Rigor",
+        body: "ParkPal was recognized within the Michigan HCI program for its depth of accessibility research and the rigor of its user-centered process. The final prototype demonstrated that a well-researched, accessibility-first approach could produce a genuinely useful tool — not a watered-down version of a mainstream app with accessibility bolted on.",
+        callout: {
+          type: "quote",
+          text: '"This feels like it was actually made for me, not just adapted for me."',
+          attr: "— Usability test participant, final round",
+        },
+      },
+    ],
+    tags: [
+      "Accessibility",
+      "User Research",
+      "Journey Mapping",
+      "Mobile UX",
+      "Usability Testing",
+      "WCAG",
+    ],
+  },
+   {
     id: "pmr",
     year: "2023–2024",
     tag: "Enterprise UX · Web · Dashboard",
@@ -496,130 +620,6 @@ const PROJECTS = [
       "Iconography",
       "Documentation",
       "iOS",
-    ],
-  },
-  {
-    id: "parkpal",
-    year: "2022",
-    tag: "Accessibility · Mobile",
-    title: "ParkPal",
-    subtitle: "Getting outside shouldn't have barriers.",
-    impact: "A11y First",
-    impactLabel: "Design Approach",
-    color: "#10b981",
-    emoji: "🌲",
-    role: "UX Designer & Researcher · Capstone Project, University of Michigan School of Information",
-    contributions: [
-      "12 user interviews with elderly and mobility-impaired participants",
-      "Persona development and journey mapping across 3 distinct user archetypes",
-      "Moderated usability testing with target populations",
-      "On-site research of local park accessibility affordances",
-      "Competitive analysis across similar products (AllTrails, Google Maps, etc.)",
-      "Accessibility-first mobile UI — WCAG AA compliant throughout",
-      "Community contribution system design for crowdsourced trail condition updates",
-    ],
-    links: [
-      {
-        label: "Watch Demo ↗",
-        url: "https://www.youtube.com/watch?v=WLHUd0M-6Cc",
-      },
-    ],
-    media: [
-      {
-        type: "image",
-        src: "/case-studies/parkpal/Research+Process.webp",
-        caption: "Research Process Overview",
-      },
-      {
-        type: "image",
-        src: "/case-studies/parkpal/Findings.webp",
-        caption: "Summary of Findings",
-      },
-      {
-        type: "image",
-        src: "/case-studies/parkpal/Prototyping+and+Evaluation.webp",
-        caption: "From Research to initial prototypes, wireframing & testing",
-      },
-      {
-        type: "image",
-        src: "/case-studies/parkpal/Design+1.webp",
-        caption: "Hi-Fi: trail detail view with accessibility grade, surface type, and condition info",
-      },
-      {
-        type: "image",
-        src: "/case-studies/parkpal/Design+2.webp",
-        caption: "Hi-Fi: Emergency Services Features",
-      },
-      {
-        type: "image",
-        src: "/case-studies/parkpal/Design+3.webp",
-        caption: "Hi-Fi: Trip-Planning",
-      },
-    ],
-    overview:
-      "People with mobility-related disabilities had almost no reliable way to understand whether a park or trail was actually accessible to them before visiting. Existing solutions were outdated, inconsistent, or simply absent. ParkPal was designed accessibility-first — not as an afterthought.",
-    metrics: [
-      { value: "12", label: "Research Participants" },
-      { value: "3", label: "Usability Test Rounds" },
-      { value: "WCAG AA", label: "Compliance Target" },
-      { value: "A11y First", label: "Design Approach" },
-    ],
-    phases: [
-      {
-        phase: "01 — Discover",
-        title: "A Gap Nobody Had Filled Well",
-        body: "People with mobility-related disabilities had almost no reliable way to understand whether a park or trail was actually accessible to them before visiting. Existing solutions were outdated, inconsistent, or simply absent. I conducted 12 interviews with elderly users and mobility-impaired participants, supplemented by observation at local parks, to map the full scope of the problem.",
-        callout: {
-          type: "quote",
-          text: '"I just want to know if I can get my wheelchair to the picnic area. Nobody tells you that."',
-          attr: "— Research participant, discovery interview",
-        },
-      },
-      {
-        phase: "02 — Define",
-        title: "The Core Insight: It Has to Work Before You Leave Home",
-        body: "Synthesizing findings into personas and journey maps revealed the central insight: users needed trustworthy accessibility information before the trip, not after they arrived. Discovering a trail is inaccessible upon arrival isn't just inconvenient — for many users it means a wasted trip with no alternative. The app had to be a planning tool first, a navigation tool second.",
-        callout: {
-          type: "principles",
-          items: [
-            "Accessibility grades at trail and feature level",
-            "Surface type and condition detail",
-            "Community-verified updates from real users",
-            "Offline access for areas with poor connectivity",
-          ],
-        },
-      },
-      {
-        phase: "03 — Design & Test",
-        title: "Three Rounds of Testing with Target Users",
-        body: "I designed and tested three iterative prototypes with the same participant pool, tracking task completion and error rates across sessions. Major changes between rounds included simplifying the trail detail hierarchy, adding explicit surface material callouts after participants consistently asked about pavement vs. gravel, and redesigning the community contribution flow to reduce friction for older users.",
-        callout: {
-          type: "stat",
-          stats: [
-            { v: "3", l: "Usability test rounds" },
-            { v: "↑ 40%", l: "Task completion improvement" },
-            { v: "12", l: "Participants across all sessions" },
-          ],
-        },
-      },
-      {
-        phase: "04 — Deliver",
-        title: "Recognized for Accessibility-First Rigor",
-        body: "ParkPal was recognized within the Michigan HCI program for its depth of accessibility research and the rigor of its user-centered process. The final prototype demonstrated that a well-researched, accessibility-first approach could produce a genuinely useful tool — not a watered-down version of a mainstream app with accessibility bolted on.",
-        callout: {
-          type: "quote",
-          text: '"This feels like it was actually made for me, not just adapted for me."',
-          attr: "— Usability test participant, final round",
-        },
-      },
-    ],
-    tags: [
-      "Accessibility",
-      "User Research",
-      "Journey Mapping",
-      "Mobile UX",
-      "Usability Testing",
-      "WCAG",
     ],
   },
   {

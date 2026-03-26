@@ -281,7 +281,7 @@ const PROJECTS = [
     impactLabel: "New Feature",
     color: "#a78bfa",
     emoji: "🗂️",
-    wip: true,
+    wip: false,
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
     role: "Lead Product Designer · Puckboard Personnel (web) · Active DoD Secret Clearance required · Cross-functional team of designers, web engineers, and a PM",
@@ -295,19 +295,29 @@ const PROJECTS = [
     links: [],
     media: [
       {
-        type: "placeholder",
-        label: "My Docs — member document home",
-        note: "Add a redacted screenshot of the My Docs landing view showing the folder structure",
+        type: "image",
+        src: "/case-studies/MyDocs/Artifact4.png",
+        caption: "Shipped member-facing FEF view in Puckboard Personnel — surfaces real-time evaluation status, pending signature actions, and completion state across a member's full record. The 'Action Required' and 'Status' columns were the core design decision: rather than making members hunt for what needed attention, the system surfaces urgency and ownership explicitly at the list level.",
       },
       {
-        type: "placeholder",
-        label: "Flight Evaluation Folder (FEF)",
-        note: "Add a screen or flow showing Form 8 storage and the Annual/Initial Review lifecycle",
+        type: "image",
+        src: "/case-studies/MyDocs/Artifact3.png",
+        caption: "The corresponding Stan/Eval office view of the same FEF record — same underlying data, entirely different information hierarchy. Officers need aggregate visibility and management controls; members need action clarity. Designing role-appropriate views of shared data was one of the central interaction challenges of the system.",
       },
       {
-        type: "placeholder",
-        label: "Information architecture diagram",
-        note: "Add the IA map showing document taxonomy, ownership model, and access tiers",
+        type: "image",
+        src: "/case-studies/MyDocs/Artifact7.png",
+        caption: "Early define-phase requirements synthesis across three user groups — Training Office, Stan/Eval Office, and general Puckboard Office needs. This session surfaced the core tension that shaped the system architecture: documents needed to behave differently depending on who owned them, who created them, and where they needed to go. The member-centric ownership model emerged directly from this work.",
+      },
+      {
+        type: "image",
+        src: "/case-studies/MyDocs/Artifact5.png",
+        caption: "System-level data flow mapping My Docs within the full Puckboard suite — showing how documents generated across PB Logging, PB Office, and PB Scheduling route to the correct member's inbox and archive. Produced during define to align design and engineering on ownership boundaries before any UI work began.",
+      },
+      {
+        type: "image",
+        src: "/case-studies/MyDocs/Artifact1.png",
+        caption: "End-to-end FEF workflow map spanning Stan/Eval, My Docs, and SARM roles — documenting 14+ discrete actions, branching paths for major vs. minor discrepancies, and cross-product dependencies. Built collaboratively with domain experts to establish a shared source of truth before screens were designed; directly informed the lifecycle states and status model in the shipped product.",
       },
     ],
     overview:

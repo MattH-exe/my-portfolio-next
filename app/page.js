@@ -451,7 +451,7 @@ const PROJECTS = [
       },
     ],
     overview:
-      "[ Add your overview here. ] The PMR Dashboard is the central hub through which all scheduled mission event data — Flight Hours, Training Accomplishments, AF Form 781s, Form 1522s, and more — flows on its way to being entered into systems of record by SARMs (Squadron Aviation Resource Managers). Designed as part of Puckboard Logging, it brings structure and accountability to the final mile of post-mission data entry.",
+      "[ Add overview here. ] The PMR Dashboard is the central hub through which all scheduled mission event data — Flight Hours, Training Accomplishments, AF Form 781s, Form 1522s, and more — flows on its way to being entered into systems of record by SARMs (Squadron Aviation Resource Managers). Designed as part of Puckboard Logging, it brings structure and accountability to the final mile of post-mission data entry.",
     metrics: [
       { value: "0→1", label: "New Feature" },
       { value: "Web", label: "Platform" },
@@ -461,7 +461,7 @@ const PROJECTS = [
     phases: [
       {
         phase: "01 — Discover",
-        title: "[ Add your discovery narrative here ]",
+        title: "[ Add discovery narrative here ]",
         body: "[ Describe what you learned about the SARM workflow — how mission event data was being handled before the PMR Dashboard, what pain points existed, and what research methods you used to uncover them. ]",
         callout: {
           type: "quote",
@@ -471,7 +471,7 @@ const PROJECTS = [
       },
       {
         phase: "02 — Define",
-        title: "[ Add your define narrative here ]",
+        title: "[ Add define narrative here ]",
         body: "[ Describe how you mapped the full data flow from mission event to system of record — the forms involved, the hand-offs, and the validation requirements. Note any key tensions or constraints that shaped the design direction. ]",
         callout: {
           type: "principles",
@@ -485,7 +485,7 @@ const PROJECTS = [
       },
       {
         phase: "03 — Design & Test",
-        title: "[ Add your design and testing narrative here ]",
+        title: "[ Add design and testing narrative here ]",
         body: "[ Describe how you approached the dashboard information architecture, how you iterated on the layout and workflows, and what testing revealed. ]",
         callout: {
           type: "stat",
@@ -498,7 +498,7 @@ const PROJECTS = [
       },
       {
         phase: "04 — Deliver",
-        title: "[ Add your delivery narrative here ]",
+        title: "[ Add delivery narrative here ]",
         body: "[ Describe what shipped, how SARMs responded, and what measurable impact the PMR Dashboard had on the post-mission data entry process. ]",
         callout: {
           type: "quote",
@@ -635,7 +635,7 @@ const PROJECTS = [
     wip: true,
     role: "Lead Product Designer · Same cross-functional team as Puckboard Logging — building on established relationships with domain experts and end users",
     contributions: [
-      "[ Add your specific contributions here as the work develops ]",
+      "[ Add specific contributions here as the work develops ]",
     ],
     links: [],
     cuiDisclaimer:

@@ -7,10 +7,10 @@ const TICKER_ITEMS = [
   "✦ 65% Task-Time Reduction ✦",
   "✦ $20M+ Operational Savings ✦",
   "✦ ~375K+ Labor Hours Reclaimed ✦",
-  "✦ Nearly 5 Years Enterprise UX ✦",
+  "✦ 5 Years Enterprise UX ✦",
   "✦ Active DoD Secret Clearance ✦",
   "✦ Research-Driven Design ✦",
-  "✦ Nimbus Design System ✦",
+  "✦ Design Systems Expertise ✦",
   "✦ M.S. UX & HCI — University of Michigan ✦",
 ];
 

@@ -803,7 +803,7 @@ function Nav({ onEasterEgg, eggFound, isMaster, eggButtonRef }) {
         <a href="#" aria-label="Matthew W. Henning — back to top" style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "22px", letterSpacing: "0.08em", color: "#fff", textDecoration: "none" }}>MWH</a>
         <span aria-label="Currently available for hire" role="status" style={{ fontSize: "9px", fontFamily: "'DM Mono', monospace", color: "#10b981", background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.25)", padding: "2px 8px", borderRadius: "100px", letterSpacing: "0.1em", whiteSpace: "nowrap", animation: "statusPulse 2.4s ease-in-out infinite", display: "inline-flex", alignItems: "center", gap: "5px" }}>
           <span aria-hidden="true" style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#10b981", display: "inline-block", flexShrink: 0 }} />
-          AVAILABLE
+          OPEN FOR NEW WORK
         </span>
       </div>
       <div style={{ display: "flex", gap: mobile ? "16px" : "32px", alignItems: "center" }}>

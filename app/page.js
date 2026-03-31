@@ -38,7 +38,7 @@ const PROJECTS = [
     color: "#00d4ff",
     emoji: "✈️",
     wip: false,
-    heroImage: "public/case-studies/PBL/hero.jpg", // Replace with path e.g. "/case-studies/PBL/hero.jpg"
+    heroImage: public/case-studies/PBL/"hero.jpg",// Replace with path e.g. "/case-studies/PBL/hero.jpg"
     role: "Product Designer · Cross-functional team of 1 designer, multiple iOS engineers, and a PM · Active DoD Secret Clearance required",
     contributions: [
       "Owned the design of the AF Form 651 digitization flow — translating a complex, paper-based form into a structured, validated digital experience aligned with real-world aircrew workflows",

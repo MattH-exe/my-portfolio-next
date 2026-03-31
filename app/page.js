@@ -38,6 +38,7 @@ const PROJECTS = [
     color: "#00d4ff",
     emoji: "✈️",
     wip: false,
+    heroImage: null, // Replace with path e.g. "/case-studies/PBL/hero.jpg"
     role: "Product Designer · Cross-functional team of 1 designer, multiple iOS engineers, and a PM · Active DoD Secret Clearance required",
     contributions: [
       "Owned the design of the AF Form 651 digitization flow — translating a complex, paper-based form into a structured, validated digital experience aligned with real-world aircrew workflows",
@@ -179,6 +180,7 @@ const PROJECTS = [
     color: "#a78bfa",
     emoji: "🗂️",
     wip: false,
+    heroImage: null, // Replace with path e.g. "/case-studies/MyDocs/hero.jpg"
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
     role: "Lead Product Designer · Puckboard Personnel (web) · Active DoD Secret Clearance required · Cross-functional team of designers, web engineers, and a PM",
@@ -296,6 +298,7 @@ const PROJECTS = [
     impactLabel: "Design Approach",
     color: "#10b981",
     emoji: "🌲",
+    heroImage: null, // Replace with path e.g. "/case-studies/parkpal/hero.jpg"
     role: "UX Designer & Researcher · Capstone Project, University of Michigan School of Information",
     contributions: [
       "12 user interviews with elderly and mobility-impaired participants",
@@ -421,6 +424,7 @@ const PROJECTS = [
     color: "#38bdf8",
     emoji: "📊",
     wip: true,
+    heroImage: null, // Replace with path e.g. "/case-studies/PMR/hero.jpg"
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
     role: "Lead Product Designer · Cross-functional team of designers, web engineers, and a PM · Active DoD Secret Clearance required",
@@ -527,6 +531,7 @@ const PROJECTS = [
     color: "#8b5cf6",
     emoji: "⚡",
     wip: true,
+    heroImage: null, // Replace with path e.g. "/case-studies/nimbus/hero.jpg"
     role: "Product Designer · Collaborated with iOS engineers, web engineers, and product designers across multi-product suite",
     contributions: [
       "Token-based color, typography, and spacing foundation across iOS and web",
@@ -633,6 +638,7 @@ const PROJECTS = [
     color: "#f97316",
     emoji: "🧪",
     wip: true,
+    heroImage: null, // Replace with path e.g. "/case-studies/PBT/hero.jpg"
     role: "Lead Product Designer · Same cross-functional team as Puckboard Logging — building on established relationships with domain experts and end users",
     contributions: [
       "[ Add specific contributions here as the work develops ]",
@@ -849,7 +855,16 @@ function Hero() {
 
 function ProjectCard({ project, onClick }) {
   const [hovered, setHovered] = useState(false);
+  const [mobile, setMobile] = useState(false);
   const isWip = !!project.wip;
+
+  useEffect(() => {
+    const handler = () => setMobile(window.innerWidth < 768);
+    setMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+
   return (
     <article
       onClick={(e) => onClick(project, e.currentTarget)}
@@ -858,28 +873,99 @@ function ProjectCard({ project, onClick }) {
       onFocus={() => setHovered(true)} onBlur={() => setHovered(false)}
       tabIndex={0} role="button"
       aria-label={`${project.title} — ${project.subtitle}. ${isWip ? "Work in progress." : "Click to open case study."}`}
-      style={{ background: hovered ? "#111" : "#0c0c0e", border: `1px solid ${hovered ? project.color : isWip ? project.color + "44" : "#1e1e1e"}`, borderRadius: "12px", padding: "clamp(20px, 4vw, 36px)", cursor: "pointer", transition: "all 0.25s ease", position: "relative", overflow: "hidden", transform: hovered ? "translateY(-4px)" : "none", boxShadow: hovered ? `0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px ${project.color}22` : "none", opacity: isWip ? 0.85 : 1, outline: "none" }}>
-      {isWip ? (
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", backgroundImage: `repeating-linear-gradient(90deg, ${project.color} 0px, ${project.color} 8px, transparent 8px, transparent 14px)`, opacity: hovered ? 1 : 0.5, transition: "opacity 0.25s" }} />
-      ) : (
-        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: project.color, opacity: hovered ? 1 : 0.3, transition: "opacity 0.25s" }} />
-      )}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "24px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7b7b7b", letterSpacing: "0.12em", textTransform: "uppercase" }}>{project.year}</span>
-          {isWip && <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase", color: project.color, background: project.color + "15", border: `1px solid ${project.color}50`, borderRadius: "100px", padding: "2px 8px" }}>● WIP</span>}
+      style={{
+        background: hovered ? "#111" : "#0c0c0e",
+        border: `1px solid ${hovered ? project.color : isWip ? project.color + "44" : "#1e1e1e"}`,
+        borderRadius: "16px",
+        cursor: "pointer",
+        transition: "all 0.3s ease",
+        position: "relative",
+        overflow: "hidden",
+        transform: hovered ? "translateY(-4px)" : "none",
+        boxShadow: hovered ? `0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px ${project.color}22` : "none",
+        opacity: isWip ? 0.88 : 1,
+        outline: "none",
+        display: "grid",
+        gridTemplateColumns: mobile ? "1fr" : "1fr 1fr",
+        minHeight: mobile ? "auto" : "320px",
+      }}>
+
+      {/* Left: content */}
+      <div style={{ padding: mobile ? "28px 24px" : "36px 40px", display: "flex", flexDirection: "column", justifyContent: "space-between", position: "relative" }}>
+        {isWip ? (
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", backgroundImage: `repeating-linear-gradient(90deg, ${project.color} 0px, ${project.color} 8px, transparent 8px, transparent 14px)`, opacity: hovered ? 1 : 0.5, transition: "opacity 0.25s" }} />
+        ) : (
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: project.color, opacity: hovered ? 1 : 0.3, transition: "opacity 0.25s" }} />
+        )}
+
+        <div>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "20px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7b7b7b", letterSpacing: "0.12em", textTransform: "uppercase" }}>{project.year}</span>
+              {isWip && <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase", color: project.color, background: project.color + "15", border: `1px solid ${project.color}50`, borderRadius: "100px", padding: "2px 8px" }}>● WIP</span>}
+            </div>
+            <span style={{ fontSize: "24px" }}>{project.emoji}</span>
+          </div>
+          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "12px" }}>{project.tag}</div>
+          <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px, 4vw, 52px)", fontWeight: "400", lineHeight: "1", color: "#fff", marginBottom: "10px", letterSpacing: "0.02em" }}>{project.title}</h3>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", color: "#8a8a8a", marginBottom: "24px", lineHeight: "1.5", maxWidth: "420px" }}>{project.subtitle}</p>
         </div>
-        <span style={{ fontSize: "28px" }}>{project.emoji}</span>
+
+        <div>
+          <div style={{ display: "flex", alignItems: "baseline", gap: "8px", borderTop: `1px solid ${isWip ? project.color + "20" : "#1a1a1a"}`, paddingTop: "16px" }}>
+            <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "28px", color: project.color, letterSpacing: "0.04em" }}>{project.impact}</span>
+            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7b7b7b", letterSpacing: "0.1em", textTransform: "uppercase" }}>{project.impactLabel}</span>
+          </div>
+          <div style={{ marginTop: "12px", fontFamily: "'DM Mono', monospace", fontSize: "11px", color: hovered ? project.color : "#7b7b7b", letterSpacing: "0.08em", transition: "color 0.2s" }}>
+            {isWip ? (hovered ? "See what's in progress →" : "Work in progress") : (hovered ? "Open case study →" : "Click to read →")}
+          </div>
+        </div>
       </div>
-      <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "12px" }}>{project.tag}</div>
-      <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "42px", fontWeight: "400", lineHeight: "1", color: "#fff", marginBottom: "8px", letterSpacing: "0.02em" }}>{project.title}</h3>
-      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", color: "#8a8a8a", marginBottom: "32px", lineHeight: "1.4" }}>{project.subtitle}</p>
-      <div style={{ display: "flex", alignItems: "baseline", gap: "8px", borderTop: `1px solid ${isWip ? project.color + "20" : "#1a1a1a"}`, paddingTop: "20px" }}>
-        <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "32px", color: project.color, letterSpacing: "0.04em" }}>{project.impact}</span>
-        <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7b7b7b", letterSpacing: "0.1em", textTransform: "uppercase" }}>{project.impactLabel}</span>
-      </div>
-      <div style={{ marginTop: "16px", fontFamily: "'DM Mono', monospace", fontSize: "11px", color: hovered ? project.color : "#7b7b7b", letterSpacing: "0.08em", transition: "color 0.2s" }}>
-        {isWip ? (hovered ? "See what's in progress →" : "Work in progress") : (hovered ? "Open case study →" : "Click to read →")}
+
+      {/* Right: hero image area */}
+      <div style={{
+        position: "relative",
+        overflow: "hidden",
+        minHeight: mobile ? "200px" : "100%",
+        background: `linear-gradient(135deg, ${project.color}08 0%, ${project.color}15 100%)`,
+        borderLeft: mobile ? "none" : `1px solid ${isWip ? project.color + "15" : "#1a1a1a"}`,
+        borderTop: mobile ? `1px solid ${isWip ? project.color + "15" : "#1a1a1a"}` : "none",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}>
+        {project.heroImage ? (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={project.heroImage} alt={`${project.title} preview`}
+              style={{
+                width: "100%", height: "100%", objectFit: "cover", display: "block",
+                transition: "transform 0.4s ease",
+                transform: hovered ? "scale(1.03)" : "scale(1)",
+              }} />
+            <div style={{
+              position: "absolute", inset: 0,
+              background: `linear-gradient(to right, #0c0c0e 0%, transparent 30%)`,
+              pointerEvents: "none",
+              display: mobile ? "none" : "block",
+            }} />
+          </>
+        ) : (
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "12px", padding: "32px", textAlign: "center" }}>
+            <div style={{
+              width: "64px", height: "64px", borderRadius: "50%",
+              background: project.color + "12", border: `1px dashed ${project.color}30`,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: "28px", transition: "transform 0.3s ease",
+              transform: hovered ? "scale(1.08)" : "scale(1)",
+            }}>
+              {project.emoji}
+            </div>
+            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color + "60", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+              Hero image coming soon
+            </span>
+          </div>
+        )}
       </div>
     </article>
   );
@@ -1308,27 +1394,64 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught, triggerRef }) {
 }
 
 function About() {
+  const [mobile, setMobile] = useState(false);
+  useEffect(() => {
+    const handler = () => setMobile(window.innerWidth < 768);
+    setMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+
   return (
     <section id="about" aria-label="About Matthew Henning" style={{ padding: "100px 48px", borderTop: "1px solid #111", background: "transparent" }}>
-      <div style={{ maxWidth: "900px" }}>
+      <div style={{ maxWidth: "1100px" }}>
         <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#10b981", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "24px" }}>About</div>
-        <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(40px, 6vw, 80px)", fontWeight: "400", color: "#fff", lineHeight: "0.95", letterSpacing: "0.02em", marginBottom: "48px" }}>
-          I SPENT YEARS<br />
-          <span style={{ color: "transparent", WebkitTextStroke: "1.5px #fff" }}>LEARNING TO TELL</span><br />
-          STORIES WITH FILM.
+        <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(40px, 6vw, 80px)", fontWeight: "400", color: "#fff", lineHeight: "0.95", letterSpacing: "0.02em", marginBottom: "56px" }}>
+          I STARTED BEHIND<br />
+          <span style={{ color: "transparent", WebkitTextStroke: "1.5px #fff" }}>THE CAMERA.</span> NOW I<br />
+          DESIGN WHAT&apos;S ON SCREEN.
         </h2>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px" }}>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "17px", color: "#909090", lineHeight: "1.65" }}>
-            Before I learned to design interfaces, I learned to tell stories through a lens. That background — understanding composition, pacing, what earns attention and what loses it — shapes how I approach every UX problem I work on.
-          </p>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "17px", color: "#909090", lineHeight: "1.65" }}>
-            Today I design complex enterprise systems where clarity isn&apos;t optional. I research deeply, synthesize rigorously, and build design systems that outlast the project. M.S. in UX Research & Design & User-Centered Agile Development (HCI) from the University of Michigan School of Information. Based in Chicago.
-          </p>
-        </div>
-        <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", marginTop: "48px" }}>
-          {[["Interaction Design","#10b981"],["UX Research","#8b5cf6"],["Design Systems","#10b981"],["Accessibility","#f59e0b"],["Figma","#10b981"],["Usability Testing","#8b5cf6"],["HCI","#10b981"],["Agile / Scrum","#f59e0b"]].map(([skill, color]) => (
-            <span key={skill} style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: color, background: `${color}11`, border: `1px solid ${color}33`, borderRadius: "4px", padding: "6px 14px", letterSpacing: "0.08em" }}>{skill}</span>
-          ))}
+
+        <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "280px 1fr", gap: mobile ? "36px" : "56px", alignItems: "start" }}>
+          {/* Headshot */}
+          <div style={{ position: "relative" }}>
+            <div style={{
+              width: "100%",
+              maxWidth: mobile ? "220px" : "280px",
+              aspectRatio: "3/4",
+              borderRadius: "12px",
+              overflow: "hidden",
+              border: "1px solid #1e1e1e",
+              background: "linear-gradient(135deg, #10b98108 0%, #8b5cf608 100%)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}>
+              {/* Replace this block with: <img src="/your-headshot.jpg" alt="Matthew Henning" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> */}
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", padding: "20px", textAlign: "center" }}>
+                <div style={{ width: "56px", height: "56px", borderRadius: "50%", background: "#10b98112", border: "1px dashed #10b98130", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px" }}>📸</div>
+                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: "#10b98160", letterSpacing: "0.1em", textTransform: "uppercase" }}>Your headshot here</span>
+              </div>
+            </div>
+            <div style={{ position: "absolute", top: "-6px", right: "-6px", width: "28px", height: "28px", borderRadius: "50%", background: "#10b981", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", border: "2px solid #060608" }}>✦</div>
+          </div>
+
+          {/* Bio text */}
+          <div>
+            <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: "36px", marginBottom: "40px" }}>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "17px", color: "#909090", lineHeight: "1.65" }}>
+                Before I learned to design interfaces, I learned to tell stories through a lens. That background — understanding composition, pacing, what earns attention and what loses it — shapes how I approach every UX problem I work on.
+              </p>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "17px", color: "#909090", lineHeight: "1.65" }}>
+                Today I design complex enterprise systems where clarity isn&apos;t optional. I research deeply, synthesize rigorously, and build design systems that outlast the project. M.S. in UX Research & Design & User-Centered Agile Development (HCI) from the University of Michigan School of Information. Based in Chicago.
+              </p>
+            </div>
+            <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+              {[["Interaction Design","#10b981"],["UX Research","#8b5cf6"],["Design Systems","#10b981"],["Accessibility","#f59e0b"],["Figma","#10b981"],["Usability Testing","#8b5cf6"],["HCI","#10b981"],["Agile / Scrum","#f59e0b"]].map(([skill, color]) => (
+                <span key={skill} style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: color, background: `${color}11`, border: `1px solid ${color}33`, borderRadius: "4px", padding: "6px 14px", letterSpacing: "0.08em" }}>{skill}</span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1336,26 +1459,105 @@ function About() {
 }
 
 function Contact() {
+  const [mobile, setMobile] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [focused, setFocused] = useState(null);
+
+  useEffect(() => {
+    const handler = () => setMobile(window.innerWidth < 768);
+    setMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+
+  const handleSubmit = () => {
+    const subject = encodeURIComponent(`Portfolio inquiry from ${formData.name || "someone"}`);
+    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);
+    window.location.href = `mailto:mhenn@umich.edu?subject=${subject}&body=${body}`;
+  };
+
+  const inputBase = {
+    width: "100%",
+    background: "#0a0a0d",
+    border: "1px solid #222",
+    borderRadius: "8px",
+    padding: "12px 16px",
+    fontFamily: "'Inter', sans-serif",
+    fontSize: "14px",
+    color: "#e0e0e0",
+    outline: "none",
+    transition: "border-color 0.2s, box-shadow 0.2s",
+  };
+
+  const inputFocused = (name) => focused === name ? { borderColor: "#10b981", boxShadow: "0 0 0 2px #10b98122" } : {};
+
   return (
     <section id="contact" aria-label="Contact" style={{ padding: "100px 48px", borderTop: "1px solid #111", background: "#080809" }}>
-      <div style={{ maxWidth: "700px" }}>
-        <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#10b981", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "24px" }}>Contact</div>
-        <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(48px, 7vw, 96px)", fontWeight: "400", color: "#fff", lineHeight: "0.92", letterSpacing: "0.02em", marginBottom: "32px" }}>
-          READY<br />
-          <span style={{ color: "transparent", WebkitTextStroke: "1.5px #fff" }}>WHEN</span><br />
-          YOU ARE.
-        </h2>
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "17px", color: "#7d7d7d", lineHeight: "1.6", marginBottom: "40px", maxWidth: "500px" }}>
-          Open to Product Design, UX Design & UX Research roles in Chicago and remote. Let&apos;s talk.
-        </p>
-        <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-          <a href="mailto:mhenn@umich.edu" style={{ background: "#fff", color: "#000", fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", borderRadius: "4px", textDecoration: "none", fontWeight: "600", transition: "all 0.15s" }}
-            onMouseEnter={(e) => { e.target.style.background = "#10b981"; e.target.style.color = "#fff"; }}
-            onMouseLeave={(e) => { e.target.style.background = "#fff"; e.target.style.color = "#000"; }}>Email Me →</a>
-          <a href="https://linkedin.com/in/matthew-henning13" target="_blank" rel="noreferrer" style={{ border: "1px solid #333", color: "#fff", fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", borderRadius: "4px", textDecoration: "none", transition: "all 0.15s" }}
-            onMouseEnter={(e) => { e.target.style.borderColor = "#fff"; }} onMouseLeave={(e) => { e.target.style.borderColor = "#606060"; }}>LinkedIn</a>
-          <a href="/Henning_Resume.pdf" target="_blank" rel="noreferrer" style={{ border: "1px solid #333", color: "#fff", fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", borderRadius: "4px", textDecoration: "none", transition: "all 0.15s" }}
-            onMouseEnter={(e) => { e.target.style.borderColor = "#fff"; }} onMouseLeave={(e) => { e.target.style.borderColor = "#606060"; }}>Resume ↗</a>
+      <div style={{ maxWidth: "1100px", display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: mobile ? "48px" : "80px", alignItems: "start" }}>
+        {/* Left: headline + links */}
+        <div>
+          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#10b981", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "24px" }}>Contact</div>
+          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(48px, 7vw, 96px)", fontWeight: "400", color: "#fff", lineHeight: "0.92", letterSpacing: "0.02em", marginBottom: "32px" }}>
+            READY<br />
+            <span style={{ color: "transparent", WebkitTextStroke: "1.5px #fff" }}>WHEN</span><br />
+            YOU ARE.
+          </h2>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "17px", color: "#7d7d7d", lineHeight: "1.6", marginBottom: "40px", maxWidth: "500px" }}>
+            Open to Product Design, UX Design & UX Research roles in Chicago and remote. Let&apos;s talk.
+          </p>
+          <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+            <a href="https://linkedin.com/in/matthew-henning13" target="_blank" rel="noreferrer" style={{ border: "1px solid #333", color: "#fff", fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", borderRadius: "4px", textDecoration: "none", transition: "all 0.15s" }}
+              onMouseEnter={(e) => { e.target.style.borderColor = "#fff"; }} onMouseLeave={(e) => { e.target.style.borderColor = "#606060"; }}>LinkedIn</a>
+            <a href="/Henning_Resume.pdf" target="_blank" rel="noreferrer" style={{ border: "1px solid #333", color: "#fff", fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", borderRadius: "4px", textDecoration: "none", transition: "all 0.15s" }}
+              onMouseEnter={(e) => { e.target.style.borderColor = "#fff"; }} onMouseLeave={(e) => { e.target.style.borderColor = "#606060"; }}>Resume ↗</a>
+          </div>
+        </div>
+
+        {/* Right: contact form */}
+        <div style={{
+          background: "#0c0c0e",
+          border: "1px solid #1e1e1e",
+          borderRadius: "16px",
+          padding: mobile ? "28px 24px" : "36px 32px",
+        }}>
+          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#10b981", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "24px" }}>Send a Message</div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            <div>
+              <label htmlFor="contact-name" style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7b7b7b", letterSpacing: "0.1em", textTransform: "uppercase", display: "block", marginBottom: "6px" }}>Name</label>
+              <input id="contact-name" type="text" placeholder="Your name"
+                value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onFocus={() => setFocused("name")} onBlur={() => setFocused(null)}
+                style={{ ...inputBase, ...inputFocused("name") }} />
+            </div>
+            <div>
+              <label htmlFor="contact-email" style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7b7b7b", letterSpacing: "0.1em", textTransform: "uppercase", display: "block", marginBottom: "6px" }}>Email</label>
+              <input id="contact-email" type="email" placeholder="you@company.com"
+                value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onFocus={() => setFocused("email")} onBlur={() => setFocused(null)}
+                style={{ ...inputBase, ...inputFocused("email") }} />
+            </div>
+            <div>
+              <label htmlFor="contact-message" style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7b7b7b", letterSpacing: "0.1em", textTransform: "uppercase", display: "block", marginBottom: "6px" }}>Message</label>
+              <textarea id="contact-message" rows={5} placeholder="Tell me about the role or project..."
+                value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                onFocus={() => setFocused("message")} onBlur={() => setFocused(null)}
+                style={{ ...inputBase, ...inputFocused("message"), resize: "vertical", minHeight: "120px" }} />
+            </div>
+            <button onClick={handleSubmit}
+              style={{
+                background: "#fff", color: "#000",
+                fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase",
+                padding: "14px 28px", borderRadius: "6px", border: "none", cursor: "pointer", fontWeight: "600",
+                transition: "all 0.15s", marginTop: "4px", width: "100%",
+              }}
+              onMouseEnter={(e) => { e.target.style.background = "#10b981"; e.target.style.color = "#fff"; }}
+              onMouseLeave={(e) => { e.target.style.background = "#fff"; e.target.style.color = "#000"; }}>
+              Send Message →
+            </button>
+            <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: "#606060", letterSpacing: "0.06em", textAlign: "center", marginTop: "4px" }}>
+              Opens your email client · No data stored
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -1448,7 +1650,7 @@ export default function App() {
               <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(32px, 5vw, 56px)", fontWeight: "400", color: "#fff", letterSpacing: "0.02em" }}>PRODUCTS I&apos;VE SHAPED.</h2>
             </div>
           </div>
-          <div className="fade-up fade-up-3" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))", gap: "16px" }}>
+          <div className="fade-up fade-up-3" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
             {PROJECTS.map((p) => (
               <ProjectCard key={p.id} project={p} onClick={(proj, el) => { lastCardRef.current = el; setActiveProject(proj); }} />
             ))}

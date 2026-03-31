@@ -24,6 +24,24 @@ const TICKER_ITEMS = [
 // item shape:
 //   { type: "image", src: "URL", caption: "..." }   — real image
 //   { type: "placeholder", label: "...", note: "..." } — swap me out
+//
+// ─── HOW TO ADD HERO IMAGES (the big card previews) ─────────
+// Each project has a `heroImage` field, currently set to null.
+// To add one:
+//
+//   1. Put your image file in your project's public/ folder, e.g.:
+//        public/case-studies/PBL/hero.jpg
+//
+//   2. In the project object below, change:
+//        heroImage: null,
+//      to:
+//        heroImage: "/case-studies/PBL/hero.jpg",
+//
+//   Note: the path does NOT include "public/" — Next.js serves
+//   files in public/ from the root automatically.
+//
+//   Good sizes: at least 800px wide, landscape (16:10 or 16:9).
+//   The image will be displayed with object-fit: cover.
 // ─────────────────────────────────────────────────────────────
 
 const PROJECTS = [
@@ -774,12 +792,13 @@ const POKEMON = [
 // ── Components ────────────────────────────────────────────────
 
 const Ticker = React.memo(function Ticker() {
-  const items = [...TICKER_ITEMS, ...TICKER_ITEMS];
+  // 4 copies ensures seamless loop — animation scrolls exactly 50% (2 copies worth)
+  const items = [...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS];
   return (
     <div style={{ overflow: "hidden", borderTop: "1px solid #222", borderBottom: "1px solid #222", background: "#0a0a0a", padding: "10px 0" }}>
-      <div style={{ display: "flex", gap: "0", animation: "ticker 30s linear infinite", whiteSpace: "nowrap", willChange: "transform" }}>
+      <div style={{ display: "flex", gap: "0", animation: "ticker 60s linear infinite", whiteSpace: "nowrap", willChange: "transform", width: "max-content" }}>
         {items.map((item, i) => (
-          <span key={i} style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", letterSpacing: "0.12em", color: "#909090", padding: "0 32px", textTransform: "uppercase" }}>
+          <span key={i} style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", letterSpacing: "0.12em", color: "#909090", padding: "0 32px", textTransform: "uppercase", flexShrink: 0 }}>
             {item}
           </span>
         ))}
@@ -798,12 +817,12 @@ function Nav({ onEasterEgg, eggFound, isMaster, eggButtonRef }) {
   }, []);
 
   return (
-    <nav aria-label="Main navigation" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: mobile ? "16px 20px" : "20px 48px", borderBottom: "none", background: "transparent" }}>
+    <nav aria-label="Main navigation" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: mobile ? "16px 16px" : "20px clamp(20px, 3vw, 36px)", borderBottom: "none", background: "transparent" }}>
       <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
         <a href="#" aria-label="Matthew W. Henning — back to top" style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "22px", letterSpacing: "0.08em", color: "#fff", textDecoration: "none" }}>MWH</a>
         <span aria-label="Currently available for hire" role="status" style={{ fontSize: "9px", fontFamily: "'DM Mono', monospace", color: "#10b981", background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.25)", padding: "2px 8px", borderRadius: "100px", letterSpacing: "0.1em", whiteSpace: "nowrap", animation: "statusPulse 2.4s ease-in-out infinite", display: "inline-flex", alignItems: "center", gap: "5px" }}>
           <span aria-hidden="true" style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#10b981", display: "inline-block", flexShrink: 0 }} />
-          OPEN FOR NEW WORK
+          AVAILABLE
         </span>
       </div>
       <div style={{ display: "flex", gap: mobile ? "16px" : "32px", alignItems: "center" }}>
@@ -826,7 +845,7 @@ function Nav({ onEasterEgg, eggFound, isMaster, eggButtonRef }) {
 
 function Hero() {
   return (
-    <section aria-label="Introduction" style={{ padding: "100px 48px 80px", maxWidth: "1200px", background: "transparent" }}>
+    <section aria-label="Introduction" style={{ padding: "100px clamp(16px, 3vw, 36px) 80px", maxWidth: "1200px", background: "transparent" }}>
       <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: "#10b981", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "28px" }}>
         Product Designer · UX Researcher · Chicago, IL
       </p>
@@ -893,9 +912,9 @@ function ProjectCard({ project, onClick }) {
       {/* Left: content */}
       <div style={{ padding: mobile ? "28px 24px" : "36px 40px", display: "flex", flexDirection: "column", justifyContent: "space-between", position: "relative" }}>
         {isWip ? (
-          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", backgroundImage: `repeating-linear-gradient(90deg, ${project.color} 0px, ${project.color} 8px, transparent 8px, transparent 14px)`, opacity: hovered ? 1 : 0.5, transition: "opacity 0.25s" }} />
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", backgroundImage: `repeating-linear-gradient(90deg, ${project.color} 0px, ${project.color} 8px, transparent 8px, transparent 14px)`, opacity: hovered ? 0 : 0.5, transition: "opacity 0.25s" }} />
         ) : (
-          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: project.color, opacity: hovered ? 1 : 0.3, transition: "opacity 0.25s" }} />
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: project.color, opacity: hovered ? 0 : 0.3, transition: "opacity 0.25s" }} />
         )}
 
         <div>
@@ -1403,7 +1422,7 @@ function About() {
   }, []);
 
   return (
-    <section id="about" aria-label="About Matthew Henning" style={{ padding: "100px 48px", borderTop: "1px solid #111", background: "transparent" }}>
+    <section id="about" aria-label="About Matthew Henning" style={{ padding: "100px clamp(16px, 3vw, 36px)", borderTop: "1px solid #111", background: "transparent" }}>
       <div style={{ maxWidth: "1100px" }}>
         <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#10b981", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "24px" }}>About</div>
         <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(40px, 6vw, 80px)", fontWeight: "400", color: "#fff", lineHeight: "0.95", letterSpacing: "0.02em", marginBottom: "56px" }}>
@@ -1414,10 +1433,9 @@ function About() {
 
         <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "280px 1fr", gap: mobile ? "36px" : "56px", alignItems: "start" }}>
           {/* Headshot */}
-          <div style={{ position: "relative" }}>
+          <div style={{ position: "relative", width: "fit-content" }}>
             <div style={{
-              width: "100%",
-              maxWidth: mobile ? "220px" : "280px",
+              width: mobile ? "220px" : "280px",
               aspectRatio: "3/4",
               borderRadius: "12px",
               overflow: "hidden",
@@ -1427,7 +1445,15 @@ function About() {
               alignItems: "center",
               justifyContent: "center",
             }}>
-              {/* Replace this block with: <img src="/your-headshot.jpg" alt="Matthew Henning" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> */}
+              {/*
+                ─── HOW TO ADD YOUR HEADSHOT ───
+                1. Put your photo in: public/headshot.jpg (or .png)
+                2. Delete everything between this comment block and the closing </div> below
+                3. Replace it with:
+                   <img src="/headshot.jpg" alt="Matthew Henning" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+
+                Remember: do NOT include "public/" in the src path.
+              */}
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", padding: "20px", textAlign: "center" }}>
                 <div style={{ width: "56px", height: "56px", borderRadius: "50%", background: "#10b98112", border: "1px dashed #10b98130", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px" }}>📸</div>
                 <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: "#10b98160", letterSpacing: "0.1em", textTransform: "uppercase" }}>Your headshot here</span>
@@ -1492,7 +1518,7 @@ function Contact() {
   const inputFocused = (name) => focused === name ? { borderColor: "#10b981", boxShadow: "0 0 0 2px #10b98122" } : {};
 
   return (
-    <section id="contact" aria-label="Contact" style={{ padding: "100px 48px", borderTop: "1px solid #111", background: "#080809" }}>
+    <section id="contact" aria-label="Contact" style={{ padding: "100px clamp(16px, 3vw, 36px)", borderTop: "1px solid #111", background: "#080809" }}>
       <div style={{ maxWidth: "1100px", display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: mobile ? "48px" : "80px", alignItems: "start" }}>
         {/* Left: headline + links */}
         <div>
@@ -1640,10 +1666,10 @@ export default function App() {
         <Ticker />
       </div>
 
-      <main style={{ maxWidth: "1280px", margin: "0 auto" }}>
+      <main style={{ maxWidth: "1400px", margin: "0 auto" }}>
         <div className="fade-up fade-up-1"><Hero /></div>
 
-        <section id="work" aria-label="Selected work" style={{ padding: "80px clamp(16px, 4vw, 48px)", background: "transparent" }}>
+        <section id="work" aria-label="Selected work" style={{ padding: "80px clamp(16px, 3vw, 36px)", background: "transparent" }}>
           <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: "48px" }}>
             <div className="fade-up fade-up-2">
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#10b981", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "8px" }}>Selected Work</div>
@@ -1663,7 +1689,7 @@ export default function App() {
         </div>
       </main>
 
-      <footer aria-label="Site footer" style={{ borderTop: "1px solid #111", padding: "24px clamp(16px, 4vw, 48px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "8px", maxWidth: "1280px", margin: "0 auto" }}>
+      <footer aria-label="Site footer" style={{ borderTop: "1px solid #111", padding: "24px clamp(16px, 3vw, 36px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "8px", maxWidth: "1400px", margin: "0 auto" }}>
         <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: "#7b7b7b", letterSpacing: "0.08em" }}>© 2026 Matthew W. Henning</span>
         <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: "#7b7b7b", letterSpacing: "0.08em" }}>Chicago, IL · Available for hire</span>
       </footer>

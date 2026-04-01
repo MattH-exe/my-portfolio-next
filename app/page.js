@@ -198,7 +198,7 @@ const PROJECTS = [
     color: "#a78bfa",
     emoji: "🗂️",
     wip: false,
-    heroImage: null, // Replace with path e.g. "/case-studies/MyDocs/hero.jpg"
+    heroImage: "/case-studies/MyDocs/hero.png", // Replace with path e.g. "/case-studies/MyDocs/hero.jpg"
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
     role: "Lead Product Designer · Puckboard Personnel (web) · Active DoD Secret Clearance required · Cross-functional team of designers, web engineers, and a PM",

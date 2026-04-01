@@ -1454,7 +1454,7 @@ function About() {
 
                 Remember: do NOT include "public/" in the src path.
               */}
-            <img src="images/headshot.jpg" alt="Matthew Henning" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img src="images/Headshot.jpg" alt="Matthew Henning" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
             <div style={{ position: "absolute", top: "-6px", right: "-6px", width: "28px", height: "28px", borderRadius: "50%", background: "#10b981", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", border: "2px solid #060608" }}>✦</div>
           </div>

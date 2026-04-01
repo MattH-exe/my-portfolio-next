@@ -155,7 +155,7 @@ const PROJECTS = [
         },
       },
       {
-        phase: "04 — Prototype & Test",
+        phase: "04 — Design & Test",
         title: "Learning from Real Users in Operational Contexts",
         body: "Prototypes were tested with active-duty, reserve & guard aircrew, providing direct feedback on usability and terminology. I contributed to iterating on specific flows based on these sessions, particularly around form structure and clarity. One major learning was the importance of domain language — early designs used terminology that didn't align with how aircrew actually described their tasks. Adjusting this significantly improved usability. I also saw firsthand how impactful pre-populated data was in reducing workload, reinforcing its importance as a core feature across the product.",
         callout: {

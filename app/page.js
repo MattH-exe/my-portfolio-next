@@ -1454,10 +1454,7 @@ function About() {
 
                 Remember: do NOT include "public/" in the src path.
               */}
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", padding: "20px", textAlign: "center" }}>
-                <div style={{ width: "56px", height: "56px", borderRadius: "50%", background: "#10b98112", border: "1px dashed #10b98130", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "24px" }}>📸</div>
-                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: "#10b98160", letterSpacing: "0.1em", textTransform: "uppercase" }}>Your headshot here</span>
-              </div>
+            <img src="images/headshot.jpg" alt="Matthew Henning" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
             <div style={{ position: "absolute", top: "-6px", right: "-6px", width: "28px", height: "28px", borderRadius: "50%", background: "#10b981", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", border: "2px solid #060608" }}>✦</div>
           </div>

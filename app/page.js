@@ -316,7 +316,7 @@ const PROJECTS = [
     impactLabel: "Design Approach",
     color: "#10b981",
     emoji: "🌲",
-    heroImage: null, // Replace with path e.g. "/case-studies/parkpal/hero.jpg"
+    heroImage: "/case-studies/parkpal/hero.jpg", // Replace with path e.g. "/case-studies/parkpal/hero.jpg"
     role: "UX Designer & Researcher · Capstone Project, University of Michigan School of Information",
     contributions: [
       "12 user interviews with elderly and mobility-impaired participants",

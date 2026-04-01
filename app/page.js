@@ -1140,9 +1140,10 @@ function Modal({ project, onClose, triggerRef }) {
           width: "100%",
           maxWidth: "clamp(680px, 96vw, 1600px)",
           maxHeight: "90vh",
-          overflowY: "auto",
+          overflow: "hidden",
           boxShadow: `0 40px 120px rgba(0,0,0,0.8), 0 0 0 1px ${project.color}22`,
         }}>
+        <div style={{ overflowY: "auto", maxHeight: "90vh" }}>
 
         {/* ── Sticky header ── */}
         <div style={{ padding: `28px ${mobile ? "20px" : "52px"} 20px`, borderBottom: "1px solid #1a1a1a", position: "sticky", top: 0, background: "#0e0e12", zIndex: 10 }}>
@@ -1289,6 +1290,7 @@ function Modal({ project, onClose, triggerRef }) {
             </div>
 
           </div>
+        </div>
         </div>
       </div>
 

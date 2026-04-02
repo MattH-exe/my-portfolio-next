@@ -1493,7 +1493,8 @@ function About() {
           <div>
             <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: "36px", marginBottom: "40px" }}>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "17px", color: "#909090", lineHeight: "1.65" }}>
-                Before I learned to design interfaces, I learned to tell stories through a lens. That background — understanding composition, pacing, what earns attention and what loses it — shapes how I approach every UX problem I work on.
+                Before I learned to design interfaces, I learned to tell stories through a lens studying Film, Television & Digital Media in my undergrad. That background — understanding composition, pacing, what earns attention and what loses it — still shines through in my product design work to this day, & shapes how I approach every UX problem I work on.
+
               </p>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "17px", color: "#909090", lineHeight: "1.65" }}>
                 Today I design complex enterprise systems where clarity isn&apos;t optional. I research deeply, synthesize rigorously, and build design systems that outlast the project. M.S. in UX Research & Design & User-Centered Agile Development (HCI) from the University of Michigan School of Information. Based in Chicago.

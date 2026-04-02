@@ -1457,8 +1457,8 @@ function About() {
         <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#10b981", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "24px" }}>About</div>
         <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(40px, 6vw, 80px)", fontWeight: "400", color: "#fff", lineHeight: "0.95", letterSpacing: "0.02em", marginBottom: "56px" }}>
           FIVE YEARS DESIGNING<br />
-          <span style={{ color: "transparent", WebkitTextStroke: "1.5px #fff" }}>SYSTEMS</span> THAT OUTLAST<br />
-          THE PROJECT.
+          <span style={{ color: "transparent", WebkitTextStroke: "1.5px #fff" }}>SYSTEMS</span> THAT DELIVER<br />
+          & DELIGHT.
         </h2>
 
         <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "280px 1fr", gap: mobile ? "36px" : "56px", alignItems: "start" }}>

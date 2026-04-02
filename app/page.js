@@ -950,7 +950,7 @@ function ProjectCard({ project, onClick }) {
           <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px, 4vw, 52px)", fontWeight: "400", lineHeight: "1", color: "#fff", marginBottom: "10px", letterSpacing: "0.02em" }}>{project.title}</h3>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", color: "#8a8a8a", marginBottom: depthLabel ? "8px" : "24px", lineHeight: "1.5", maxWidth: "420px" }}>{project.subtitle}</p>
           {depthLabel && (
-            <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#606060", letterSpacing: "0.08em", marginBottom: "24px" }}>{depthLabel}</p>
+            <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", color: "#606060", letterSpacing: "0.08em", marginBottom: "24px" }}>{depthLabel}</p>
           )}
         </div>
 
@@ -1493,7 +1493,7 @@ function About() {
           <div>
             <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: "36px", marginBottom: "40px" }}>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "17px", color: "#909090", lineHeight: "1.65" }}>
-                Before I learned to design interfaces, I learned to tell stories through a lens studying Film, Television & Digital Media in my undergrad. That background — understanding composition, pacing, what earns attention and what loses it — still shines through in my product design work, & shapes how I approach every UX problem I work on.
+                Before I learned to design interfaces, I learned to tell stories through a lens. That background — understanding composition, pacing, what earns attention and what loses it — shapes how I approach every UX problem I work on.
               </p>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "17px", color: "#909090", lineHeight: "1.65" }}>
                 Today I design complex enterprise systems where clarity isn&apos;t optional. I research deeply, synthesize rigorously, and build design systems that outlast the project. M.S. in UX Research & Design & User-Centered Agile Development (HCI) from the University of Michigan School of Information. Based in Chicago.

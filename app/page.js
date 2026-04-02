@@ -377,7 +377,7 @@ const PROJECTS = [
       {
         phase: "01 — Discover",
         title: "A Gap Nobody Had Filled Well",
-        body: "People with mobility-related disabilities had almost no reliable way to understand whether a park or trail was actually accessible to them before visiting. Existing solutions were outdated, inconsistent, or simply absent. I conducted 12 interviews with elderly users and mobility-impaired participants, supplemented by observation at local parks, to map the full scope of the problem.",
+        body: "People with mobility-related disabilities had almost no reliable way to understand whether a park or trail was actually accessible to them before visiting. Existing solutions were outdated, inconsistent, or simply absent. I conducted 12 interviews with elderly users and mobility-impaired participants, supplemented by observation & impromprtu interviews with individuals at local parks, to map the full scope of the problem, and understand where the gaps currently are.",
         callout: {
           type: "quote",
           text: '"I just want to know if I can get my wheelchair to the picnic area. Nobody tells you that."',
@@ -414,7 +414,7 @@ const PROJECTS = [
       {
         phase: "04 — Deliver",
         title: "Recognized for Accessibility-First Rigor",
-        body: "ParkPal was recognized within the Michigan HCI program for its depth of accessibility research and the rigor of its user-centered process. The final prototype demonstrated that a well-researched, accessibility-first approach could produce a genuinely useful tool — not a watered-down version of a mainstream app with accessibility bolted on.",
+        body: "ParkPal was recognized within the Michigan School of Information UX Research & Design program for its depth of accessibility research and the rigor of its user-centered process. The final prototype demonstrated that a well-researched, accessibility-first approach could produce a genuinely useful tool — not a watered-down version of a mainstream app with accessibility bolted on.",
         callout: {
           type: "quote",
           text: '"This feels like it was actually made for me, not just adapted for me."',

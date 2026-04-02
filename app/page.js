@@ -442,6 +442,7 @@ const PROJECTS = [
     color: "#38bdf8",
     emoji: "📊",
     wip: true,
+    disabled: true, // ← flip to false when case study content is ready
     heroImage: null, // Replace with path e.g. "/case-studies/PMR/hero.jpg"
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
@@ -549,6 +550,7 @@ const PROJECTS = [
     color: "#8b5cf6",
     emoji: "⚡",
     wip: true,
+    disabled: true, // ← flip to false when case study content is ready
     heroImage: null, // Replace with path e.g. "/case-studies/nimbus/hero.jpg"
     role: "Product Designer · Collaborated with iOS engineers, web engineers, and product designers across multi-product suite",
     contributions: [
@@ -656,6 +658,7 @@ const PROJECTS = [
     color: "#f97316",
     emoji: "🧪",
     wip: true,
+    disabled: true, // ← flip to false when case study content is ready
     heroImage: null, // Replace with path e.g. "/case-studies/PBT/hero.jpg"
     role: "Lead Product Designer · Same cross-functional team as Puckboard Logging — building on established relationships with domain experts and end users",
     contributions: [
@@ -876,6 +879,7 @@ function ProjectCard({ project, onClick }) {
   const [hovered, setHovered] = useState(false);
   const [mobile, setMobile] = useState(false);
   const isWip = !!project.wip;
+  const isDisabled = !!project.disabled;
 
   useEffect(() => {
     const handler = () => setMobile(window.innerWidth < 768);
@@ -884,25 +888,42 @@ function ProjectCard({ project, onClick }) {
     return () => window.removeEventListener("resize", handler);
   }, []);
 
+  // Depth indicators: count phases and real artifacts (non-placeholder media)
+  const phaseCount = project.phases ? project.phases.length : 0;
+  const artifactCount = project.media ? project.media.filter((m) => m.type === "image").length : 0;
+  const depthLabel = !isDisabled && phaseCount > 0
+    ? `${phaseCount}-phase case study` + (artifactCount > 0 ? ` · ${artifactCount} artifact${artifactCount !== 1 ? "s" : ""}` : "")
+    : null;
+
+  const handleClick = (e) => {
+    if (isDisabled) return;
+    onClick(project, e.currentTarget);
+  };
+
+  const handleKeyDown = (e) => {
+    if (isDisabled) return;
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onClick(project); }
+  };
+
   return (
     <article
-      onClick={(e) => onClick(project, e.currentTarget)}
-      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onClick(project); } }}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
       onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
       onFocus={() => setHovered(true)} onBlur={() => setHovered(false)}
-      tabIndex={0} role="button"
-      aria-label={`${project.title} — ${project.subtitle}. ${isWip ? "Work in progress." : "Click to open case study."}`}
+      tabIndex={isDisabled ? -1 : 0} role={isDisabled ? undefined : "button"}
+      aria-label={`${project.title} — ${project.subtitle}. ${isDisabled ? "Case study coming soon." : isWip ? "Work in progress." : "Click to open case study."}`}
       style={{
-        background: hovered ? "#111" : "#0c0c0e",
-        border: `1px solid ${hovered ? project.color : isWip ? project.color + "44" : "#1e1e1e"}`,
+        background: hovered && !isDisabled ? "#111" : "#0c0c0e",
+        border: `1px solid ${hovered && !isDisabled ? project.color : isWip ? project.color + "44" : "#1e1e1e"}`,
         borderRadius: "16px",
-        cursor: "pointer",
+        cursor: isDisabled ? "default" : "pointer",
         transition: "all 0.3s ease",
         position: "relative",
         overflow: "hidden",
-        transform: hovered ? "translateY(-4px)" : "none",
-        boxShadow: hovered ? `0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px ${project.color}22` : "none",
-        opacity: isWip ? 0.88 : 1,
+        transform: hovered && !isDisabled ? "translateY(-4px)" : "none",
+        boxShadow: hovered && !isDisabled ? `0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px ${project.color}22` : "none",
+        opacity: isDisabled ? 0.7 : isWip ? 0.88 : 1,
         outline: "none",
         display: "grid",
         gridTemplateColumns: mobile ? "1fr" : "1fr 1fr",
@@ -912,9 +933,9 @@ function ProjectCard({ project, onClick }) {
       {/* Left: content */}
       <div style={{ padding: mobile ? "28px 24px" : "36px 40px", display: "flex", flexDirection: "column", justifyContent: "space-between", position: "relative" }}>
         {isWip ? (
-          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", backgroundImage: `repeating-linear-gradient(90deg, ${project.color} 0px, ${project.color} 8px, transparent 8px, transparent 14px)`, opacity: hovered ? 0 : 0.5, transition: "opacity 0.25s" }} />
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", backgroundImage: `repeating-linear-gradient(90deg, ${project.color} 0px, ${project.color} 8px, transparent 8px, transparent 14px)`, opacity: hovered && !isDisabled ? 0 : 0.5, transition: "opacity 0.25s" }} />
         ) : (
-          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: project.color, opacity: hovered ? 0 : 0.3, transition: "opacity 0.25s" }} />
+          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: project.color, opacity: hovered && !isDisabled ? 0 : 0.3, transition: "opacity 0.25s" }} />
         )}
 
         <div>
@@ -927,7 +948,10 @@ function ProjectCard({ project, onClick }) {
           </div>
           <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "12px" }}>{project.tag}</div>
           <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px, 4vw, 52px)", fontWeight: "400", lineHeight: "1", color: "#fff", marginBottom: "10px", letterSpacing: "0.02em" }}>{project.title}</h3>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", color: "#8a8a8a", marginBottom: "24px", lineHeight: "1.5", maxWidth: "420px" }}>{project.subtitle}</p>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "15px", color: "#8a8a8a", marginBottom: depthLabel ? "8px" : "24px", lineHeight: "1.5", maxWidth: "420px" }}>{project.subtitle}</p>
+          {depthLabel && (
+            <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#606060", letterSpacing: "0.08em", marginBottom: "24px" }}>{depthLabel}</p>
+          )}
         </div>
 
         <div>
@@ -935,8 +959,12 @@ function ProjectCard({ project, onClick }) {
             <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "28px", color: project.color, letterSpacing: "0.04em" }}>{project.impact}</span>
             <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7b7b7b", letterSpacing: "0.1em", textTransform: "uppercase" }}>{project.impactLabel}</span>
           </div>
-          <div style={{ marginTop: "12px", fontFamily: "'DM Mono', monospace", fontSize: "11px", color: hovered ? project.color : "#7b7b7b", letterSpacing: "0.08em", transition: "color 0.2s" }}>
-            {isWip ? (hovered ? "See what's in progress →" : "Work in progress") : (hovered ? "Open case study →" : "Click to read →")}
+          <div style={{ marginTop: "12px", fontFamily: "'DM Mono', monospace", fontSize: "11px", color: isDisabled ? "#606060" : (hovered ? project.color : "#7b7b7b"), letterSpacing: "0.08em", transition: "color 0.2s" }}>
+            {isDisabled
+              ? "Case study coming soon"
+              : isWip
+                ? (hovered ? "See what's in progress →" : "Work in progress")
+                : (hovered ? "Open case study →" : "Click to read →")}
           </div>
         </div>
       </div>
@@ -960,7 +988,7 @@ function ProjectCard({ project, onClick }) {
               style={{
                 width: "100%", height: "100%", objectFit: "cover", display: "block",
                 transition: "transform 0.4s ease",
-                transform: hovered ? "scale(1.03)" : "scale(1)",
+                transform: hovered && !isDisabled ? "scale(1.03)" : "scale(1)",
               }} />
             <div style={{
               position: "absolute", inset: 0,
@@ -976,12 +1004,12 @@ function ProjectCard({ project, onClick }) {
               background: project.color + "12", border: `1px dashed ${project.color}30`,
               display: "flex", alignItems: "center", justifyContent: "center",
               fontSize: "28px", transition: "transform 0.3s ease",
-              transform: hovered ? "scale(1.08)" : "scale(1)",
+              transform: hovered && !isDisabled ? "scale(1.08)" : "scale(1)",
             }}>
               {project.emoji}
             </div>
             <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color + "60", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-              Hero image coming soon
+              Coming Soon
             </span>
           </div>
         )}
@@ -1428,9 +1456,9 @@ function About() {
       <div style={{ maxWidth: "1100px" }}>
         <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#10b981", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "24px" }}>About</div>
         <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(40px, 6vw, 80px)", fontWeight: "400", color: "#fff", lineHeight: "0.95", letterSpacing: "0.02em", marginBottom: "56px" }}>
-          I STARTED BEHIND<br />
-          <span style={{ color: "transparent", WebkitTextStroke: "1.5px #fff" }}>THE CAMERA.</span> NOW I<br />
-          DESIGN WHAT&apos;S ON SCREEN.
+          FIVE YEARS DESIGNING<br />
+          <span style={{ color: "transparent", WebkitTextStroke: "1.5px #fff" }}>SYSTEMS</span> THAT OUTLAST<br />
+          THE PROJECT.
         </h2>
 
         <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "280px 1fr", gap: mobile ? "36px" : "56px", alignItems: "start" }}>
@@ -1602,6 +1630,34 @@ export default function App() {
 
   const handleEgg = () => { setShowEgg(true); setEggFound(true); };
 
+  // ── Hash-based case study routing ──────────────────────────
+  // Enables direct links like matt-henning.com/#case/mydocs
+  const openProject = (project) => {
+    if (project.disabled) return;
+    setActiveProject(project);
+    window.history.replaceState(null, "", `#case/${project.id}`);
+  };
+
+  const closeProject = () => {
+    setActiveProject(null);
+    window.history.replaceState(null, "", window.location.pathname);
+  };
+
+  // On mount: check URL hash and auto-open matching case study
+  useEffect(() => {
+    const checkHash = () => {
+      const hash = window.location.hash;
+      const match = hash.match(/^#case\/(.+)$/);
+      if (match) {
+        const project = PROJECTS.find((p) => p.id === match[1] && !p.disabled);
+        if (project) setActiveProject(project);
+      }
+    };
+    checkHash();
+    window.addEventListener("hashchange", checkHash);
+    return () => window.removeEventListener("hashchange", checkHash);
+  }, []);
+
   useEffect(() => {
     const KONAMI = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
     let pos = 0;
@@ -1677,7 +1733,7 @@ export default function App() {
           </div>
           <div className="fade-up fade-up-3" style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
             {PROJECTS.map((p) => (
-              <ProjectCard key={p.id} project={p} onClick={(proj, el) => { lastCardRef.current = el; setActiveProject(proj); }} />
+              <ProjectCard key={p.id} project={p} onClick={(proj, el) => { lastCardRef.current = el; openProject(proj); }} />
             ))}
           </div>
         </section>
@@ -1693,7 +1749,7 @@ export default function App() {
         <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: "#7b7b7b", letterSpacing: "0.08em" }}>Chicago, IL · Available for hire</span>
       </footer>
 
-      {activeProject && <Modal project={activeProject} onClose={() => setActiveProject(null)} triggerRef={lastCardRef} />}
+      {activeProject && <Modal project={activeProject} onClose={closeProject} triggerRef={lastCardRef} />}
       {showEgg && <EasterEggModal onClose={() => setShowEgg(false)} onMaster={() => setIsMaster(true)} caught={caughtPokemon} setCaught={setCaughtPokemon} triggerRef={eggButtonRef} />}
     </>
   );

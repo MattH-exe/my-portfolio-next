@@ -368,8 +368,8 @@ const PROJECTS = [
     overview:
       "People with mobility-related disabilities had almost no reliable way to understand whether a park or trail was actually accessible to them before visiting. Existing solutions were outdated, inconsistent, or simply absent. ParkPal was designed accessibility-first — not as an afterthought.",
     metrics: [
-      { value: "12", label: "Research Participants" },
-      { value: "3", label: "Usability Test Rounds" },
+      { value: "4", label: "Research Participants" },
+      { value: "2", label: "Usability Test Rounds" },
       { value: "WCAG AA", label: "Compliance Target" },
       { value: "A11y First", label: "Design Approach" },
     ],
@@ -377,7 +377,7 @@ const PROJECTS = [
       {
         phase: "01 — Discover",
         title: "A Gap Nobody Had Filled Well",
-        body: "People with mobility-related disabilities had almost no reliable way to understand whether a park or trail was actually accessible to them before visiting. Existing solutions were outdated, inconsistent, or simply absent. I conducted 12 interviews with elderly users and mobility-impaired participants, supplemented by observation & impromprtu interviews with individuals at local parks, to map the full scope of the problem, and understand where the gaps currently are.",
+        body: "People with mobility-related disabilities had almost no reliable way to understand whether a park or trail was actually accessible to them before visiting. Existing solutions were outdated, inconsistent, or simply absent. I conducted 8 interviews & 2 rounds of usability tests with elderly users and mobility-impaired participants, supplemented by observation & impromprtu interviews with individuals at local parks, to map the full scope of the problem, and understand where the gaps currently are.",
         callout: {
           type: "quote",
           text: '"I just want to know if I can get my wheelchair to the picnic area. Nobody tells you that."',
@@ -400,14 +400,14 @@ const PROJECTS = [
       },
       {
         phase: "03 — Design & Test",
-        title: "Three Rounds of Testing with Target Users",
-        body: "I designed and tested three iterative prototypes with the same participant pool, tracking task completion and error rates across sessions. Major changes between rounds included simplifying the trail detail hierarchy, adding explicit surface material callouts after participants consistently asked about pavement vs. gravel, and redesigning the community contribution flow to reduce friction for older users.",
+        title: "Two Rounds of Testing with Target Users",
+        body: "I designed and tested two iterative prototypes with the same participant pool, tracking task completion and error rates across sessions. Major changes between rounds included simplifying the trail detail hierarchy, adding explicit surface material callouts after participants consistently asked about pavement vs. gravel, and redesigning the community contribution flow to reduce friction for older users.",
         callout: {
           type: "stat",
           stats: [
-            { v: "3", l: "Usability test rounds" },
+            { v: "2", l: "Usability test rounds" },
             { v: "↑ 40%", l: "Task completion improvement" },
-            { v: "12", l: "Participants across all sessions" },
+            { v: "8", l: "Participants across all sessions" },
           ],
         },
       },

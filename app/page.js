@@ -407,7 +407,7 @@ const PROJECTS = [
           stats: [
             { v: "2", l: "Usability test rounds" },
             { v: "↑ 40%", l: "Task completion improvement" },
-            { v: "8", l: "Participants across all sessions" },
+            { v: "12", l: "Participants across all sessions" },
           ],
         },
       },

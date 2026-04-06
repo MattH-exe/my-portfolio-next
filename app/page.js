@@ -225,6 +225,11 @@ const PROJECTS = [
       },
       {
         type: "image",
+        src: "/case-studies/MyDocs/MetricsStrategy.png",
+        caption: "Evaluation Process Metrics captured during an on-site base visit — comparing Time-on-Task between legacy workflows (17+ hours across 9 steps) and the Puckboard-integrated flow (≈6 hours), quantifying a 65% reduction in task completion time. Created this visual breakdown to communicate impact clearly to stakeholders and non-designers at a glance — translating raw TOT data into structured comparisons, phased timelines, and executive-ready framing that made the case for the connected-system approach without requiring technical context.",
+      },
+      {
+        type: "image",
         src: "/case-studies/MyDocs/Artifact7.png",
         caption: "Early define-phase requirements synthesis across three user groups — Training, Stan/Eval, and general PBLO needs. This session surfaced the core tension that shaped the system architecture: documents needed to behave differently depending on who owned them, who created them, and where they needed to go. The member-centric ownership model emerged directly from this work.",
       },

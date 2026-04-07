@@ -82,7 +82,7 @@ const PROJECTS = [
     color: "#00d4ff",
     emoji: "✈️",
     wip: false,
-    heroImage: "/case-studies/PBL/hero.png", // Replace with path e.g. "/case-studies/PBL/hero.jpg"
+    heroImage: "/case-studies/PBL/hero.png",
     role: "Product Designer · Cross-functional team of 1 designer, multiple iOS engineers, and a PM · Active DoD Secret Clearance required",
     contributions: [
       "Owned the design of the AF Form 651 digitization flow — translating a complex, paper-based form into a structured, validated digital experience aligned with real-world aircrew workflows",
@@ -224,7 +224,7 @@ const PROJECTS = [
     color: "#a78bfa",
     emoji: "🗂️",
     wip: false,
-    heroImage: "/case-studies/MyDocs/hero.png", // Replace with path e.g. "/case-studies/MyDocs/hero.jpg"
+    heroImage: "/case-studies/MyDocs/hero.png",
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
     role: "Lead Product Designer · Puckboard Personnel (web) · Active DoD Secret Clearance required · Cross-functional team of designers, web engineers, and a PM",
@@ -347,7 +347,7 @@ const PROJECTS = [
     impactLabel: "Design Approach",
     color: "#10b981",
     emoji: "🌲",
-    heroImage: "/case-studies/parkpal/hero.jpg", // Replace with path e.g. "/case-studies/parkpal/hero.jpg"
+    heroImage: "/case-studies/parkpal/hero.jpg",
     role: "UX Designer & Researcher · Capstone Project, University of Michigan School of Information",
     contributions: [
       "12 user interviews with elderly and mobility-impaired participants",
@@ -862,8 +862,8 @@ function Nav({ onEasterEgg, eggFound, isMaster, eggButtonRef }) {
       <div style={{ display: "flex", gap: mobile ? "16px" : "32px", alignItems: "center" }}>
         {!mobile && ["Work", "About", "Contact"].map((link) => (
           <a key={link} href={`#${link.toLowerCase()}`} style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", color: "#7d7d7d", textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase", transition: "color 0.15s" }}
-            onMouseEnter={(e) => (e.target.style.color = "#fff")}
-            onMouseLeave={(e) => (e.target.style.color = "#7d7d7d")}>
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#7d7d7d")}>
             {link}
           </a>
         ))}
@@ -892,13 +892,13 @@ function Hero() {
       </p>
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
         <a href="#work" style={{ background: "#fff", color: "#000", fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", borderRadius: "4px", textDecoration: "none", fontWeight: "600", transition: "all 0.15s" }}
-          onMouseEnter={(e) => { e.target.style.background = "#10b981"; e.target.style.color = "#fff"; }}
-          onMouseLeave={(e) => { e.target.style.background = "#fff"; e.target.style.color = "#000"; }}>
+          onMouseEnter={(e) => { e.currentTarget.style.background = "#10b981"; e.currentTarget.style.color = "#fff"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.color = "#000"; }}>
           View Work →
         </a>
         <a href="mailto:mhenn@umich.edu" style={{ border: "1px solid #333", color: "#fff", fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", borderRadius: "4px", textDecoration: "none", transition: "all 0.15s" }}
-          onMouseEnter={(e) => { e.target.style.borderColor = "#fff"; }}
-          onMouseLeave={(e) => { e.target.style.borderColor = "#606060"; }}>
+          onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#fff"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#606060"; }}>
           Get in Touch
         </a>
       </div>
@@ -1156,10 +1156,13 @@ function Modal({ project, onClose, triggerRef }) {
   const [lightbox, setLightbox] = useState(null);
   const phaseNavRef = useRef(null);
   const modalRef = useRef(null);
+  const lightboxOpenRef = useRef(false);
+
+  useEffect(() => { lightboxOpenRef.current = !!lightbox; }, [lightbox]);
 
   useEffect(() => { setActivePhase(0); }, [project.id]);
 
-  useFocusTrap(modalRef);
+  useFocusTrap(modalRef, !lightbox);
 
   useEffect(() => {
     const handler = () => setMobile(window.innerWidth < 768);
@@ -1175,7 +1178,7 @@ function Modal({ project, onClose, triggerRef }) {
       if (firstFocusable) firstFocusable.focus();
     }
     const handler = (e) => {
-      if (e.key === "Escape") { onClose(); return; }
+      if (e.key === "Escape") { if (!lightboxOpenRef.current) onClose(); return; }
       if (!phaseNavRef.current) return;
       const chips = Array.from(phaseNavRef.current.querySelectorAll("button"));
       const focused = document.activeElement;
@@ -1269,8 +1272,8 @@ function Modal({ project, onClose, triggerRef }) {
                   <button key={i} role="tab" onClick={() => setActivePhase(i)}
                     aria-label={`Go to phase: ${p.phase}`} aria-selected={i === activePhase} tabIndex={i === activePhase ? 0 : -1}
                     style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", letterSpacing: "0.08em", textTransform: "uppercase", padding: "6px 14px", borderRadius: "100px", cursor: "pointer", border: `1px solid ${i === activePhase ? project.color : "#2a2a2a"}`, background: i === activePhase ? project.color + "18" : "transparent", color: i === activePhase ? project.color : "#7b7b7b", transition: "all 0.15s", outline: "none", boxShadow: "none" }}
-                    onFocus={(e) => { e.target.style.boxShadow = `0 0 0 2px ${project.color}66`; }}
-                    onBlur={(e) => { e.target.style.boxShadow = "none"; }}>
+                    onFocus={(e) => { e.currentTarget.style.boxShadow = `0 0 0 2px ${project.color}66`; }}
+                    onBlur={(e) => { e.currentTarget.style.boxShadow = "none"; }}>
                     {p.phase.split(" — ")[1]}
                   </button>
                 ))}
@@ -1517,7 +1520,7 @@ function About() {
             }}>
             <img src="/Headshot.jpg" alt="Matthew Henning" loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
-            <div style={{ position: "absolute", top: "-6px", right: "-6px", width: "28px", height: "28px", borderRadius: "50%", background: "#10b981", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", border: "2px solid #060608" }}>✦</div>
+            <div aria-hidden="true" style={{ position: "absolute", top: "-6px", right: "-6px", width: "28px", height: "28px", borderRadius: "50%", background: "#10b981", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", border: "2px solid #060608" }}>✦</div>
           </div>
 
           {/* Bio text */}
@@ -1525,7 +1528,6 @@ function About() {
             <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: "36px", marginBottom: "40px" }}>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "17px", color: "#909090", lineHeight: "1.65" }}>
                 Before I learned to design interfaces, I learned to tell stories through a lens studying Film, Television & Digital Media in my undergrad. That background — understanding composition, pacing, what earns attention and what loses it — still shines through in my product design work to this day, & shapes how I approach every UX problem I work on.
-
               </p>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "17px", color: "#909090", lineHeight: "1.65" }}>
                 Today I design complex enterprise systems where clarity isn&apos;t optional. I research deeply, synthesize rigorously, and build design systems that outlast the project. M.S. in UX Research & Design & User-Centered Agile Development (HCI) from the University of Michigan School of Information. Based in Chicago.
@@ -1556,7 +1558,12 @@ function Contact() {
   }, []);
 
   const handleSubmit = () => {
-    const subject = encodeURIComponent(`Portfolio inquiry from ${formData.name || "someone"}`);
+    const fields = ["contact-name", "contact-email", "contact-message"];
+    for (const id of fields) {
+      const el = document.getElementById(id);
+      if (el && !el.reportValidity()) return;
+    }
+    const subject = encodeURIComponent(`Portfolio inquiry from ${formData.name}`);
     const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);
     window.location.href = `mailto:mhenn@umich.edu?subject=${subject}&body=${body}`;
   };
@@ -1592,9 +1599,9 @@ function Contact() {
           </p>
           <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
             <a href="https://linkedin.com/in/matthew-henning13" target="_blank" rel="noreferrer" style={{ border: "1px solid #333", color: "#fff", fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", borderRadius: "4px", textDecoration: "none", transition: "all 0.15s" }}
-              onMouseEnter={(e) => { e.target.style.borderColor = "#fff"; }} onMouseLeave={(e) => { e.target.style.borderColor = "#606060"; }}>LinkedIn</a>
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#fff"; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#606060"; }}>LinkedIn</a>
             <a href="/Henning_Resume.pdf" target="_blank" rel="noreferrer" style={{ border: "1px solid #333", color: "#fff", fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", borderRadius: "4px", textDecoration: "none", transition: "all 0.15s" }}
-              onMouseEnter={(e) => { e.target.style.borderColor = "#fff"; }} onMouseLeave={(e) => { e.target.style.borderColor = "#606060"; }}>Resume ↗</a>
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#fff"; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#606060"; }}>Resume ↗</a>
           </div>
         </div>
 
@@ -1635,8 +1642,8 @@ function Contact() {
                 padding: "14px 28px", borderRadius: "6px", border: "none", cursor: "pointer", fontWeight: "600",
                 transition: "all 0.15s", marginTop: "4px", width: "100%",
               }}
-              onMouseEnter={(e) => { e.target.style.background = "#10b981"; e.target.style.color = "#fff"; }}
-              onMouseLeave={(e) => { e.target.style.background = "#fff"; e.target.style.color = "#000"; }}>
+              onMouseEnter={(e) => { e.currentTarget.style.background = "#10b981"; e.currentTarget.style.color = "#fff"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.color = "#000"; }}>
               Send Message →
             </button>
             <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: "#606060", letterSpacing: "0.06em", textAlign: "center", marginTop: "4px" }}>

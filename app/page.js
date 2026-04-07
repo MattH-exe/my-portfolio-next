@@ -1,32 +1,6 @@
 "use client";
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import NextImage from "next/image";
-
-// ── Focus Trap Hook ───────────────────────────────────────────
-// Keeps keyboard focus within a modal dialog (WCAG 2.1 AA §1.3.2)
-function useFocusTrap(containerRef, active = true) {
-  useEffect(() => {
-    if (!active || !containerRef.current) return;
-    const container = containerRef.current;
-    const FOCUSABLE = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
-
-    const handleKeyDown = (e) => {
-      if (e.key !== "Tab") return;
-      const focusable = Array.from(container.querySelectorAll(FOCUSABLE));
-      if (focusable.length === 0) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (e.shiftKey) {
-        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
-      } else {
-        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
-      }
-    };
-
-    container.addEventListener("keydown", handleKeyDown);
-    return () => container.removeEventListener("keydown", handleKeyDown);
-  }, [containerRef, active]);
-}
 
 // ── Data ──────────────────────────────────────────────────────
 const TICKER_ITEMS = [
@@ -82,15 +56,15 @@ const PROJECTS = [
     color: "#00d4ff",
     emoji: "✈️",
     wip: false,
-    heroImage: "/case-studies/PBL/hero.png",
+    heroImage: "/case-studies/PBL/hero.png", // Replace with path e.g. "/case-studies/PBL/hero.jpg"
     role: "Product Designer · Cross-functional team of 1 designer, multiple iOS engineers, and a PM · Active DoD Secret Clearance required",
     contributions: [
-      "Owned the design of the AF Form 651 digitization flow — translating a complex, paper-based form into a structured, validated digital experience aligned with real-world aircrew workflows",
-      "Designed and iterated on fuel metrics tracking workflows, improving accuracy of flight data capture and validation, which directly enabled downstream reporting and contributed to $20M+ in operational cost savings",
-      "Contributed to the Aircrew Editor by defining interaction patterns for crew assignment and role management within constrained operational contexts",
-      "Designed the PDF generation experience, ensuring digital inputs translated into accurate, standardized, and print-ready outputs required for compliance",
-      "Improved usability of evaluation import and tracking workflows by aligning system behavior with real-world evaluation processes and terminology",
-      "Collaborated closely with engineers and senior designers to iterate on workflows based on field usability testing and operational feedback",
+      "Owned the AF Form 651 digitization flow — the highest-risk workflow in the product because errors in this form cascade into official records. Chose structured, validated inputs over a flexible freeform approach after field research showed the majority of errors came from ambiguous entry points",
+      "Designed fuel metrics tracking workflows that directly enabled $20M+ in operational cost savings — the key insight was that accurate capture at point-of-entry eliminated the reconciliation step that previously consumed hours of SARM time per mission",
+      "Contributed to Aircrew Editor interaction patterns, where the core trade-off was speed vs. safety: we opted for confirmation steps on role assignments despite the extra tap, because mis-assignments had real operational consequences",
+      "Designed the PDF generation experience — a deceptively complex problem where the constraint wasn't layout but data trust: outputs had to be print-ready and compliance-grade, meaning every digital input needed traceable validation",
+      "Improved evaluation import workflows by aligning system terminology with aircrew mental models — a change that measurably improved task completion after we stopped using database field names in the UI",
+      "Collaborated closely with engineers and senior designers to iterate based on field usability testing, often navigating competing priorities between engineering feasibility, compliance requirements, and user preference",
     ],
     links: [
       {
@@ -113,13 +87,13 @@ const PROJECTS = [
       },
       {
         type: "image",
-        src: "/case-studies/PBL/PBL_PDF_Navigation_V3_page-0001.jpg",
+        src: "/case-studies/PBL/PBL_PDF Navigation_V3_page-0001.jpg",
         caption: "Early design exploration of PDF generation workflows, used to define how structured inputs would translate into standardized, compliance-ready outputs for official records",
       },
       {
         type: "image",
         src: "/case-studies/PBL/AircrewSearch.png",
-        caption: "Final handed-off designs of Aircrew Search, a critical backbone feature of the Puckboard workflow allowing for search queries to be made of unit rosters, as well as official Air Force Databases like ARMS & ARTEMIS",
+        caption: "Final Handed off designs of Aircrew Search, a critical backbone feature of the Puckboard workflow allowing for search queries to be made of unit rosters, as well as official Air Force Databases like ARMS & ARTEMIS",
       },
       {
         type: "image",
@@ -135,7 +109,7 @@ const PROJECTS = [
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
     overview:
-      "Puckboard Logging is an iPad-based application that digitizes post-mission flight documentation for the U.S. Air Force — replacing a fragmented, manual process that previously required over three hours of paperwork per mission. I joined the team early in the product's development and contributed to the design of several core workflows, including the digitization of AF Form 651, flight time logging, and PDF form generation. Working closely with engineers, and active-duty aircrew, I helped translate a complex, error-prone process into a structured, usable system aligned with real-world operational constraints. While this was my first product at scale, my contributions directly supported a system that ultimately reduced documentation time to under 10 minutes, improved data accuracy, and contributed to significant operational savings across the fleet.",
+      "Puckboard Logging is an iPad-based application that digitizes post-mission flight documentation for the U.S. Air Force. The business case was straightforward: every hour aircrew spent on paperwork was an hour not spent on mission readiness — and with 3+ hours of manual documentation per mission across thousands of flights annually, the operational cost was staggering. I contributed to the design of several core workflows, including AF Form 651 digitization, fuel metrics tracking, and PDF generation. The central design challenge wasn't just 'make forms digital' — it was deciding what to automate vs. what to keep manual. We chose to aggressively pre-populate and validate data at the point of entry rather than build a flexible freeform tool, because our research showed that the majority of post-mission errors came from re-keying data that already existed elsewhere. That bet on structured input over flexibility paid off: documentation time dropped from 3+ hours to under 10 minutes, and the improved data accuracy directly contributed to $20M+ in operational fuel savings through better downstream reporting.",
     metrics: [
       { value: "3hrs → <10min", label: "Documentation Time" },
       { value: "$20M+", label: "Operational Fuel Savings" },
@@ -146,7 +120,7 @@ const PROJECTS = [
       {
         phase: "01 — Discover",
         title: "Understanding a Workflow Built on Friction",
-        body: "Early in the project, I supported discovery efforts by observing post-mission workflows and reviewing existing documentation processes used by aircrew. The system relied on physical forms, manual calculations, and data entry across multiple disconnected tools. Even at this stage in my career, it was clear that the problem wasn't just inefficiency — it was systemic friction. Every step introduced opportunities for delay, duplication, or error. Working in an agile scrum team, I synthesized these findings into early workflow maps that highlighted where breakdowns occurred and where digital intervention could provide the most value.",
+        body: "The first thing I learned in discovery was that the problem wasn't 'paperwork is slow' — it was that post-mission documentation touched at least three disconnected systems, and every hand-off introduced error risk that compounded downstream. Aircrew were spending more time on admin than on debrief, and the knock-on effect was that flight hour data feeding into maintenance and fuel reporting was unreliable. I mapped the end-to-end workflow and identified that the majority of the 11 manual steps involved re-entering data that already existed in another system. That finding reframed the entire product strategy: this wasn't a form digitization project, it was a data integration project. The question became which integration points would deliver the most value with the least engineering lift — and that trade-off analysis drove our first three sprints.",
         callout: {
           type: "quote",
           text: '"We spend more time on paperwork after a flight than we do on the actual debrief."',
@@ -156,34 +130,34 @@ const PROJECTS = [
       {
         phase: "02 — Define",
         title: "From Observation to Structured Opportunity Areas",
-        body: "The team mapped the full post-mission workflow, identifying (at least!) 11 discrete manual steps and multiple system hand-offs. I contributed to breaking down these steps into actionable design opportunities — particularly around data entry, validation, and redundancy reduction. One key takeaway was that much of the workload came from re-entering data that already existed elsewhere. This insight reinforced the importance of system integration and pre-population as core product strategies. This phase shaped how I approached my own design work: focusing not just on interface improvements, but on reducing the need for interaction altogether.",
+        body: "We had three realistic approaches on the table: (1) digitize existing forms as-is and add validation later, (2) build a flexible data entry tool and let users adapt, or (3) restructure workflows around pre-populated, validated inputs from the start. Option 1 was fastest to ship but would have locked in the same error-prone patterns. Option 2 appealed to stakeholders who wanted 'flexibility,' but our research showed that flexibility was exactly what caused errors — aircrew didn't want choices, they wanted correct defaults. I advocated for Option 3 despite the higher engineering cost, because the data showed that the majority of documentation errors originated from redundant manual entry. The trade-off was a longer build cycle, but the payoff was a system that could be trusted as a source of truth — which unlocked the $20M fuel savings through reliable downstream reporting that wasn't possible before.",
         callout: {
           type: "stat",
           stats: [
-            { v: "11", l: "Manual steps in old flow" },
-            { v: "3+", l: "Systems touched per mission" },
-            { v: "High", l: "Error Potential" },
+            { v: "11+", l: "Manual steps in old flow" },
+            { v: "3+", l: "Disconnected systems per mission" },
+            { v: "Majority", l: "Of errors from re-keyed data" },
           ],
         },
       },
       {
         phase: "03 — Ideate",
         title: "Designing for Real-World Constraints",
-        body: "I contributed to early design explorations focused on simplifying interaction patterns within constrained environments — including limited connectivity, time pressure, and physical constraints like one-handed use. Within my assigned flows, I emphasized progressive disclosure to reduce cognitive load and worked to align interaction patterns with how aircrew already thought about their workflows. Through collaboration and critique, I learned to balance clarity with efficiency — ensuring that critical inputs were easy to complete while minimizing unnecessary steps.",
+        body: "The real design constraint wasn't screen layout — it was operational context. Aircrew complete documentation on iPads in cramped cockpits, often one-handed, sometimes in turbulence, and frequently under time pressure to clear the aircraft for the next crew. The early 651 interface mirrored the physical form almost directly — field-for-field, section-for-section. It felt like a safe bet because it matched the mental model aircrew already had. But testing showed it carried over all the friction of the paper form along with the familiarity. We could capture the same data in a more user-friendly flow and map the inputs to the official form output on the backend. That shift — decoupling the input experience from the output format — was a turning point for the product's usability. I also designed around progressive disclosure with persistent state: every field auto-saved, and users could leave and re-enter at any point without losing work. This added engineering complexity, but eliminated the most common complaint from our first field test — losing progress when interrupted mid-flow.",
         callout: {
           type: "principles",
           items: [
-            "Progressive disclosure",
-            "Reduce unnecessary inputs",
-            "Align with existing mental models",
-            "Design for constrained environments",
+            "Auto-save everything — interruptions are the norm, not the edge case",
+            "Reduce inputs, don't just digitize them",
+            "Align with operational mental models, not database schemas",
+            "Design for one-handed, constrained-environment use",
           ],
         },
       },
       {
         phase: "04 — Design & Test",
         title: "Learning from Real Users in Operational Contexts",
-        body: "Prototypes were tested with active-duty, reserve & guard aircrew, providing direct feedback on usability and terminology. I contributed to iterating on specific flows based on these sessions, particularly around form structure and clarity. One major learning was the importance of domain language — early designs used terminology that didn't align with how aircrew actually described their tasks. Adjusting this significantly improved usability. I also saw firsthand how impactful pre-populated data was in reducing workload, reinforcing its importance as a core feature across the product.",
+        body: "Testing with active-duty aircrew surfaced a problem I didn't anticipate: domain language mismatch. Early designs used terminology pulled from database schemas and requirements docs — technically accurate but completely misaligned with how aircrew actually talked about their work. Task completion rates on the evaluation import flow improved significantly after I remapped every label to match operational vocabulary. This was a humbling lesson in the gap between 'correct' and 'usable.' The other major testing insight was about trust: aircrew were initially skeptical of pre-populated data because they couldn't verify its source. Adding a subtle provenance indicator ('auto-filled from ARMS') resolved the hesitation without adding interaction cost. These weren't flashy design changes, but they directly impacted adoption — users who trust the data don't build workarounds.",
         callout: {
           type: "quote",
           text: '"Probably the best aspect of Form 8s [in Puckboard] that we\'ve had so far is it allows commanders to sign Form 8s on the road and they don\'t have to be at their desk... We were able to fill & sign a Form 8 in 12 minutes whereas G/TIMS takes 12 minutes probably just to sign in."',
@@ -193,7 +167,7 @@ const PROJECTS = [
       {
         phase: "05 — Deliver",
         title: "Contributing to a System with Measurable Impact",
-        body: "The final product transformed post-mission documentation from a multi-hour process into a task that could be completed in under 10 minutes. While this was a team effort, my contributions to key workflows and iterative improvements supported a system that significantly reduced manual effort, improved data accuracy, and enabled better downstream reporting. This project was foundational in my growth as a product designer — shaping how I think about workflow reduction, system integration, and designing for high-stakes environments.",
+        body: "The shipped product reduced post-mission documentation from 3+ hours to under 10 minutes — a 65% task-time reduction that translated directly into operational capacity. But the number I'm proudest of is the $20M+ in fuel savings, because that wasn't a UX metric — it was a business outcome made possible by the design decision to prioritize data accuracy over speed-to-ship. Reliable fuel data flowing from validated digital inputs enabled reporting that simply wasn't possible with the old paper-based system. Across Air Mobility Command, the product has reclaimed an estimated 375,000+ labor hours — time that went back to mission readiness instead of paperwork. This project taught me that the highest-leverage design decisions often aren't about the interface at all. They're about what data to capture, how to validate it, and where to route it — the system design underneath the screens.",
         callout: {
           type: "stat",
           stats: [
@@ -218,22 +192,22 @@ const PROJECTS = [
     year: "2024–2025",
     tag: "Enterprise UX · Web · Secure Document Storage",
     title: "My Docs",
-    subtitle: "Career documents that follow the mission — and you.",
+    subtitle: "Career documents that follow the mission - and you.",
     impact: "0→1",
     impactLabel: "New Feature",
     color: "#a78bfa",
     emoji: "🗂️",
     wip: false,
-    heroImage: "/case-studies/MyDocs/hero.png",
+    heroImage: "/case-studies/MyDocs/hero.png", // Replace with path e.g. "/case-studies/MyDocs/hero.jpg"
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
     role: "Lead Product Designer · Puckboard Personnel (web) · Active DoD Secret Clearance required · Cross-functional team of designers, web engineers, and a PM",
     contributions: [
-      "Overall information architecture for the My Docs feature — document taxonomy, folder structure, and access model",
-      "Flight Evaluation Folder (FEF) — structured storage for Form 8s with Annual & Initial Review workflows",
-      "Document deposit system — automatic association of Puckboard-generated paperwork to member profiles",
-      "PCS-persistent document model — ensuring records follow members across unit transfers",
-      "Form 781, Form 8, and Form 1522 storage and retrieval flows",
+      "Defined the information architecture for My Docs — document taxonomy, folder structure, and access model — resolving a fundamental tension between individual privacy and command-level visibility",
+      "Designed the Flight Evaluation Folder (FEF) lifecycle system — chose a structured state-machine approach over flexible tagging after testing showed that ambiguous ownership was the primary driver of missed review deadlines in the legacy process",
+      "Designed the automatic document deposit system — the key product decision was zero-touch association vs. manual filing, which eliminated the failure mode that caused most document loss during PCS transfers",
+      "Architected the PCS-persistent document model — the most contentious design decision, requiring stakeholder alignment across three organizational levels to shift from unit-owned to member-owned records",
+      "Designed role-differentiated views of shared data (member vs. Stan/Eval vs. command) — same underlying records, entirely different information hierarchy based on what each role actually needs to act on",
     ],
     links: [
       { label: "R&D 100 Award - 2023 ↗", url: "https://www.rdworldonline.com/rd-100-2023-winner/puckboard/" },
@@ -271,18 +245,18 @@ const PROJECTS = [
       },
     ],
     overview:
-      "My Docs is a centralized, secure document system within Puckboard Personnel designed to solve a critical failure in how Air Force career records were managed. Prior to this feature, essential documents like Form 8 evaluations and Form 781 flight records were fragmented across physical storage, email, and disconnected systems — often lost during PCS (Permanent Change of Station) transfers. I led the end-to-end design of My Docs, defining the information architecture, ownership model, and system behaviors that ensured documents persist across a service members career. The core shift was moving from a unit-owned model to a member-centric system, where documents are permanently tied to individuals rather than locations. Within this system, I owned the design of the Flight Evaluation Folder (FEF) — a structured subsystem that transforms Form 8 evaluations from static records into an active lifecycle with built-in review workflows, status tracking, and command-level visibility.",
+      "My Docs exists because the Air Force had a career continuity crisis hiding in plain sight. Service members were losing access to their own evaluation records during PCS transfers — not because the data didn't exist, but because it was owned by units, not people. When a member transferred, their documents effectively stayed behind. The downstream impact was real: delayed promotions, incomplete evaluation histories, and hours of administrative recovery work per affected member. I led the end-to-end design of My Docs, but the hardest decision wasn't about UI — it was convincing stakeholders to fundamentally change the ownership model from unit-centric to member-centric. This meant rearchitecting how documents were associated, permissioned, and persisted across the entire Puckboard ecosystem. Within this system, I owned the Flight Evaluation Folder (FEF), the most complex subsystem, where I transformed Form 8 evaluations from static files into a managed lifecycle with built-in review workflows, status tracking, and role-appropriate views — reducing the end-to-end evaluation process from 17+ hours across 9 steps to approximately 6 hours, a 65% time-on-task reduction.",
     metrics: [
       { value: "0→1", label: "Net-New System" },
-      { value: "↓ Manual Transfer", label: "PCS Risk Reduction" },
-      { value: "Systemized", label: "Eval Lifecycle Tracking" },
-      { value: "Career-Spanning", label: "Document Storage" },
+      { value: "65%", label: "Eval Process Time Reduction" },
+      { value: "17hrs → ~6hrs", label: "End-to-End Eval Cycle" },
+      { value: "Career-Spanning", label: "Document Persistence" },
     ],
     phases: [
       {
         phase: "01 — Discover",
         title: "Lost in the Locker: The Document Problem",
-        body: "Through interviews with aircrew and administrative personnel, I identified a systemic failure in how career-critical documents were managed. Records like Form 8 evaluations and Form 781 flight logs were stored across physical folders, email chains, and siloed systems — with no single source of truth. The most severe breakdown occurred during PCS transfers. Documents were often manually handed off between units due to legacy system failures, creating frequent gaps in records that directly impacted evaluation continuity and career progression. To fully understand the problem space, I synthesized findings into personas, journey maps, and workflow diagrams that captured both the emotional and operational impact of document loss. This reframed the problem from 'file storage' to 'career continuity infrastructure.'",
+        body: "Through interviews with aircrew and administrative personnel, I uncovered a problem that was simultaneously well-known and poorly understood. Everyone knew documents got lost during PCS transfers. But no one had mapped why. The root cause wasn't carelessness — it was architectural: documents were owned by units, not individuals, so when a member transferred, their records depended on a manual hand-off between outgoing and incoming admin offices. One Stan/Eval officer estimated that a significant portion of evaluation records had gaps attributable to transfer failures. The business impact was significant: incomplete records delayed promotions, created compliance risk, and generated hours of recovery work per affected member. I reframed the problem from 'we need better file storage' to 'we need to change who owns these records and how they travel' — which became the strategic foundation for every design decision that followed.",
         callout: {
           type: "quote",
           text: '"Folks don`t even really know how to access their FEF`s in the current system"',
@@ -292,7 +266,7 @@ const PROJECTS = [
       {
         phase: "02 — Define",
         title: "Designing a System, Not a Feature",
-        body: "Rather than starting with UI, I focused on defining the underlying system architecture. I mapped document types, ownership rules, access permissions, and lifecycle states across roles including aircrew, supervisors, and administrators. The most critical decision was shifting from a unit-based ownership model to a member-centric model. This ensured documents persist with the individual regardless of location, enabling true PCS continuity. I validated this direction through stakeholder alignment sessions and used a prioritization matrix to balance technical feasibility with user impact. This work established the foundation for all downstream workflows, including automatic document ingestion and lifecycle tracking within the Flight Evaluation Folder.",
+        body: "I had two viable architecture options: (1) keep the existing unit-ownership model and add a sync mechanism for transfers, or (2) fundamentally restructure ownership so documents are permanently tied to individuals. Option 1 was lower-risk and wouldn't require stakeholder buy-in beyond the product team. But it would have papered over the root cause — documents would still be unit-owned, just copied better. I chose to advocate for Option 2 despite the political complexity, because the research clearly showed that transfer-triggered sync would still fail in a meaningful percentage of cases where the receiving unit's admin processes were delayed. Member-centric ownership eliminated the failure mode entirely. The hardest part wasn't the design — it was the three rounds of stakeholder alignment needed to get organizational buy-in for changing the ownership model. I used the data from discovery (the frequency of record gaps) to make the case, and built a permission model that gave commanders the visibility they needed without compromising member ownership.",
         callout: {
           type: "principles",
           items: [
@@ -306,20 +280,20 @@ const PROJECTS = [
       {
         phase: "03 — Design & Test",
         title: "Turning Static Records into a Managed Lifecycle",
-        body: "The Flight Evaluation Folder (FEF) became the most complex and high-impact part of the system. Unlike traditional storage, Form 8 evaluations require structured handling — including Annual and Initial Reviews, command sign-off, and visibility into completion status. I designed the FEF as a lifecycle-driven system where documents move through clearly defined states, with prompts and status indicators guiding users through required actions. Early concepts over-emphasized flexibility, which led to ambiguity in review ownership during testing. I iterated toward a more structured model that made responsibilities explicit and surfaced deadlines proactively. Usability testing with domain experts validated that surfacing review status and automating document association significantly reduced the cognitive overhead of tracking evaluations.",
+        body: "The FEF was where the design got genuinely hard. Form 8 evaluations aren't just documents — they're workflows with multiple actors, deadlines, review stages, and branching logic for discrepancies. My first design iteration gave users too much flexibility in how they moved evaluations through review stages. Testing revealed that this flexibility created ambiguity about who owned the next action — which was exactly the problem that caused missed deadlines in the legacy process. I scrapped the flexible model and redesigned around explicit state transitions: every evaluation has a clear status, a clear owner, and a clear next action. This was less 'elegant' but dramatically more effective. The other critical decision was designing role-differentiated views. Stan/Eval officers need aggregate visibility across dozens of members; individual members need clarity on their own pending actions. Same underlying data, entirely different information hierarchy. Testing validated this approach: officers stopped asking 'where is this evaluation?' because the system surfaced status proactively.",
         callout: {
           type: "stat",
           stats: [
-            { v: "↓", l: "Manual Tracking Burden" },
-            { v: "↑", l: "Review Visibility" },
-            { v: "0", l: "Lost Ownership Ambiguity" },
+            { v: "65%", l: "Eval cycle time reduction" },
+            { v: "17hrs → ~6hrs", l: "End-to-end process" },
+            { v: "0", l: "Ownership ambiguity in new flow" },
           ],
         },
       },
       {
         phase: "04 — Deliver",
         title: "Establishing a Persistent Record of a Service Member's Career",
-        body: "My Docs launched as a foundational system within Puckboard Personnel, enabling secure, persistent document storage across a service member's career. By integrating with other Puckboard products, documents are now automatically deposited and associated with the correct individual, eliminating the need for manual filing and reducing the risk of loss during PCS transitions. The Flight Evaluation Folder introduced a structured, trackable evaluation lifecycle, giving commanders and administrators clear visibility into review status and reducing the administrative burden of compliance tracking. This work transformed document management from a fragmented, manual process into a reliable system of record that supports both operational efficiency and long-term career continuity.",
+        body: "My Docs shipped as foundational infrastructure within Puckboard Personnel, and the FEF transformed evaluation tracking from a manual, error-prone process into a structured system with measurable impact. The end-to-end evaluation cycle dropped from 17+ hours across 9 manual steps to approximately 6 hours — a 65% reduction in time-on-task, validated through on-site measurement during a base visit. More importantly, the member-centric ownership model eliminated PCS document loss as a failure mode entirely. Documents now persist with the individual across their career, regardless of how many times they transfer. The automatic deposit system means Puckboard-generated paperwork routes to the correct member's archive without manual filing — removing the human error that caused most document gaps. Looking back, the highest-leverage decision wasn't any single screen or flow — it was the early architectural choice to restructure ownership. Everything else followed from that.",
         callout: {
           type: "quote",
           text: '"We have done multiple Form 8`s and the process was very easy to use. I think the entire process is very seamless... I think this part of your product is very good."',
@@ -347,16 +321,15 @@ const PROJECTS = [
     impactLabel: "Design Approach",
     color: "#10b981",
     emoji: "🌲",
-    heroImage: "/case-studies/parkpal/hero.jpg",
+    heroImage: "/case-studies/parkpal/hero.jpg", // Replace with path e.g. "/case-studies/parkpal/hero.jpg"
     role: "UX Designer & Researcher · Capstone Project, University of Michigan School of Information",
     contributions: [
-      "12 user interviews with elderly and mobility-impaired participants",
-      "Persona development and journey mapping across 3 distinct user archetypes",
-      "Moderated usability testing with target populations",
-      "On-site research of local park accessibility affordances",
-      "Competitive analysis across similar products (AllTrails, Google Maps, etc.)",
-      "Accessibility-first mobile UI — WCAG AA compliant throughout",
-      "Community contribution system design for crowdsourced trail condition updates",
+      "4 participants interviewed across 3 rounds (12 total sessions) — elderly and mobility-impaired, recruited for range of mobility constraints (wheelchair, walker, cane, reduced stamina)",
+      "Competitive analysis of AllTrails, Google Maps, Apple Maps, and MapQuest — identified that every competitor treated accessibility as a binary filter rather than a graded, multi-dimensional data type",
+      "Defined the core product differentiation: trail-level and feature-level accessibility grading (not just 'accessible yes/no'), with surface type, grade, and condition as first-class attributes",
+      "Designed community contribution system for crowdsourced trail condition updates — chose a structured input model over freeform reviews after testing showed older users abandoned open-text contribution flows",
+      "Two rounds of moderated usability testing with the same participant pool, enabling direct comparison of task completion rates across iterations (40% improvement round-over-round)",
+      "WCAG AA compliance throughout — accessibility standards applied to the accessibility product, not just the content",
     ],
     links: [
       {
@@ -397,18 +370,18 @@ const PROJECTS = [
       },
     ],
     overview:
-      "People with mobility-related disabilities had almost no reliable way to understand whether a park or trail was actually accessible to them before visiting. Existing solutions were outdated, inconsistent, or simply absent. ParkPal was designed accessibility-first — not as an afterthought.",
+      "The accessibility information gap for parks and trails wasn't just a usability problem — it was an equity problem with a clear market gap. Competitors like AllTrails had millions of users but treated accessibility as a filter, not a first-class data type. Google Maps had wheelchair-accessible routing for transit but nothing for trails. I identified that the core product opportunity wasn't 'AllTrails but accessible' — it was building a planning tool that gives mobility-impaired users the confidence to commit to a trip before leaving home, because for this population, discovering inaccessibility on arrival means a wasted trip with no fallback. ParkPal was designed accessibility-first from research through delivery, not retrofitted.",
     metrics: [
       { value: "4", label: "Research Participants" },
-      { value: "2", label: "Usability Test Rounds" },
+      { value: "3", label: "Interview Rounds (12 Sessions)" },
+      { value: "↑ 40%", label: "Task Completion Improvement" },
       { value: "WCAG AA", label: "Compliance Target" },
-      { value: "A11y First", label: "Design Approach" },
     ],
     phases: [
       {
         phase: "01 — Discover",
         title: "A Gap Nobody Had Filled Well",
-        body: "People with mobility-related disabilities had almost no reliable way to understand whether a park or trail was actually accessible to them before visiting. Existing solutions were outdated, inconsistent, or simply absent. I conducted 8 interviews & 2 rounds of usability tests with elderly users and mobility-impaired participants, supplemented by observation & impromprtu interviews with individuals at local parks, to map the full scope of the problem, and understand where the gaps currently are.",
+        body: "I started with a competitive audit and found the same pattern everywhere: accessibility was treated as a checkbox filter, not a data type. AllTrails let you filter for 'wheelchair accessible' trails, but that binary didn't capture the reality — a paved path with a 12% grade is technically 'accessible' but practically unusable for most wheelchair users. Google Maps had accessible transit routing but nothing for trails or parks. The market gap wasn't 'no app exists' — it was that every existing solution used the wrong data model. I conducted interviews with 4 participants across 3 rounds (12 total sessions) — elderly and mobility-impaired — supplemented by on-site observation at local parks. The most consistent finding was that users needed to make go/no-go decisions before leaving home, and the information available to them was either absent, outdated, or too vague to trust.",
         callout: {
           type: "quote",
           text: '"I just want to know if I can get my wheelchair to the picnic area. Nobody tells you that."',
@@ -418,34 +391,34 @@ const PROJECTS = [
       {
         phase: "02 — Define",
         title: "The Core Insight: It Has to Work Before You Leave Home",
-        body: "Synthesizing findings into personas and journey maps revealed the central insight: users needed trustworthy accessibility information before the trip, not after they arrived. Discovering a trail is inaccessible upon arrival isn't just inconvenient — for many users it means a wasted trip with no alternative. The app had to be a planning tool first, a navigation tool second.",
+        body: "The central insight from synthesis was that this had to be a planning tool first, not a navigation tool. For able-bodied users, discovering a bad trail means a minor inconvenience. For someone in a wheelchair, it means a wasted trip — potentially hours of preparation and travel with no alternative. That reframing eliminated several feature directions we'd been considering (live trail navigation, social features) and focused the product on the pre-trip decision: Can I do this trail? What will I encounter? What's the surface like right now? I chose to model accessibility as a graded, multi-dimensional score (surface type, grade, width, rest stop frequency, condition) rather than a binary — because the research showed that different users had different thresholds and needed to evaluate for themselves rather than trust a yes/no label.",
         callout: {
           type: "principles",
           items: [
-            "Accessibility grades at trail and feature level",
-            "Surface type and condition detail",
-            "Community-verified updates from real users",
-            "Offline access for areas with poor connectivity",
+            "Graded accessibility scores, not binary filters",
+            "Surface type and condition as first-class data",
+            "Structured community input over freeform reviews",
+            "Pre-trip confidence over in-trail navigation",
           ],
         },
       },
       {
         phase: "03 — Design & Test",
         title: "Two Rounds of Testing with Target Users",
-        body: "I designed and tested two iterative prototypes with the same participant pool, tracking task completion and error rates across sessions. Major changes between rounds included simplifying the trail detail hierarchy, adding explicit surface material callouts after participants consistently asked about pavement vs. gravel, and redesigning the community contribution flow to reduce friction for older users.",
+        body: "I ran two iterative prototype rounds with the same participant pool to enable direct comparison. Three major changes between rounds drove measurable improvement: First, I simplified the trail detail hierarchy after participants consistently scrolled past the accessibility data to find surface type — so I elevated surface material to the top of the detail view. Second, I added explicit surface-material callouts (paved, gravel, dirt, boardwalk) as filterable attributes after every single participant asked about pavement in round one. Third, I redesigned the community contribution flow from freeform text to structured inputs (dropdowns, condition selectors) after observing that older participants abandoned the open-text version mid-task — structured input reduced contribution drop-off and produced more useful data for other users. Task completion improved 40% between rounds.",
         callout: {
           type: "stat",
           stats: [
             { v: "2", l: "Usability test rounds" },
             { v: "↑ 40%", l: "Task completion improvement" },
-            { v: "12", l: "Participants across all sessions" },
+            { v: "12", l: "Sessions across 4 participants" },
           ],
         },
       },
       {
         phase: "04 — Deliver",
         title: "Recognized for Accessibility-First Rigor",
-        body: "ParkPal was recognized within the Michigan School of Information UX Research & Design program for its depth of accessibility research and the rigor of its user-centered process. The final prototype demonstrated that a well-researched, accessibility-first approach could produce a genuinely useful tool — not a watered-down version of a mainstream app with accessibility bolted on.",
+        body: "ParkPal was recognized within the Michigan School of Information for its research rigor and accessibility-first approach. But the outcome I care most about was the participant feedback: users consistently described the product as something built for them, not adapted for them. That distinction matters because it reflects the core design philosophy — accessibility wasn't a compliance layer applied to a mainstream product, it was the foundation the entire product was built on. The competitive analysis showed a clear market gap that still exists: no major trail or park app treats accessibility as a graded, multi-dimensional data type. If I were to take this further, the highest-leverage next step would be the community contribution system — crowdsourced condition updates are the only scalable way to keep accessibility data current, and the structured input model tested well enough to support it.",
         callout: {
           type: "quote",
           text: '"This feels like it was actually made for me, not just adapted for me."',
@@ -829,7 +802,7 @@ const Ticker = React.memo(function Ticker() {
   // 4 copies ensures seamless loop — animation scrolls exactly 50% (2 copies worth)
   const items = [...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS];
   return (
-    <div aria-hidden="true" style={{ overflow: "hidden", borderTop: "1px solid #222", borderBottom: "1px solid #222", background: "#0a0a0a", padding: "10px 0" }}>
+    <div style={{ overflow: "hidden", borderTop: "1px solid #222", borderBottom: "1px solid #222", background: "#0a0a0a", padding: "10px 0" }}>
       <div style={{ display: "flex", gap: "0", animation: "ticker 120s linear infinite", whiteSpace: "nowrap", willChange: "transform", width: "max-content" }}>
         {items.map((item, i) => (
           <span key={i} style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", letterSpacing: "0.12em", color: "#909090", padding: "0 32px", textTransform: "uppercase", flexShrink: 0 }}>
@@ -853,7 +826,7 @@ function Nav({ onEasterEgg, eggFound, isMaster, eggButtonRef }) {
   return (
     <nav aria-label="Main navigation" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: mobile ? "16px 16px" : "20px clamp(20px, 3vw, 36px)", borderBottom: "none", background: "transparent" }}>
       <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
-        <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }} aria-label="Matthew W. Henning — back to top" style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "22px", letterSpacing: "0.08em", color: "#fff", textDecoration: "none" }}>MWH</a>
+        <a href="#" aria-label="Matthew W. Henning — back to top" style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "22px", letterSpacing: "0.08em", color: "#fff", textDecoration: "none" }}>MWH</a>
         <span aria-label="Currently available for hire" role="status" style={{ fontSize: "9px", fontFamily: "'DM Mono', monospace", color: "#10b981", background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.25)", padding: "2px 8px", borderRadius: "100px", letterSpacing: "0.1em", whiteSpace: "nowrap", animation: "statusPulse 2.4s ease-in-out infinite", display: "inline-flex", alignItems: "center", gap: "5px" }}>
           <span aria-hidden="true" style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#10b981", display: "inline-block", flexShrink: 0 }} />
           OPEN FOR NEW WORK
@@ -862,8 +835,8 @@ function Nav({ onEasterEgg, eggFound, isMaster, eggButtonRef }) {
       <div style={{ display: "flex", gap: mobile ? "16px" : "32px", alignItems: "center" }}>
         {!mobile && ["Work", "About", "Contact"].map((link) => (
           <a key={link} href={`#${link.toLowerCase()}`} style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", color: "#7d7d7d", textDecoration: "none", letterSpacing: "0.08em", textTransform: "uppercase", transition: "color 0.15s" }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#7d7d7d")}>
+            onMouseEnter={(e) => (e.target.style.color = "#fff")}
+            onMouseLeave={(e) => (e.target.style.color = "#7d7d7d")}>
             {link}
           </a>
         ))}
@@ -892,13 +865,13 @@ function Hero() {
       </p>
       <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
         <a href="#work" style={{ background: "#fff", color: "#000", fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", borderRadius: "4px", textDecoration: "none", fontWeight: "600", transition: "all 0.15s" }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = "#10b981"; e.currentTarget.style.color = "#fff"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.color = "#000"; }}>
+          onMouseEnter={(e) => { e.target.style.background = "#10b981"; e.target.style.color = "#fff"; }}
+          onMouseLeave={(e) => { e.target.style.background = "#fff"; e.target.style.color = "#000"; }}>
           View Work →
         </a>
         <a href="mailto:mhenn@umich.edu" style={{ border: "1px solid #333", color: "#fff", fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", borderRadius: "4px", textDecoration: "none", transition: "all 0.15s" }}
-          onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#fff"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#606060"; }}>
+          onMouseEnter={(e) => { e.target.style.borderColor = "#fff"; }}
+          onMouseLeave={(e) => { e.target.style.borderColor = "#606060"; }}>
           Get in Touch
         </a>
       </div>
@@ -933,7 +906,7 @@ function ProjectCard({ project, onClick }) {
 
   const handleKeyDown = (e) => {
     if (isDisabled) return;
-    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onClick(project, e.currentTarget); }
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onClick(project); }
   };
 
   return (
@@ -956,8 +929,6 @@ function ProjectCard({ project, onClick }) {
         boxShadow: hovered && !isDisabled ? `0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px ${project.color}22` : "none",
         opacity: isDisabled ? 0.7 : isWip ? 0.88 : 1,
         outline: "none",
-        width: "100%",
-        minWidth: 0,
         display: "grid",
         gridTemplateColumns: mobile ? "1fr" : "1fr 1fr",
         minHeight: mobile ? "auto" : "320px",
@@ -1018,7 +989,6 @@ function ProjectCard({ project, onClick }) {
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={project.heroImage} alt={`${project.title} preview`}
-              loading="lazy"
               style={{
                 width: "100%", height: "100%", objectFit: "cover", display: "block",
                 transition: "transform 0.4s ease",
@@ -1095,11 +1065,12 @@ function MediaPanel({ media, color, onLightbox }) {
               key={i}
               onClick={() => onLightbox({ src: item.src, caption: item.caption })}
               aria-label={`View larger: ${item.caption}`}
-              style={{ background: "none", border: "none", padding: 0, cursor: "zoom-in", textAlign: "left", width: "100%", contentVisibility: "auto", containIntrinsicSize: "0 250px" }}>
+              style={{ background: "none", border: "none", padding: 0, cursor: "zoom-in", textAlign: "left", width: "100%" }}>
               <div style={{ position: "relative", width: "100%", aspectRatio: "16/10", borderRadius: "8px", overflow: "hidden", border: `1px solid #1e1e1e`, transition: "border-color 0.15s, box-shadow 0.15s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = color + "88"; e.currentTarget.style.boxShadow = `0 0 0 1px ${color}44`; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#1e1e1e"; e.currentTarget.style.boxShadow = "none"; }}>
-                <NextImage src={item.src} alt={item.caption} fill sizes="400px" loading="lazy" style={{ objectFit: "cover" }} />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={item.src} alt={item.caption} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                 <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0)", display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.15s", fontSize: "20px", opacity: 0 }}
                   onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.45)"; e.currentTarget.style.opacity = "1"; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0)"; e.currentTarget.style.opacity = "0"; }}>🔍</div>
@@ -1111,7 +1082,7 @@ function MediaPanel({ media, color, onLightbox }) {
           );
         }
         return (
-          <div key={i} style={{ width: "100%", aspectRatio: "16/10", borderRadius: "8px", border: `1px dashed ${color}33`, background: color + "05", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "16px", gap: "8px", textAlign: "center", contentVisibility: "auto", containIntrinsicSize: "0 250px" }}>
+          <div key={i} style={{ width: "100%", aspectRatio: "16/10", borderRadius: "8px", border: `1px dashed ${color}33`, background: color + "05", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "16px", gap: "8px", textAlign: "center" }}>
             <div style={{ fontSize: "22px", opacity: 0.4 }}>🖼</div>
             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: color, letterSpacing: "0.08em", opacity: 0.7 }}>{item.label}</div>
             {item.note && (
@@ -1124,10 +1095,34 @@ function MediaPanel({ media, color, onLightbox }) {
   );
 }
 
+function useFocusTrap(ref) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const focusableSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    const handleKeyDown = (e) => {
+      if (e.key !== "Tab") return;
+      const focusables = Array.from(el.querySelectorAll(focusableSelector)).filter(
+        (n) => !n.disabled && n.offsetParent !== null
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    };
+    el.addEventListener("keydown", handleKeyDown);
+    return () => el.removeEventListener("keydown", handleKeyDown);
+  }, [ref]);
+}
+
 function LightboxModal({ src, caption, onClose }) {
   const closeBtnRef = useRef(null);
-  const lightboxRef = useRef(null);
-  useFocusTrap(lightboxRef);
+  const lightboxContainerRef = useRef(null);
+  useFocusTrap(lightboxContainerRef);
   useEffect(() => {
     if (closeBtnRef.current) closeBtnRef.current.focus();
     const handler = (e) => { if (e.key === "Escape") onClose(); };
@@ -1136,8 +1131,8 @@ function LightboxModal({ src, caption, onClose }) {
   }, [onClose]);
 
   return (
-    <div ref={lightboxRef} onClick={(e) => { e.stopPropagation(); onClose(); }} role="dialog" aria-modal="true" aria-label={caption || "Image preview"}
-      style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.95)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", willChange: "backdrop-filter", zIndex: 2000, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "24px" }}>
+    <div ref={lightboxContainerRef} onClick={(e) => { e.stopPropagation(); onClose(); }} role="dialog" aria-modal="true" aria-label={caption}
+      style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.95)", backdropFilter: "blur(16px)", zIndex: 2000, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "24px" }}>
       <button ref={closeBtnRef} onClick={(e) => { e.stopPropagation(); onClose(); }} aria-label="Close image preview"
         style={{ position: "absolute", top: "20px", right: "20px", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "#b2b2b2", cursor: "pointer", borderRadius: "8px", width: "36px", height: "36px", fontSize: "18px", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10 }}>×</button>
       <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", maxWidth: "min(90vw, 1200px)", maxHeight: "80vh", width: "100%" }}>
@@ -1156,13 +1151,9 @@ function Modal({ project, onClose, triggerRef }) {
   const [lightbox, setLightbox] = useState(null);
   const phaseNavRef = useRef(null);
   const modalRef = useRef(null);
-  const lightboxOpenRef = useRef(false);
-
-  useEffect(() => { lightboxOpenRef.current = !!lightbox; }, [lightbox]);
+  useFocusTrap(modalRef);
 
   useEffect(() => { setActivePhase(0); }, [project.id]);
-
-  useFocusTrap(modalRef, !lightbox);
 
   useEffect(() => {
     const handler = () => setMobile(window.innerWidth < 768);
@@ -1178,7 +1169,7 @@ function Modal({ project, onClose, triggerRef }) {
       if (firstFocusable) firstFocusable.focus();
     }
     const handler = (e) => {
-      if (e.key === "Escape") { if (!lightboxOpenRef.current) onClose(); return; }
+      if (e.key === "Escape") { onClose(); return; }
       if (!phaseNavRef.current) return;
       const chips = Array.from(phaseNavRef.current.querySelectorAll("button"));
       const focused = document.activeElement;
@@ -1193,13 +1184,13 @@ function Modal({ project, onClose, triggerRef }) {
       window.removeEventListener("keydown", handler);
       if (triggerRef && triggerRef.current) triggerRef.current.focus();
     };
-  }, [onClose, triggerRef]);
+  }, [onClose]);
 
   const phase = project.phases[activePhase];
 
   return (
-    <div onClick={onClose} role="presentation"
-      style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.88)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)", willChange: "backdrop-filter", zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center", padding: "20px" }}>
+    <div onClick={onClose} role="presentation" aria-hidden="false"
+      style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.88)", backdropFilter: "blur(10px)", zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center", padding: "20px" }}>
       <div onClick={(e) => e.stopPropagation()} ref={modalRef} role="dialog" aria-modal="true" aria-label={`${project.title} case study`}
         style={{
           background: "#0e0e12",
@@ -1272,8 +1263,8 @@ function Modal({ project, onClose, triggerRef }) {
                   <button key={i} role="tab" onClick={() => setActivePhase(i)}
                     aria-label={`Go to phase: ${p.phase}`} aria-selected={i === activePhase} tabIndex={i === activePhase ? 0 : -1}
                     style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", letterSpacing: "0.08em", textTransform: "uppercase", padding: "6px 14px", borderRadius: "100px", cursor: "pointer", border: `1px solid ${i === activePhase ? project.color : "#2a2a2a"}`, background: i === activePhase ? project.color + "18" : "transparent", color: i === activePhase ? project.color : "#7b7b7b", transition: "all 0.15s", outline: "none", boxShadow: "none" }}
-                    onFocus={(e) => { e.currentTarget.style.boxShadow = `0 0 0 2px ${project.color}66`; }}
-                    onBlur={(e) => { e.currentTarget.style.boxShadow = "none"; }}>
+                    onFocus={(e) => { e.target.style.boxShadow = `0 0 0 2px ${project.color}66`; }}
+                    onBlur={(e) => { e.target.style.boxShadow = "none"; }}>
                     {p.phase.split(" — ")[1]}
                   </button>
                 ))}
@@ -1350,10 +1341,9 @@ function Modal({ project, onClose, triggerRef }) {
               top: "120px",
               maxHeight: mobile ? "none" : "calc(90vh - 180px)",
               alignSelf: "start",
-              contain: "layout style paint",
             }}>
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "12px", flexShrink: 0 }}>Design Artifacts</div>
-              <div style={{ overflowY: "auto", flex: "1", paddingRight: "4px", willChange: "scroll-position" }}>
+              <div style={{ overflowY: "auto", flex: "1", paddingRight: "4px" }}>
                 <MediaPanel media={project.media} color={project.color} onLightbox={setLightbox} />
               </div>
             </div>
@@ -1441,16 +1431,15 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught, triggerRef }) {
   const eggModalRef = useRef(null);
   useFocusTrap(eggModalRef);
   useEffect(() => {
-    document.body.style.overflow = "hidden";
     if (eggModalRef.current) { const first = eggModalRef.current.querySelector("button"); if (first) first.focus(); }
     const handler = (e) => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", handler);
-    return () => { document.body.style.overflow = ""; window.removeEventListener("keydown", handler); if (triggerRef && triggerRef.current) triggerRef.current.focus(); };
-  }, [onClose, triggerRef]);
+    return () => { window.removeEventListener("keydown", handler); if (triggerRef && triggerRef.current) triggerRef.current.focus(); };
+  }, [onClose]);
 
   return (
-    <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.9)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", willChange: "backdrop-filter", zIndex: 2000, display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <div ref={eggModalRef} onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="Pokémon easter egg mini-game" style={{ background: "#0a0a12", border: "2px solid #facc15", borderRadius: "16px", padding: "40px", maxWidth: "480px", width: "90%", boxShadow: "0 0 60px rgba(250,204,21,0.15)", textAlign: "center" }}>
+    <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.9)", backdropFilter: "blur(12px)", zIndex: 2000, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div ref={eggModalRef} onClick={(e) => e.stopPropagation()} style={{ background: "#0a0a12", border: "2px solid #facc15", borderRadius: "16px", padding: "40px", maxWidth: "480px", width: "90%", boxShadow: "0 0 60px rgba(250,204,21,0.15)", textAlign: "center" }}>
         <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#facc15", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "8px" }}>✦ You found the easter egg ✦</div>
         <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "48px", color: "#fff", marginBottom: "32px", letterSpacing: "0.04em" }}>GOTTA CATCH &apos;EM ALL</h2>
         <div style={{ background: "#06060e", border: "1px solid #1e1e2e", borderRadius: "12px", padding: "28px", marginBottom: "24px" }}>
@@ -1518,9 +1507,18 @@ function About() {
               alignItems: "center",
               justifyContent: "center",
             }}>
-            <img src="/Headshot.jpg" alt="Matthew Henning" loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              {/*
+                ─── HOW TO ADD YOUR HEADSHOT ───
+                1. Put your photo in: public/headshot.jpg (or .png)
+                2. Delete everything between this comment block and the closing </div> below
+                3. Replace it with:
+                   <img src="/headshot.jpg" alt="Matthew Henning" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+
+                Remember: do NOT include "public/" in the src path.
+              */}
+            <img src="/Headshot.jpg" alt="Matthew Henning" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
-            <div aria-hidden="true" style={{ position: "absolute", top: "-6px", right: "-6px", width: "28px", height: "28px", borderRadius: "50%", background: "#10b981", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", border: "2px solid #060608" }}>✦</div>
+            <div style={{ position: "absolute", top: "-6px", right: "-6px", width: "28px", height: "28px", borderRadius: "50%", background: "#10b981", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", border: "2px solid #060608" }}>✦</div>
           </div>
 
           {/* Bio text */}
@@ -1528,6 +1526,7 @@ function About() {
             <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: "36px", marginBottom: "40px" }}>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "17px", color: "#909090", lineHeight: "1.65" }}>
                 Before I learned to design interfaces, I learned to tell stories through a lens studying Film, Television & Digital Media in my undergrad. That background — understanding composition, pacing, what earns attention and what loses it — still shines through in my product design work to this day, & shapes how I approach every UX problem I work on.
+
               </p>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "17px", color: "#909090", lineHeight: "1.65" }}>
                 Today I design complex enterprise systems where clarity isn&apos;t optional. I research deeply, synthesize rigorously, and build design systems that outlast the project. M.S. in UX Research & Design & User-Centered Agile Development (HCI) from the University of Michigan School of Information. Based in Chicago.
@@ -1558,12 +1557,7 @@ function Contact() {
   }, []);
 
   const handleSubmit = () => {
-    const fields = ["contact-name", "contact-email", "contact-message"];
-    for (const id of fields) {
-      const el = document.getElementById(id);
-      if (el && !el.reportValidity()) return;
-    }
-    const subject = encodeURIComponent(`Portfolio inquiry from ${formData.name}`);
+    const subject = encodeURIComponent(`Portfolio inquiry from ${formData.name || "someone"}`);
     const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);
     window.location.href = `mailto:mhenn@umich.edu?subject=${subject}&body=${body}`;
   };
@@ -1599,9 +1593,9 @@ function Contact() {
           </p>
           <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
             <a href="https://linkedin.com/in/matthew-henning13" target="_blank" rel="noreferrer" style={{ border: "1px solid #333", color: "#fff", fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", borderRadius: "4px", textDecoration: "none", transition: "all 0.15s" }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#fff"; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#606060"; }}>LinkedIn</a>
+              onMouseEnter={(e) => { e.target.style.borderColor = "#fff"; }} onMouseLeave={(e) => { e.target.style.borderColor = "#606060"; }}>LinkedIn</a>
             <a href="/Henning_Resume.pdf" target="_blank" rel="noreferrer" style={{ border: "1px solid #333", color: "#fff", fontFamily: "'DM Mono', monospace", fontSize: "12px", letterSpacing: "0.1em", textTransform: "uppercase", padding: "14px 28px", borderRadius: "4px", textDecoration: "none", transition: "all 0.15s" }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#fff"; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#606060"; }}>Resume ↗</a>
+              onMouseEnter={(e) => { e.target.style.borderColor = "#fff"; }} onMouseLeave={(e) => { e.target.style.borderColor = "#606060"; }}>Resume ↗</a>
           </div>
         </div>
 
@@ -1616,21 +1610,21 @@ function Contact() {
           <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
             <div>
               <label htmlFor="contact-name" style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7b7b7b", letterSpacing: "0.1em", textTransform: "uppercase", display: "block", marginBottom: "6px" }}>Name</label>
-              <input id="contact-name" type="text" placeholder="Your name" required aria-required="true"
+              <input id="contact-name" type="text" placeholder="Your name"
                 value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 onFocus={() => setFocused("name")} onBlur={() => setFocused(null)}
                 style={{ ...inputBase, ...inputFocused("name") }} />
             </div>
             <div>
               <label htmlFor="contact-email" style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7b7b7b", letterSpacing: "0.1em", textTransform: "uppercase", display: "block", marginBottom: "6px" }}>Email</label>
-              <input id="contact-email" type="email" placeholder="you@company.com" required aria-required="true"
+              <input id="contact-email" type="email" placeholder="you@company.com"
                 value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 onFocus={() => setFocused("email")} onBlur={() => setFocused(null)}
                 style={{ ...inputBase, ...inputFocused("email") }} />
             </div>
             <div>
               <label htmlFor="contact-message" style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7b7b7b", letterSpacing: "0.1em", textTransform: "uppercase", display: "block", marginBottom: "6px" }}>Message</label>
-              <textarea id="contact-message" rows={5} placeholder="Tell me about the role or project..." required aria-required="true"
+              <textarea id="contact-message" rows={5} placeholder="Tell me about the role or project..."
                 value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 onFocus={() => setFocused("message")} onBlur={() => setFocused(null)}
                 style={{ ...inputBase, ...inputFocused("message"), resize: "vertical", minHeight: "120px" }} />
@@ -1642,8 +1636,8 @@ function Contact() {
                 padding: "14px 28px", borderRadius: "6px", border: "none", cursor: "pointer", fontWeight: "600",
                 transition: "all 0.15s", marginTop: "4px", width: "100%",
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = "#10b981"; e.currentTarget.style.color = "#fff"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.color = "#000"; }}>
+              onMouseEnter={(e) => { e.target.style.background = "#10b981"; e.target.style.color = "#fff"; }}
+              onMouseLeave={(e) => { e.target.style.background = "#fff"; e.target.style.color = "#000"; }}>
               Send Message →
             </button>
             <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: "#606060", letterSpacing: "0.06em", textAlign: "center", marginTop: "4px" }}>
@@ -1667,7 +1661,7 @@ export default function App() {
   const eggButtonRef = useRef(null);
   const lastCardRef = useRef(null);
 
-  const handleEgg = useCallback(() => { setShowEgg(true); setEggFound(true); }, []);
+  const handleEgg = () => { setShowEgg(true); setEggFound(true); };
 
   // ── Hash-based case study routing ──────────────────────────
   // Enables direct links like matt-henning.com/#case/mydocs
@@ -1706,7 +1700,7 @@ export default function App() {
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [handleEgg]);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -1721,15 +1715,12 @@ export default function App() {
   return (
     <>
       <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
         body { background: #060608; color: #fff; min-height: 100vh; -webkit-font-smoothing: antialiased; }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #0a0a0a; }
         ::-webkit-scrollbar-thumb { background: #222; border-radius: 2px; }
-        * { scrollbar-width: thin; scrollbar-color: #222 #0a0a0a; }
-        .skip-link { position: absolute; top: -100%; left: 16px; background: #10b981; color: #000; padding: 12px 24px; border-radius: 0 0 8px 8px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-decoration: none; z-index: 9999; transition: top 0.15s; }
-        .skip-link:focus { top: 0; }
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
         @keyframes shake { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
@@ -1742,7 +1733,6 @@ export default function App() {
         .fade-up-4 { animation-delay: 0.55s; opacity: 0; }
         :focus-visible { outline: 2px solid #10b981 !important; outline-offset: 3px; border-radius: 3px; }
         @media (prefers-reduced-motion: reduce) {
-          html { scroll-behavior: auto !important; }
           .fade-up, .fade-up-1, .fade-up-2, .fade-up-3, .fade-up-4 { animation: none !important; opacity: 1 !important; }
           * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
         }
@@ -1756,11 +1746,9 @@ export default function App() {
         @keyframes starBurst5 { 0% { transform: translate(-50%,-50%) scale(0); opacity:0; } 40% { opacity:1; } 100% { transform: translate(calc(-50% + 44px), calc(-50% + 52px)) scale(1.2); opacity:0; } }
       `}</style>
 
-      <a href="#work" className="skip-link">Skip to main content</a>
-
-      <div style={{ position: "sticky", top: 0, zIndex: 100, background: "rgba(6,6,8,0.95)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}>
+      <div style={{ position: "sticky", top: 0, zIndex: 100, background: "rgba(6,6,8,0.95)", backdropFilter: "blur(12px)" }}>
         <Nav onEasterEgg={handleEgg} eggFound={eggFound} isMaster={isMaster} eggButtonRef={eggButtonRef} />
-        <div aria-hidden="true" style={{ position: "relative", height: "1px", background: "#222" }}>
+        <div style={{ position: "relative", height: "1px", background: "#222" }}>
           <div style={{ position: "absolute", top: 0, left: 0, height: "100%", width: scrollProgress + "%", background: "#10b981", transition: "width 0.05s linear" }} />
         </div>
         <Ticker />

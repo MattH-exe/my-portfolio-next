@@ -215,6 +215,11 @@ const PROJECTS = [
     media: [
       {
         type: "image",
+        src: "/case-studies/MyDocs/MetricsStrategy.png",
+        caption: "Evaluation Process Metrics captured during an on-site base visit — comparing Time-on-Task between legacy workflows (17+ hours across 9 steps) and the Puckboard-integrated flow (≈6 hours), quantifying a 65% reduction in task completion time. Created this visual breakdown to communicate impact clearly to stakeholders and non-designers at a glance — translating raw TOT data into structured comparisons, phased timelines, and executive-ready framing that made the case for the connected-system approach without requiring technical context.",
+      },
+      {
+        type: "image",
         src: "/case-studies/MyDocs/Artifact4.png",
         caption: "Shipped member-facing FEF view in Puckboard Personnel — surfaces real-time evaluation status, pending signature actions, and completion state across a member's full record. The 'Action Required' and 'Status' columns were the core design decision: rather than making members hunt for what needed attention, the system surfaces urgency and ownership explicitly at the list level.",
       },
@@ -222,11 +227,6 @@ const PROJECTS = [
         type: "image",
         src: "/case-studies/MyDocs/Artifact3.png",
         caption: "The corresponding Stan/Eval office user view of the same FEF record — same underlying data, entirely different information hierarchy. Officers need aggregate visibility and management controls; members need action clarity. Designing role-appropriate views of shared data was one of the central interaction challenges of the system.",
-      },
-      {
-        type: "image",
-        src: "/case-studies/MyDocs/MetricsStrategy.png",
-        caption: "Evaluation Process Metrics captured during an on-site base visit — comparing Time-on-Task between legacy workflows (17+ hours across 9 steps) and the Puckboard-integrated flow (≈6 hours), quantifying a 65% reduction in task completion time. Created this visual breakdown to communicate impact clearly to stakeholders and non-designers at a glance — translating raw TOT data into structured comparisons, phased timelines, and executive-ready framing that made the case for the connected-system approach without requiring technical context.",
       },
       {
         type: "image",

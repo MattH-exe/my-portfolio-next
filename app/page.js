@@ -63,7 +63,7 @@ const PROJECTS = [
     },
     role: "Product Designer · Cross-functional team of 1 designer, multiple iOS engineers, and a PM · Active DoD Secret Clearance required",
     contributions: [
-      "Owned the AF Form 651 digitization flow — the highest-risk workflow in the product because errors in this form cascade into official records. Chose structured, validated inputs over a flexible freeform approach after field research showed the majority of errors came from ambiguous entry points",
+      "Owned the AF Form 651 digitization flow — one of the highest-risk workflows in the product because errors in this form cascade into official records. Chose structured, validated inputs over a flexible freeform approach after field research showed the majority of errors came from ambiguous entry points",
       "Designed fuel metrics tracking workflows that directly enabled $20M+ in operational cost savings — the key insight was that accurate capture at point-of-entry eliminated the reconciliation step that previously consumed hours of SARM time per mission",
       "Contributed to Aircrew Editor interaction patterns, where the core trade-off was speed vs. safety: we opted for confirmation steps on role assignments despite the extra tap, because mis-assignments had real operational consequences",
       "Designed the PDF generation experience — a deceptively complex problem where the constraint wasn't layout but data trust: outputs had to be print-ready and compliance-grade, meaning every digital input needed traceable validation",

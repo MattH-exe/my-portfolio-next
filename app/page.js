@@ -57,6 +57,10 @@ const PROJECTS = [
     emoji: "✈️",
     wip: false,
     heroImage: "/case-studies/PBL/hero.png", // Replace with path e.g. "/case-studies/PBL/hero.jpg"
+    featuredArtifact: {
+      src: "/case-studies/PBL/651Process.png",
+      caption: "Paper Form 651 (left) vs. redesigned digital input (right) — decoupled the input experience from the output format, capturing the same data through a structured, validated flow instead of mirroring the physical form field-by-field",
+    },
     role: "Product Designer · Cross-functional team of 1 designer, multiple iOS engineers, and a PM · Active DoD Secret Clearance required",
     contributions: [
       "Owned the AF Form 651 digitization flow — the highest-risk workflow in the product because errors in this form cascade into official records. Chose structured, validated inputs over a flexible freeform approach after field research showed the majority of errors came from ambiguous entry points",
@@ -199,6 +203,10 @@ const PROJECTS = [
     emoji: "🗂️",
     wip: false,
     heroImage: "/case-studies/MyDocs/hero.png", // Replace with path e.g. "/case-studies/MyDocs/hero.jpg"
+    featuredArtifact: {
+      src: "/case-studies/MyDocs/Artifact4.png",
+      caption: "Shipped FEF member view — surfaces real-time evaluation status, pending actions, and completion state. The 'Action Required' and 'Status' columns were the core design decision: surfacing urgency and ownership at the list level instead of making members hunt for what needs attention",
+    },
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
     role: "Lead Product Designer · Puckboard Personnel (web) · Active DoD Secret Clearance required · Cross-functional team of designers, web engineers, and a PM",
@@ -322,6 +330,10 @@ const PROJECTS = [
     color: "#10b981",
     emoji: "🌲",
     heroImage: "/case-studies/parkpal/hero.jpg", // Replace with path e.g. "/case-studies/parkpal/hero.jpg"
+    featuredArtifact: {
+      src: "/case-studies/parkpal/Design+1.webp",
+      caption: "Hi-fi trail detail view with accessibility grade, surface type, and real-time condition data — the core screen that proves the graded, multi-dimensional accessibility model no competitor offers",
+    },
     role: "UX Designer & Researcher · Capstone Project, University of Michigan School of Information",
     contributions: [
       "4 participants interviewed across 3 rounds (12 total sessions) — elderly and mobility-impaired, recruited for range of mobility constraints (wheelchair, walker, cane, reduced stamina)",
@@ -1252,6 +1264,26 @@ function Modal({ project, onClose, triggerRef }) {
             ))}
           </div>
 
+          {/* ── Featured artifact — full-width hero image ── */}
+          {project.featuredArtifact && (
+            <button
+              onClick={() => setLightbox({ src: project.featuredArtifact.src, caption: project.featuredArtifact.caption })}
+              aria-label={`View larger: ${project.featuredArtifact.caption}`}
+              style={{ background: "none", border: "none", padding: 0, cursor: "zoom-in", textAlign: "left", width: "100%", marginBottom: "40px" }}>
+              <div style={{ position: "relative", width: "100%", borderRadius: "12px", overflow: "hidden", border: `1px solid ${project.color}33`, transition: "border-color 0.2s, box-shadow 0.2s" }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = project.color + "88"; e.currentTarget.style.boxShadow = `0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px ${project.color}44`; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = project.color + "33"; e.currentTarget.style.boxShadow = "none"; }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={project.featuredArtifact.src} alt={project.featuredArtifact.caption} loading="lazy"
+                  style={{ width: "100%", height: "auto", display: "block" }} />
+                <div style={{ position: "absolute", top: "12px", left: "12px", fontFamily: "'DM Mono', monospace", fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#fff", background: "rgba(0,0,0,0.6)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", padding: "4px 10px", borderRadius: "4px", pointerEvents: "none" }}>Featured Artifact</div>
+              </div>
+              {project.featuredArtifact.caption && (
+                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7b7b7b", letterSpacing: "0.06em", marginTop: "10px", lineHeight: "1.5", maxWidth: "800px" }}>{project.featuredArtifact.caption}</p>
+              )}
+            </button>
+          )}
+
           {/* ── Two-column layout ── */}
           <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : `1fr clamp(280px, 28%, 400px)`, gap: "32px", alignItems: "stretch" }}>
 
@@ -1283,10 +1315,10 @@ function Modal({ project, onClose, triggerRef }) {
               {/* Prev / next */}
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "14px" }}>
                 <button onClick={() => setActivePhase(Math.max(0, activePhase - 1))} disabled={activePhase === 0} aria-label="Previous phase"
-                  style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: activePhase === 0 ? "#2a2a2a" : "#7d7d7d", background: "none", border: "none", cursor: activePhase === 0 ? "default" : "pointer", letterSpacing: "0.08em" }}>← Prev</button>
-                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#606060", letterSpacing: "0.1em" }}>{activePhase + 1} / {project.phases.length}</span>
+                  style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", color: activePhase === 0 ? "#2a2a2a" : "#7d7d7d", background: "none", border: "none", cursor: activePhase === 0 ? "default" : "pointer", letterSpacing: "0.08em" }}>← Prev</button>
+                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", color: "#606060", letterSpacing: "0.1em" }}>{activePhase + 1} / {project.phases.length}</span>
                 <button onClick={() => setActivePhase(Math.min(project.phases.length - 1, activePhase + 1))} disabled={activePhase === project.phases.length - 1} aria-label="Next phase"
-                  style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: activePhase === project.phases.length - 1 ? "#2a2a2a" : project.color, background: "none", border: "none", cursor: activePhase === project.phases.length - 1 ? "default" : "pointer", letterSpacing: "0.08em" }}>Next →</button>
+                  style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", color: activePhase === project.phases.length - 1 ? "#2a2a2a" : project.color, background: "none", border: "none", cursor: activePhase === project.phases.length - 1 ? "default" : "pointer", letterSpacing: "0.08em" }}>Next →</button>
               </div>
 
               {/* Tags */}

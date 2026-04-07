@@ -1066,12 +1066,11 @@ function MediaPanel({ media, color, onLightbox }) {
               key={i}
               onClick={() => onLightbox({ src: item.src, caption: item.caption })}
               aria-label={`View larger: ${item.caption}`}
-              style={{ background: "none", border: "none", padding: 0, cursor: "zoom-in", textAlign: "left", width: "100%" }}>
+              style={{ background: "none", border: "none", padding: 0, cursor: "zoom-in", textAlign: "left", width: "100%", contentVisibility: "auto", containIntrinsicSize: "auto 400px 250px" }}>
               <div style={{ position: "relative", width: "100%", aspectRatio: "16/10", borderRadius: "8px", overflow: "hidden", border: `1px solid #1e1e1e`, transition: "border-color 0.15s, box-shadow 0.15s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = color + "88"; e.currentTarget.style.boxShadow = `0 0 0 1px ${color}44`; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#1e1e1e"; e.currentTarget.style.boxShadow = "none"; }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <NextImage src={item.src} alt={item.caption} width={400} height={250} sizes="200px" loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                <NextImage src={item.src} alt={item.caption} width={400} height={250} sizes="400px" loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                 <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0)", display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.15s", fontSize: "20px", opacity: 0 }}
                   onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.45)"; e.currentTarget.style.opacity = "1"; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0)"; e.currentTarget.style.opacity = "0"; }}>🔍</div>
@@ -1083,7 +1082,7 @@ function MediaPanel({ media, color, onLightbox }) {
           );
         }
         return (
-          <div key={i} style={{ width: "100%", aspectRatio: "16/10", borderRadius: "8px", border: `1px dashed ${color}33`, background: color + "05", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "16px", gap: "8px", textAlign: "center" }}>
+          <div key={i} style={{ width: "100%", aspectRatio: "16/10", borderRadius: "8px", border: `1px dashed ${color}33`, background: color + "05", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "16px", gap: "8px", textAlign: "center", contentVisibility: "auto", containIntrinsicSize: "auto 400px 250px" }}>
             <div style={{ fontSize: "22px", opacity: 0.4 }}>🖼</div>
             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: color, letterSpacing: "0.08em", opacity: 0.7 }}>{item.label}</div>
             {item.note && (
@@ -1315,9 +1314,10 @@ function Modal({ project, onClose, triggerRef }) {
               top: "120px",
               maxHeight: mobile ? "none" : "calc(90vh - 180px)",
               alignSelf: "start",
+              contain: "layout style paint",
             }}>
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "12px", flexShrink: 0 }}>Design Artifacts</div>
-              <div style={{ overflowY: "auto", flex: "1", paddingRight: "4px" }}>
+              <div style={{ overflowY: "auto", flex: "1", paddingRight: "4px", willChange: "scroll-position" }}>
                 <MediaPanel media={project.media} color={project.color} onLightbox={setLightbox} />
               </div>
             </div>

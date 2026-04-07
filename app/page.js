@@ -1,6 +1,31 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
-import NextImage from "next/image";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+
+// ── Focus Trap Hook ───────────────────────────────────────────
+// Keeps keyboard focus within a modal dialog (WCAG 2.1 AA §1.3.2)
+function useFocusTrap(containerRef, active = true) {
+  useEffect(() => {
+    if (!active || !containerRef.current) return;
+    const container = containerRef.current;
+    const FOCUSABLE = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
+    const handleKeyDown = (e) => {
+      if (e.key !== "Tab") return;
+      const focusable = Array.from(container.querySelectorAll(FOCUSABLE));
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    };
+
+    container.addEventListener("keydown", handleKeyDown);
+    return () => container.removeEventListener("keydown", handleKeyDown);
+  }, [containerRef, active]);
+}
 
 // ── Data ──────────────────────────────────────────────────────
 const TICKER_ITEMS = [
@@ -87,7 +112,7 @@ const PROJECTS = [
       },
       {
         type: "image",
-        src: "/case-studies/PBL/PBL_PDF Navigation_V3_page-0001.jpg",
+        src: "/case-studies/PBL/PBL_PDF_Navigation_V3_page-0001.jpg",
         caption: "Early design exploration of PDF generation workflows, used to define how structured inputs would translate into standardized, compliance-ready outputs for official records",
       },
       {
@@ -803,7 +828,7 @@ const Ticker = React.memo(function Ticker() {
   // 4 copies ensures seamless loop — animation scrolls exactly 50% (2 copies worth)
   const items = [...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS];
   return (
-    <div style={{ overflow: "hidden", borderTop: "1px solid #222", borderBottom: "1px solid #222", background: "#0a0a0a", padding: "10px 0" }}>
+    <div aria-hidden="true" style={{ overflow: "hidden", borderTop: "1px solid #222", borderBottom: "1px solid #222", background: "#0a0a0a", padding: "10px 0" }}>
       <div style={{ display: "flex", gap: "0", animation: "ticker 120s linear infinite", whiteSpace: "nowrap", willChange: "transform", width: "max-content" }}>
         {items.map((item, i) => (
           <span key={i} style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", letterSpacing: "0.12em", color: "#909090", padding: "0 32px", textTransform: "uppercase", flexShrink: 0 }}>
@@ -827,7 +852,7 @@ function Nav({ onEasterEgg, eggFound, isMaster, eggButtonRef }) {
   return (
     <nav aria-label="Main navigation" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: mobile ? "16px 16px" : "20px clamp(20px, 3vw, 36px)", borderBottom: "none", background: "transparent" }}>
       <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
-        <a href="#" aria-label="Matthew W. Henning — back to top" style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "22px", letterSpacing: "0.08em", color: "#fff", textDecoration: "none" }}>MWH</a>
+        <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }} aria-label="Matthew W. Henning — back to top" style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "22px", letterSpacing: "0.08em", color: "#fff", textDecoration: "none" }}>MWH</a>
         <span aria-label="Currently available for hire" role="status" style={{ fontSize: "9px", fontFamily: "'DM Mono', monospace", color: "#10b981", background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.25)", padding: "2px 8px", borderRadius: "100px", letterSpacing: "0.1em", whiteSpace: "nowrap", animation: "statusPulse 2.4s ease-in-out infinite", display: "inline-flex", alignItems: "center", gap: "5px" }}>
           <span aria-hidden="true" style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#10b981", display: "inline-block", flexShrink: 0 }} />
           OPEN FOR NEW WORK
@@ -907,7 +932,7 @@ function ProjectCard({ project, onClick }) {
 
   const handleKeyDown = (e) => {
     if (isDisabled) return;
-    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onClick(project); }
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onClick(project, e.currentTarget); }
   };
 
   return (
@@ -990,6 +1015,7 @@ function ProjectCard({ project, onClick }) {
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={project.heroImage} alt={`${project.title} preview`}
+              loading="lazy"
               style={{
                 width: "100%", height: "100%", objectFit: "cover", display: "block",
                 transition: "transform 0.4s ease",
@@ -1066,11 +1092,12 @@ function MediaPanel({ media, color, onLightbox }) {
               key={i}
               onClick={() => onLightbox({ src: item.src, caption: item.caption })}
               aria-label={`View larger: ${item.caption}`}
-              style={{ background: "none", border: "none", padding: 0, cursor: "zoom-in", textAlign: "left", width: "100%", contentVisibility: "auto", containIntrinsicSize: "auto 400px 250px" }}>
+              style={{ background: "none", border: "none", padding: 0, cursor: "zoom-in", textAlign: "left", width: "100%" }}>
               <div style={{ position: "relative", width: "100%", aspectRatio: "16/10", borderRadius: "8px", overflow: "hidden", border: `1px solid #1e1e1e`, transition: "border-color 0.15s, box-shadow 0.15s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = color + "88"; e.currentTarget.style.boxShadow = `0 0 0 1px ${color}44`; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#1e1e1e"; e.currentTarget.style.boxShadow = "none"; }}>
-                <NextImage src={item.src} alt={item.caption} width={400} height={250} sizes="400px" loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={item.src} alt={item.caption} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                 <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0)", display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.15s", fontSize: "20px", opacity: 0 }}
                   onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.45)"; e.currentTarget.style.opacity = "1"; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0)"; e.currentTarget.style.opacity = "0"; }}>🔍</div>
@@ -1082,7 +1109,7 @@ function MediaPanel({ media, color, onLightbox }) {
           );
         }
         return (
-          <div key={i} style={{ width: "100%", aspectRatio: "16/10", borderRadius: "8px", border: `1px dashed ${color}33`, background: color + "05", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "16px", gap: "8px", textAlign: "center", contentVisibility: "auto", containIntrinsicSize: "auto 400px 250px" }}>
+          <div key={i} style={{ width: "100%", aspectRatio: "16/10", borderRadius: "8px", border: `1px dashed ${color}33`, background: color + "05", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "16px", gap: "8px", textAlign: "center" }}>
             <div style={{ fontSize: "22px", opacity: 0.4 }}>🖼</div>
             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: color, letterSpacing: "0.08em", opacity: 0.7 }}>{item.label}</div>
             {item.note && (
@@ -1097,6 +1124,8 @@ function MediaPanel({ media, color, onLightbox }) {
 
 function LightboxModal({ src, caption, onClose }) {
   const closeBtnRef = useRef(null);
+  const lightboxRef = useRef(null);
+  useFocusTrap(lightboxRef);
   useEffect(() => {
     if (closeBtnRef.current) closeBtnRef.current.focus();
     const handler = (e) => { if (e.key === "Escape") onClose(); };
@@ -1105,8 +1134,8 @@ function LightboxModal({ src, caption, onClose }) {
   }, [onClose]);
 
   return (
-    <div onClick={(e) => { e.stopPropagation(); onClose(); }} role="dialog" aria-modal="true" aria-label={caption}
-      style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.95)", backdropFilter: "blur(16px)", zIndex: 2000, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "24px" }}>
+    <div ref={lightboxRef} onClick={(e) => { e.stopPropagation(); onClose(); }} role="dialog" aria-modal="true" aria-label={caption || "Image preview"}
+      style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.95)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", willChange: "backdrop-filter", zIndex: 2000, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "24px" }}>
       <button ref={closeBtnRef} onClick={(e) => { e.stopPropagation(); onClose(); }} aria-label="Close image preview"
         style={{ position: "absolute", top: "20px", right: "20px", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "#b2b2b2", cursor: "pointer", borderRadius: "8px", width: "36px", height: "36px", fontSize: "18px", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10 }}>×</button>
       <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", maxWidth: "min(90vw, 1200px)", maxHeight: "80vh", width: "100%" }}>
@@ -1127,6 +1156,8 @@ function Modal({ project, onClose, triggerRef }) {
   const modalRef = useRef(null);
 
   useEffect(() => { setActivePhase(0); }, [project.id]);
+
+  useFocusTrap(modalRef);
 
   useEffect(() => {
     const handler = () => setMobile(window.innerWidth < 768);
@@ -1157,13 +1188,13 @@ function Modal({ project, onClose, triggerRef }) {
       window.removeEventListener("keydown", handler);
       if (triggerRef && triggerRef.current) triggerRef.current.focus();
     };
-  }, [onClose]);
+  }, [onClose, triggerRef]);
 
   const phase = project.phases[activePhase];
 
   return (
-    <div onClick={onClose} role="presentation" aria-hidden="false"
-      style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.88)", backdropFilter: "blur(10px)", zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center", padding: "20px" }}>
+    <div onClick={onClose} role="presentation"
+      style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.88)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)", willChange: "backdrop-filter", zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center", padding: "20px" }}>
       <div onClick={(e) => e.stopPropagation()} ref={modalRef} role="dialog" aria-modal="true" aria-label={`${project.title} case study`}
         style={{
           background: "#0e0e12",
@@ -1314,10 +1345,9 @@ function Modal({ project, onClose, triggerRef }) {
               top: "120px",
               maxHeight: mobile ? "none" : "calc(90vh - 180px)",
               alignSelf: "start",
-              contain: "layout style paint",
             }}>
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "12px", flexShrink: 0 }}>Design Artifacts</div>
-              <div style={{ overflowY: "auto", flex: "1", paddingRight: "4px", willChange: "scroll-position" }}>
+              <div style={{ overflowY: "auto", flex: "1", paddingRight: "4px" }}>
                 <MediaPanel media={project.media} color={project.color} onLightbox={setLightbox} />
               </div>
             </div>
@@ -1403,16 +1433,18 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught, triggerRef }) {
   };
 
   const eggModalRef = useRef(null);
+  useFocusTrap(eggModalRef);
   useEffect(() => {
+    document.body.style.overflow = "hidden";
     if (eggModalRef.current) { const first = eggModalRef.current.querySelector("button"); if (first) first.focus(); }
     const handler = (e) => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", handler);
-    return () => { window.removeEventListener("keydown", handler); if (triggerRef && triggerRef.current) triggerRef.current.focus(); };
-  }, [onClose]);
+    return () => { document.body.style.overflow = ""; window.removeEventListener("keydown", handler); if (triggerRef && triggerRef.current) triggerRef.current.focus(); };
+  }, [onClose, triggerRef]);
 
   return (
-    <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.9)", backdropFilter: "blur(12px)", zIndex: 2000, display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <div ref={eggModalRef} onClick={(e) => e.stopPropagation()} style={{ background: "#0a0a12", border: "2px solid #facc15", borderRadius: "16px", padding: "40px", maxWidth: "480px", width: "90%", boxShadow: "0 0 60px rgba(250,204,21,0.15)", textAlign: "center" }}>
+    <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.9)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", willChange: "backdrop-filter", zIndex: 2000, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div ref={eggModalRef} onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="Pokémon easter egg mini-game" style={{ background: "#0a0a12", border: "2px solid #facc15", borderRadius: "16px", padding: "40px", maxWidth: "480px", width: "90%", boxShadow: "0 0 60px rgba(250,204,21,0.15)", textAlign: "center" }}>
         <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#facc15", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "8px" }}>✦ You found the easter egg ✦</div>
         <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "48px", color: "#fff", marginBottom: "32px", letterSpacing: "0.04em" }}>GOTTA CATCH &apos;EM ALL</h2>
         <div style={{ background: "#06060e", border: "1px solid #1e1e2e", borderRadius: "12px", padding: "28px", marginBottom: "24px" }}>
@@ -1480,16 +1512,7 @@ function About() {
               alignItems: "center",
               justifyContent: "center",
             }}>
-              {/*
-                ─── HOW TO ADD YOUR HEADSHOT ───
-                1. Put your photo in: public/headshot.jpg (or .png)
-                2. Delete everything between this comment block and the closing </div> below
-                3. Replace it with:
-                   <img src="/headshot.jpg" alt="Matthew Henning" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-
-                Remember: do NOT include "public/" in the src path.
-              */}
-            <img src="/Headshot.jpg" alt="Matthew Henning" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img src="/Headshot.jpg" alt="Matthew Henning" loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
             <div style={{ position: "absolute", top: "-6px", right: "-6px", width: "28px", height: "28px", borderRadius: "50%", background: "#10b981", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", border: "2px solid #060608" }}>✦</div>
           </div>
@@ -1583,21 +1606,21 @@ function Contact() {
           <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
             <div>
               <label htmlFor="contact-name" style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7b7b7b", letterSpacing: "0.1em", textTransform: "uppercase", display: "block", marginBottom: "6px" }}>Name</label>
-              <input id="contact-name" type="text" placeholder="Your name"
+              <input id="contact-name" type="text" placeholder="Your name" required aria-required="true"
                 value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 onFocus={() => setFocused("name")} onBlur={() => setFocused(null)}
                 style={{ ...inputBase, ...inputFocused("name") }} />
             </div>
             <div>
               <label htmlFor="contact-email" style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7b7b7b", letterSpacing: "0.1em", textTransform: "uppercase", display: "block", marginBottom: "6px" }}>Email</label>
-              <input id="contact-email" type="email" placeholder="you@company.com"
+              <input id="contact-email" type="email" placeholder="you@company.com" required aria-required="true"
                 value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 onFocus={() => setFocused("email")} onBlur={() => setFocused(null)}
                 style={{ ...inputBase, ...inputFocused("email") }} />
             </div>
             <div>
               <label htmlFor="contact-message" style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7b7b7b", letterSpacing: "0.1em", textTransform: "uppercase", display: "block", marginBottom: "6px" }}>Message</label>
-              <textarea id="contact-message" rows={5} placeholder="Tell me about the role or project..."
+              <textarea id="contact-message" rows={5} placeholder="Tell me about the role or project..." required aria-required="true"
                 value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 onFocus={() => setFocused("message")} onBlur={() => setFocused(null)}
                 style={{ ...inputBase, ...inputFocused("message"), resize: "vertical", minHeight: "120px" }} />
@@ -1634,7 +1657,7 @@ export default function App() {
   const eggButtonRef = useRef(null);
   const lastCardRef = useRef(null);
 
-  const handleEgg = () => { setShowEgg(true); setEggFound(true); };
+  const handleEgg = useCallback(() => { setShowEgg(true); setEggFound(true); }, []);
 
   // ── Hash-based case study routing ──────────────────────────
   // Enables direct links like matt-henning.com/#case/mydocs
@@ -1673,7 +1696,7 @@ export default function App() {
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, []);
+  }, [handleEgg]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -1688,12 +1711,15 @@ export default function App() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body { background: #060608; color: #fff; min-height: 100vh; -webkit-font-smoothing: antialiased; }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #0a0a0a; }
         ::-webkit-scrollbar-thumb { background: #222; border-radius: 2px; }
+        * { scrollbar-width: thin; scrollbar-color: #222 #0a0a0a; }
+        .skip-link { position: absolute; top: -100%; left: 16px; background: #10b981; color: #000; padding: 12px 24px; border-radius: 0 0 8px 8px; font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-decoration: none; z-index: 9999; transition: top 0.15s; }
+        .skip-link:focus { top: 0; }
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
         @keyframes shake { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
@@ -1706,6 +1732,7 @@ export default function App() {
         .fade-up-4 { animation-delay: 0.55s; opacity: 0; }
         :focus-visible { outline: 2px solid #10b981 !important; outline-offset: 3px; border-radius: 3px; }
         @media (prefers-reduced-motion: reduce) {
+          html { scroll-behavior: auto !important; }
           .fade-up, .fade-up-1, .fade-up-2, .fade-up-3, .fade-up-4 { animation: none !important; opacity: 1 !important; }
           * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
         }
@@ -1719,9 +1746,11 @@ export default function App() {
         @keyframes starBurst5 { 0% { transform: translate(-50%,-50%) scale(0); opacity:0; } 40% { opacity:1; } 100% { transform: translate(calc(-50% + 44px), calc(-50% + 52px)) scale(1.2); opacity:0; } }
       `}</style>
 
-      <div style={{ position: "sticky", top: 0, zIndex: 100, background: "rgba(6,6,8,0.95)", backdropFilter: "blur(12px)" }}>
+      <a href="#work" className="skip-link">Skip to main content</a>
+
+      <div style={{ position: "sticky", top: 0, zIndex: 100, background: "rgba(6,6,8,0.95)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}>
         <Nav onEasterEgg={handleEgg} eggFound={eggFound} isMaster={isMaster} eggButtonRef={eggButtonRef} />
-        <div style={{ position: "relative", height: "1px", background: "#222" }}>
+        <div aria-hidden="true" style={{ position: "relative", height: "1px", background: "#222" }}>
           <div style={{ position: "absolute", top: 0, left: 0, height: "100%", width: scrollProgress + "%", background: "#10b981", transition: "width 0.05s linear" }} />
         </div>
         <Ticker />

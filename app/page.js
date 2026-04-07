@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import NextImage from "next/image";
 
 // ── Data ──────────────────────────────────────────────────────
 const TICKER_ITEMS = [
@@ -92,7 +93,7 @@ const PROJECTS = [
       {
         type: "image",
         src: "/case-studies/PBL/AircrewSearch.png",
-        caption: "Final Handed off designs of Aircrew Search, a critical backbone feature of the Puckboard workflow allowing for search queries to be made of unit rosters, as well as official Air Force Databases like ARMS & ARTEMIS",
+        caption: "Final handed-off designs of Aircrew Search, a critical backbone feature of the Puckboard workflow allowing for search queries to be made of unit rosters, as well as official Air Force Databases like ARMS & ARTEMIS",
       },
       {
         type: "image",
@@ -191,7 +192,7 @@ const PROJECTS = [
     year: "2024–2025",
     tag: "Enterprise UX · Web · Secure Document Storage",
     title: "My Docs",
-    subtitle: "Career documents that follow the mission - and you.",
+    subtitle: "Career documents that follow the mission — and you.",
     impact: "0→1",
     impactLabel: "New Feature",
     color: "#a78bfa",
@@ -928,6 +929,8 @@ function ProjectCard({ project, onClick }) {
         boxShadow: hovered && !isDisabled ? `0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px ${project.color}22` : "none",
         opacity: isDisabled ? 0.7 : isWip ? 0.88 : 1,
         outline: "none",
+        width: "100%",
+        minWidth: 0,
         display: "grid",
         gridTemplateColumns: mobile ? "1fr" : "1fr 1fr",
         minHeight: mobile ? "auto" : "320px",
@@ -1065,12 +1068,11 @@ function MediaPanel({ media, color, onLightbox }) {
               key={i}
               onClick={() => onLightbox({ src: item.src, caption: item.caption })}
               aria-label={`View larger: ${item.caption}`}
-              style={{ background: "none", border: "none", padding: 0, cursor: "zoom-in", textAlign: "left", width: "100%" }}>
+              style={{ background: "none", border: "none", padding: 0, cursor: "zoom-in", textAlign: "left", width: "100%", contentVisibility: "auto", containIntrinsicSize: "0 250px" }}>
               <div style={{ position: "relative", width: "100%", aspectRatio: "16/10", borderRadius: "8px", overflow: "hidden", border: `1px solid #1e1e1e`, transition: "border-color 0.15s, box-shadow 0.15s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = color + "88"; e.currentTarget.style.boxShadow = `0 0 0 1px ${color}44`; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#1e1e1e"; e.currentTarget.style.boxShadow = "none"; }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={item.src} alt={item.caption} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                <NextImage src={item.src} alt={item.caption} fill sizes="400px" loading="lazy" style={{ objectFit: "cover" }} />
                 <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0)", display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.15s", fontSize: "20px", opacity: 0 }}
                   onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.45)"; e.currentTarget.style.opacity = "1"; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0)"; e.currentTarget.style.opacity = "0"; }}>🔍</div>
@@ -1343,7 +1345,7 @@ function Modal({ project, onClose, triggerRef }) {
               alignSelf: "start",
             }}>
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "12px", flexShrink: 0 }}>Design Artifacts</div>
-              <div style={{ overflowY: "auto", flex: "1", paddingRight: "4px" }}>
+              <div style={{ overflowY: "auto", flex: "1", paddingRight: "4px", contain: "layout style paint", willChange: "scroll-position" }}>
                 <MediaPanel media={project.media} color={project.color} onLightbox={setLightbox} />
               </div>
             </div>

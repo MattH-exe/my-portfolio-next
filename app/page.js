@@ -92,11 +92,6 @@ const PROJECTS = [
       },
       {
         type: "image",
-        src: "/case-studies/PBL/PBL_PDF_Navigation_V3_page-0001.jpg",
-        caption: "Early design exploration of PDF generation workflows, used to define how structured inputs would translate into standardized, compliance-ready outputs for official records",
-      },
-      {
-        type: "image",
         src: "/case-studies/PBL/AircrewSearch.png",
         caption: "Final handed-off designs of Aircrew Search, a critical backbone feature of the Puckboard workflow allowing for search queries to be made of unit rosters, as well as official Air Force Databases like ARMS & ARTEMIS",
       },
@@ -114,6 +109,11 @@ const PROJECTS = [
         type: "video",
         src: "/case-studies/PBL/Form651.mp4",
         caption: "Translated AF Form 651 from a paper-based form into a structured digital flow with validated inputs and pre-populated data, reducing ambiguity and minimizing common entry errors observed in manual workflows",
+      },
+      {
+        type: "image",
+        src: "/case-studies/PBL/PBL_PDF_Navigation_V3_page-0001.jpg",
+        caption: "Early design exploration of PDF generation workflows, used to define how structured inputs would translate into standardized, compliance-ready outputs for official records",
       },
       {
         type: "video",

@@ -917,7 +917,7 @@ function ProjectCard({ project, onClick }) {
 
   // Depth indicators: count phases and real artifacts (non-placeholder media)
   const phaseCount = project.phases ? project.phases.length : 0;
-  const artifactCount = project.media ? project.media.filter((m) => m.type === "image").length : 0;
+  const artifactCount = project.media ? project.media.filter((m) => m.type === "image" || m.type === "video").length : 0;
   const depthLabel = !isDisabled && phaseCount > 0
     ? `${phaseCount}-phase case study` + (artifactCount > 0 ? ` · ${artifactCount} artifact${artifactCount !== 1 ? "s" : ""}` : "")
     : null;

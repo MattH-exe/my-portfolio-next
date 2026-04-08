@@ -1079,6 +1079,39 @@ function Callout({ callout, color }) {
   return null;
 }
 
+// ── Lazy video — only loads/plays when visible ───────────────
+function LazyVideo({ src, caption, poster, style: styleProp }) {
+  const videoRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+        if (entry.isIntersecting) { el.play().catch(() => {}); }
+        else { el.pause(); }
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      src={isVisible ? src : undefined}
+      poster={poster}
+      loop
+      muted
+      playsInline
+      aria-label={caption}
+      style={styleProp}
+    />
+  );
+}
+
 // ── Media panel — right column of modal ──────────────────────
 function MediaPanel({ media, color, onLightbox }) {
   if (!media || media.length === 0) return null;
@@ -1089,7 +1122,7 @@ function MediaPanel({ media, color, onLightbox }) {
           return (
             <button
               key={i}
-              onClick={() => onLightbox({ src: item.src, caption: item.caption })}
+              onClick={() => onLightbox({ src: item.src, caption: item.caption, type: "image" })}
               aria-label={`View larger: ${item.caption}`}
               style={{ background: "none", border: "none", padding: 0, cursor: "zoom-in", textAlign: "left", width: "100%", contentVisibility: "auto", containIntrinsicSize: "0 250px" }}>
               <div style={{ position: "relative", width: "100%", aspectRatio: "16/10", borderRadius: "8px", overflow: "hidden", border: `1px solid #1e1e1e`, transition: "border-color 0.15s, box-shadow 0.15s" }}
@@ -1110,19 +1143,16 @@ function MediaPanel({ media, color, onLightbox }) {
           return (
             <button
               key={i}
-              onClick={() => onLightbox({ src: item.src, caption: item.caption })}
+              onClick={() => onLightbox({ src: item.src, caption: item.caption, type: "video" })}
               aria-label={`View larger: ${item.caption}`}
               style={{ background: "none", border: "none", padding: 0, cursor: "zoom-in", textAlign: "left", width: "100%" }}>
               <div style={{ position: "relative", width: "100%", borderRadius: "8px", overflow: "hidden", border: `1px solid #1e1e1e`, transition: "border-color 0.15s, box-shadow 0.15s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = color + "88"; e.currentTarget.style.boxShadow = `0 0 0 1px ${color}44`; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#1e1e1e"; e.currentTarget.style.boxShadow = "none"; }}>
-                <video
+                <LazyVideo
                   src={item.src}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  aria-label={item.caption}
+                  caption={item.caption}
+                  poster={item.poster}
                   style={{ width: "100%", display: "block" }}
                 />
                 <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0)", display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.15s", fontSize: "20px", opacity: 0 }}
@@ -1173,7 +1203,8 @@ function useFocusTrap(ref) {
   }, [ref]);
 }
 
-function LightboxModal({ src, caption, onClose }) {
+function LightboxModal({ src, caption, type, onClose }) {
+  const isVideo = type === "video";
   const closeBtnRef = useRef(null);
   const lightboxContainerRef = useRef(null);
   useFocusTrap(lightboxContainerRef);
@@ -1185,13 +1216,13 @@ function LightboxModal({ src, caption, onClose }) {
   }, [onClose]);
 
   return (
-    <div ref={lightboxContainerRef} onClick={(e) => { e.stopPropagation(); onClose(); }} role="dialog" aria-modal="true" aria-label={caption || "Image preview"}
+    <div ref={lightboxContainerRef} onClick={(e) => { e.stopPropagation(); onClose(); }} role="dialog" aria-modal="true" aria-label={caption || (isVideo ? "Video preview" : "Image preview")}
       style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.95)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", zIndex: 2000, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "24px" }}>
-      <button ref={closeBtnRef} onClick={(e) => { e.stopPropagation(); onClose(); }} aria-label="Close image preview"
+      <button ref={closeBtnRef} onClick={(e) => { e.stopPropagation(); onClose(); }} aria-label="Close preview"
         style={{ position: "absolute", top: "20px", right: "20px", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "#b2b2b2", cursor: "pointer", borderRadius: "8px", width: "36px", height: "36px", fontSize: "18px", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10 }}>×</button>
       <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", maxWidth: "min(90vw, 1200px)", maxHeight: "80vh", width: "100%" }}>
-        {src.endsWith(".mp4") ? (
-          <video src={src} autoPlay loop muted playsInline aria-label={caption}
+        {isVideo ? (
+          <video src={src} autoPlay loop muted playsInline controls aria-label={caption}
             style={{ display: "block", width: "100%", maxHeight: "80vh", objectFit: "contain", borderRadius: "10px", boxShadow: "0 8px 40px rgba(0,0,0,0.6)" }} />
         ) : (
           /* eslint-disable-next-line @next/next/no-img-element */
@@ -1312,7 +1343,7 @@ function Modal({ project, onClose, triggerRef }) {
           {/* ── Featured artifact — full-width hero image ── */}
           {project.featuredArtifact && (
             <button
-              onClick={() => setLightbox({ src: project.featuredArtifact.src, caption: project.featuredArtifact.caption })}
+              onClick={() => setLightbox({ src: project.featuredArtifact.src, caption: project.featuredArtifact.caption, type: project.featuredArtifact.src.endsWith(".mp4") ? "video" : "image" })}
               aria-label={`View larger: ${project.featuredArtifact.caption}`}
               style={{ background: "none", border: "none", padding: 0, cursor: "zoom-in", textAlign: "left", width: "100%", marginBottom: "40px" }}>
               <div style={{ position: "relative", width: "100%", maxHeight: "480px", borderRadius: "12px", overflow: "hidden", border: `1px solid ${project.color}33`, transition: "border-color 0.2s, box-shadow 0.2s" }}
@@ -1347,7 +1378,7 @@ function Modal({ project, onClose, triggerRef }) {
               <div ref={phaseNavRef} role="tablist" aria-label="Case study phases"
                 style={{ display: "flex", gap: "6px", flexWrap: "wrap", marginBottom: "20px" }}>
                 {project.phases.map((p, i) => (
-                  <button key={i} role="tab" onClick={() => setActivePhase(i)}
+                  <button key={i} role="tab" id={`phase-tab-${i}`} aria-controls="phase-tabpanel" onClick={() => setActivePhase(i)}
                     aria-label={`Go to phase: ${p.phase}`} aria-selected={i === activePhase} tabIndex={i === activePhase ? 0 : -1}
                     style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", letterSpacing: "0.08em", textTransform: "uppercase", padding: "6px 14px", borderRadius: "100px", cursor: "pointer", border: `1px solid ${i === activePhase ? project.color : "#2a2a2a"}`, background: i === activePhase ? project.color + "18" : "transparent", color: i === activePhase ? project.color : "#7b7b7b", transition: "all 0.15s", outline: "none", boxShadow: "none" }}
                     onFocus={(e) => { e.target.style.boxShadow = `0 0 0 2px ${project.color}66`; }}
@@ -1358,7 +1389,7 @@ function Modal({ project, onClose, triggerRef }) {
               </div>
 
               {/* Active phase card */}
-              <div style={{ flex: "1", background: "#0a0a0d", border: "1px solid #1e1e24", borderRadius: "12px", padding: "24px", borderTop: `3px solid ${project.color}` }}>
+              <div role="tabpanel" id="phase-tabpanel" aria-labelledby={`phase-tab-${activePhase}`} style={{ flex: "1", background: "#0a0a0d", border: "1px solid #1e1e24", borderRadius: "12px", padding: "24px", borderTop: `3px solid ${project.color}` }}>
                 <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: project.color, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "10px" }}>{phase.phase}</div>
                 <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "26px", color: "#fff", letterSpacing: "0.02em", marginBottom: "12px", fontWeight: "400" }}>{phase.title}</h3>
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "14px", color: "#c8c8c8", lineHeight: "1.65" }}>{phase.body}</p>
@@ -1440,7 +1471,7 @@ function Modal({ project, onClose, triggerRef }) {
         </div>
       </div>
 
-      {lightbox && <LightboxModal src={lightbox.src} caption={lightbox.caption} onClose={() => setLightbox(null)} />}
+      {lightbox && <LightboxModal src={lightbox.src} caption={lightbox.caption} type={lightbox.type} onClose={() => setLightbox(null)} />}
     </div>
   );
 }

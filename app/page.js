@@ -1294,13 +1294,13 @@ function Modal({ project, onClose, triggerRef }) {
           {project.featuredArtifact && (
             <div
               style={{ background: "none", border: "none", padding: 0, textAlign: "left", width: "100%", marginBottom: "40px" }}>
-              <div style={{ position: "relative", width: "100%", borderRadius: "12px", overflow: "hidden", border: `1px solid ${project.color}33`, transition: "border-color 0.2s, box-shadow 0.2s" }}
+              <div style={{ position: "relative", width: "100%", maxHeight: "480px", borderRadius: "12px", overflow: "hidden", border: `1px solid ${project.color}33`, transition: "border-color 0.2s, box-shadow 0.2s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = project.color + "88"; e.currentTarget.style.boxShadow = `0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px ${project.color}44`; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = project.color + "33"; e.currentTarget.style.boxShadow = "none"; }}>
                 {project.featuredArtifact.src.endsWith(".mp4") ? (
                   <video src={project.featuredArtifact.src} autoPlay loop muted playsInline
                     aria-label={project.featuredArtifact.caption}
-                    style={{ width: "100%", display: "block" }} />
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
                 ) : (
                   <>
                     {/* eslint-disable-next-line @next/next/no-img-element */}

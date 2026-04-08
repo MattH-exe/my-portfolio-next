@@ -59,8 +59,8 @@ const PROJECTS = [
     wip: false,
     heroImage: "/case-studies/PBL/hero.png", // Replace with path e.g. "/case-studies/PBL/hero.jpg"
     featuredArtifact: {
-      src: "/case-studies/PBL/651Process.png",
-      caption: "Paper Form 651 (left) vs. redesigned digital input (right) — decoupled the input experience from the output format, capturing the same data through a structured, validated flow instead of mirroring the physical form field-by-field",
+      src: "/case-studies/PBL/Form651.mp4",
+      caption: "AF Form 651 digitization flow — structured, validated inputs replace a paper-based form, with pre-populated data and progressive disclosure reducing entry errors and documentation time from 3+ hours to under 10 minutes",
     },
     role: "Product Designer · Cross-functional team of 1 designer, multiple iOS engineers, and a PM · Active DoD Secret Clearance required",
     contributions: [
@@ -101,13 +101,18 @@ const PROJECTS = [
         caption: "Final handed-off designs of Aircrew Search, a critical backbone feature of the Puckboard workflow allowing for search queries to be made of unit rosters, as well as official Air Force Databases like ARMS & ARTEMIS",
       },
       {
-        type: "image",
-        src: "/case-studies/PBL/651.GIF",
+        type: "video",
+        src: "/case-studies/PBL/AircrewSearch.mp4",
+        caption: "Aircrew Search in action — demonstrating query flows across unit rosters and official Air Force databases (ARMS & ARTEMIS) with real-time filtering and role-based result handling",
+      },
+      {
+        type: "video",
+        src: "/case-studies/PBL/Form651.mp4",
         caption: "Translated AF Form 651 from a paper-based form into a structured digital flow with validated inputs and pre-populated data, reducing ambiguity and minimizing common entry errors observed in manual workflows",
       },
       {
-        type: "image",
-        src: "/case-studies/PBL/pdf.GIF",
+        type: "video",
+        src: "/case-studies/PBL/pdfgen.mp4",
         caption: "Final PDF generation workflow, where validated system inputs dynamically produce accurate, standardized outputs — eliminating manual formatting and ensuring consistency across mission records",
       },
     ],
@@ -1096,6 +1101,26 @@ function MediaPanel({ media, color, onLightbox }) {
             </button>
           );
         }
+        if (item.type === "video") {
+          return (
+            <div key={i} style={{ textAlign: "left", width: "100%" }}>
+              <div style={{ position: "relative", width: "100%", borderRadius: "8px", overflow: "hidden", border: `1px solid #1e1e1e` }}>
+                <video
+                  src={item.src}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  aria-label={item.caption}
+                  style={{ width: "100%", display: "block" }}
+                />
+              </div>
+              {item.caption && (
+                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: "#7b7b7b", letterSpacing: "0.06em", marginTop: "6px", lineHeight: "1.4" }}>{item.caption}</p>
+              )}
+            </div>
+          );
+        }
         return (
           <div key={i} style={{ width: "100%", aspectRatio: "16/10", borderRadius: "8px", border: `1px dashed ${color}33`, background: color + "05", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "16px", gap: "8px", textAlign: "center" }}>
             <div style={{ fontSize: "22px", opacity: 0.4 }}>🖼</div>
@@ -1267,22 +1292,28 @@ function Modal({ project, onClose, triggerRef }) {
 
           {/* ── Featured artifact — full-width hero image ── */}
           {project.featuredArtifact && (
-            <button
-              onClick={() => setLightbox({ src: project.featuredArtifact.src, caption: project.featuredArtifact.caption })}
-              aria-label={`View larger: ${project.featuredArtifact.caption}`}
-              style={{ background: "none", border: "none", padding: 0, cursor: "zoom-in", textAlign: "left", width: "100%", marginBottom: "40px" }}>
+            <div
+              style={{ background: "none", border: "none", padding: 0, textAlign: "left", width: "100%", marginBottom: "40px" }}>
               <div style={{ position: "relative", width: "100%", borderRadius: "12px", overflow: "hidden", border: `1px solid ${project.color}33`, transition: "border-color 0.2s, box-shadow 0.2s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = project.color + "88"; e.currentTarget.style.boxShadow = `0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px ${project.color}44`; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = project.color + "33"; e.currentTarget.style.boxShadow = "none"; }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={project.featuredArtifact.src} alt={project.featuredArtifact.caption} loading="lazy"
-                  style={{ width: "100%", height: "auto", display: "block" }} />
+                {project.featuredArtifact.src.endsWith(".mp4") ? (
+                  <video src={project.featuredArtifact.src} autoPlay loop muted playsInline
+                    aria-label={project.featuredArtifact.caption}
+                    style={{ width: "100%", display: "block" }} />
+                ) : (
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={project.featuredArtifact.src} alt={project.featuredArtifact.caption} loading="lazy"
+                      style={{ width: "100%", height: "auto", display: "block" }} />
+                  </>
+                )}
                 <div style={{ position: "absolute", top: "12px", left: "12px", fontFamily: "'DM Mono', monospace", fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#fff", background: "rgba(0,0,0,0.6)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", padding: "4px 10px", borderRadius: "4px", pointerEvents: "none" }}>Featured Artifact</div>
               </div>
               {project.featuredArtifact.caption && (
                 <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7b7b7b", letterSpacing: "0.06em", marginTop: "10px", lineHeight: "1.5", maxWidth: "800px" }}>{project.featuredArtifact.caption}</p>
               )}
-            </button>
+            </div>
           )}
 
           {/* ── Two-column layout ── */}

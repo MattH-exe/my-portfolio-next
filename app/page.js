@@ -1103,8 +1103,14 @@ function MediaPanel({ media, color, onLightbox }) {
         }
         if (item.type === "video") {
           return (
-            <div key={i} style={{ textAlign: "left", width: "100%" }}>
-              <div style={{ position: "relative", width: "100%", borderRadius: "8px", overflow: "hidden", border: `1px solid #1e1e1e` }}>
+            <button
+              key={i}
+              onClick={() => onLightbox({ src: item.src, caption: item.caption })}
+              aria-label={`View larger: ${item.caption}`}
+              style={{ background: "none", border: "none", padding: 0, cursor: "zoom-in", textAlign: "left", width: "100%" }}>
+              <div style={{ position: "relative", width: "100%", borderRadius: "8px", overflow: "hidden", border: `1px solid #1e1e1e`, transition: "border-color 0.15s, box-shadow 0.15s" }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = color + "88"; e.currentTarget.style.boxShadow = `0 0 0 1px ${color}44`; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#1e1e1e"; e.currentTarget.style.boxShadow = "none"; }}>
                 <video
                   src={item.src}
                   autoPlay
@@ -1114,11 +1120,14 @@ function MediaPanel({ media, color, onLightbox }) {
                   aria-label={item.caption}
                   style={{ width: "100%", display: "block" }}
                 />
+                <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0)", display: "flex", alignItems: "center", justifyContent: "center", transition: "background 0.15s", fontSize: "20px", opacity: 0 }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.45)"; e.currentTarget.style.opacity = "1"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0)"; e.currentTarget.style.opacity = "0"; }}>🔍</div>
               </div>
               {item.caption && (
                 <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "9px", color: "#7b7b7b", letterSpacing: "0.06em", marginTop: "6px", lineHeight: "1.4" }}>{item.caption}</p>
               )}
-            </div>
+            </button>
           );
         }
         return (
@@ -1176,8 +1185,13 @@ function LightboxModal({ src, caption, onClose }) {
       <button ref={closeBtnRef} onClick={(e) => { e.stopPropagation(); onClose(); }} aria-label="Close image preview"
         style={{ position: "absolute", top: "20px", right: "20px", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)", color: "#b2b2b2", cursor: "pointer", borderRadius: "8px", width: "36px", height: "36px", fontSize: "18px", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10 }}>×</button>
       <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", maxWidth: "min(90vw, 1200px)", maxHeight: "80vh", width: "100%" }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt={caption} style={{ display: "block", width: "100%", height: "auto", maxHeight: "80vh", objectFit: "contain", borderRadius: "10px", boxShadow: "0 8px 40px rgba(0,0,0,0.6)" }} />
+        {src.endsWith(".mp4") ? (
+          <video src={src} autoPlay loop muted playsInline aria-label={caption}
+            style={{ display: "block", width: "100%", maxHeight: "80vh", objectFit: "contain", borderRadius: "10px", boxShadow: "0 8px 40px rgba(0,0,0,0.6)" }} />
+        ) : (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img src={src} alt={caption} style={{ display: "block", width: "100%", height: "auto", maxHeight: "80vh", objectFit: "contain", borderRadius: "10px", boxShadow: "0 8px 40px rgba(0,0,0,0.6)" }} />
+        )}
       </div>
       {caption && <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "11px", color: "#7b7b7b", letterSpacing: "0.08em", marginTop: "16px", textAlign: "center", maxWidth: "600px" }}>{caption}</p>}
       <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#606060", letterSpacing: "0.08em", marginTop: "8px" }}>click anywhere or press esc to close</p>
@@ -1292,8 +1306,10 @@ function Modal({ project, onClose, triggerRef }) {
 
           {/* ── Featured artifact — full-width hero image ── */}
           {project.featuredArtifact && (
-            <div
-              style={{ background: "none", border: "none", padding: 0, textAlign: "left", width: "100%", marginBottom: "40px" }}>
+            <button
+              onClick={() => setLightbox({ src: project.featuredArtifact.src, caption: project.featuredArtifact.caption })}
+              aria-label={`View larger: ${project.featuredArtifact.caption}`}
+              style={{ background: "none", border: "none", padding: 0, cursor: "zoom-in", textAlign: "left", width: "100%", marginBottom: "40px" }}>
               <div style={{ position: "relative", width: "100%", maxHeight: "480px", borderRadius: "12px", overflow: "hidden", border: `1px solid ${project.color}33`, transition: "border-color 0.2s, box-shadow 0.2s" }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = project.color + "88"; e.currentTarget.style.boxShadow = `0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px ${project.color}44`; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = project.color + "33"; e.currentTarget.style.boxShadow = "none"; }}>
@@ -1313,7 +1329,7 @@ function Modal({ project, onClose, triggerRef }) {
               {project.featuredArtifact.caption && (
                 <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#7b7b7b", letterSpacing: "0.06em", marginTop: "10px", lineHeight: "1.5", maxWidth: "800px" }}>{project.featuredArtifact.caption}</p>
               )}
-            </div>
+            </button>
           )}
 
           {/* ── Two-column layout ── */}

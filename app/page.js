@@ -1549,6 +1549,19 @@ function EasterEggModal({ onClose, onMaster, caught, setCaught, triggerRef }) {
   const eggModalRef = useRef(null);
   useFocusTrap(eggModalRef);
   useEffect(() => {
+    // Catch focus escaping the modal (e.g. when throw button becomes disabled mid-animation)
+    const el = eggModalRef.current;
+    if (!el) return;
+    const handleFocusIn = (e) => {
+      if (!el.contains(e.target)) {
+        const focusables = Array.from(el.querySelectorAll('button:not(:disabled), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')).filter((n) => n.offsetParent !== null);
+        if (focusables.length > 0) focusables[0].focus();
+      }
+    };
+    document.addEventListener("focusin", handleFocusIn);
+    return () => document.removeEventListener("focusin", handleFocusIn);
+  }, []);
+  useEffect(() => {
     if (eggModalRef.current) { const first = eggModalRef.current.querySelector("button"); if (first) first.focus(); }
     const handler = (e) => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", handler);

@@ -4,7 +4,8 @@ import NextImage from "next/image";
 
 // ── Data ──────────────────────────────────────────────────────
 const TICKER_ITEMS = [
-  "✦ 65% Task-Time Reduction ✦",
+  "✦ 65% Task-Time Reduction - My Docs ✦",
+  "✦ 95% Task-Time Reduction - Puckboard Logging ✦",
   "✦ $20M+ Operational Savings ✦",
   "✦ R&D 100 Award Winner 2023 - Puckboard ✦",
   "✦ ~375K+ Labor Hours Reclaimed ✦",
@@ -182,11 +183,11 @@ const PROJECTS = [
       {
         phase: "05 — Deliver",
         title: "Contributing to a System with Measurable Impact",
-        body: "The shipped product reduced post-mission documentation from 3+ hours to under 10 minutes — a 65% task-time reduction that translated directly into operational capacity. But the number I'm proudest of is the $20M+ in fuel savings, because that wasn't a UX metric — it was a business outcome made possible by the design decision to prioritize data accuracy over speed-to-ship. Reliable fuel data flowing from validated digital inputs enabled reporting that simply wasn't possible with the old paper-based system. Across Air Mobility Command, the product has reclaimed an estimated 375,000+ labor hours — time that went back to mission readiness instead of paperwork. This project taught me that the highest-leverage design decisions often aren't about the interface at all. They're about what data to capture, how to validate it, and where to route it — the system design underneath the screens.",
+        body: "The shipped product reduced post-mission documentation from 3+ hours to under 10 minutes — a 95% task-time reduction that translated directly into operational capacity. But the number I'm proudest of is the $20M+ in fuel savings, because that wasn't a UX metric — it was a business outcome made possible by the design decision to prioritize data accuracy over speed-to-ship. Reliable fuel data flowing from validated digital inputs enabled reporting that simply wasn't possible with the old paper-based system. Across Air Mobility Command, the product has reclaimed an estimated 375,000+ labor hours — time that went back to mission readiness instead of paperwork. This project taught me that the highest-leverage design decisions often aren't about the interface at all. They're about what data to capture, how to validate it, and where to route it — the system design underneath the screens.",
         callout: {
           type: "stat",
           stats: [
-            { v: "65%", l: "Task time reduction" },
+            { v: "95%", l: "Task time reduction" },
             { v: "$20M+", l: "Savings" },
             { v: "375K+ hrs", l: "Given Back to Users" },
           ],

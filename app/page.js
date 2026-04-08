@@ -106,6 +106,11 @@ const PROJECTS = [
         caption: "Aircrew Search in action — demonstrating query flows across unit rosters and official Air Force databases (ARMS & ARTEMIS) with real-time filtering and role-based result handling",
       },
       {
+        type: "image",
+        src: "/case-studies/PBL/651Process.png",
+        caption: "Paper Form 651 (left) vs. redesigned digital input (right) — decoupled the input experience from the output format, capturing the same data through a structured, validated flow instead of mirroring the physical form field-by-field",
+      },
+      {
         type: "video",
         src: "/case-studies/PBL/Form651.mp4",
         caption: "Translated AF Form 651 from a paper-based form into a structured digital flow with validated inputs and pre-populated data, reducing ambiguity and minimizing common entry errors observed in manual workflows",

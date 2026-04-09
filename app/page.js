@@ -11,7 +11,6 @@ const TICKER_ITEMS = [
   "✦ ~375K+ Labor Hours Reclaimed ✦",
   "✦ 5 Years Enterprise UX ✦",
   "✦ Active DoD Secret Clearance ✦",
-  "✦ Research-Driven Design ✦",
   "✦ Design Systems Expertise ✦",
   "✦ M.S. UX & HCI — University of Michigan ✦",
 ];

@@ -50,7 +50,7 @@ const PROJECTS = [
     id: "pbl",
     year: "2022–2023",
     tag: "iOS · Enterprise UX",
-    title: "Puckboard Logging",
+    title: "Puckboard - Logging",
     subtitle: "The future of post-mission paperwork.",
     impact: "3hrs → <10min",
     impactLabel: "Task Time",

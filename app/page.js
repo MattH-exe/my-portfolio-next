@@ -220,7 +220,7 @@ const PROJECTS = [
     },
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
-    role: "Lead Product Designer · Puckboard Personnel (web) · Active DoD Secret Clearance required · Cross-functional team of designers, web engineers, and a PM",
+    role: "Lead Product Designer · Puckboard Office (web) · Active DoD Secret Clearance required · Cross-functional team of designers, web engineers, and a PM",
     contributions: [
       "Defined the information architecture for My Docs — document taxonomy, folder structure, and access model — resolving a fundamental tension between individual privacy and command-level visibility",
       "Designed the Flight Evaluation Folder (FEF) lifecycle system — chose a structured state-machine approach over flexible tagging after testing showed that ambiguous ownership was the primary driver of missed review deadlines in the legacy process",

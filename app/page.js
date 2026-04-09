@@ -5,7 +5,7 @@ import NextImage from "next/image";
 // ── Data ──────────────────────────────────────────────────────
 const TICKER_ITEMS = [
   "✦ 65% Task-Time Reduction - My Docs ✦",
-  "✦ 95% Task-Time Reduction - Puckboard Logging ✦",
+  "✦ 95% Task-Time Reduction — Logging ✦",
   "✦ $20M+ Operational Savings ✦",
   "✦ R&D 100 Award Winner 2023 - Puckboard ✦",
   "✦ ~375K+ Labor Hours Reclaimed ✦",

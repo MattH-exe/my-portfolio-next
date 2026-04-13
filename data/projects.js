@@ -416,7 +416,7 @@ export const PROJECT_CARDS = [
     id: "parkpal",
     title: "ParkPal",
     subtitle: "Getting outside shouldn't have barriers.",
-    tag: "Accessibility · Mobile · UX Research",
+    tag: "Accessibility · Mobile · UX Research · M.S.I. Capstone",
     impact: "A11y First",
     impactLabel: "Design Approach",
     color: "#10b981",

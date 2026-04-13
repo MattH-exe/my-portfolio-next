@@ -45,7 +45,7 @@ export default function PuckboardPage() {
 
         {/* Products */}
         <section aria-label="Products in the Puckboard suite" style={{ padding: "0 clamp(16px, 3vw, 36px) 64px" }}>
-          <div style={{ fontFamily: FONTS.mono, fontSize: "10px", color: "#00d4ff", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "24px" }}>Products in the Suite</div>
+          <div style={{ fontFamily: FONTS.mono, fontSize: "10px", color: "#00d4ff", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "24px" }}>Puckboard Features I've Built:</div>
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {data.products.map((product, i) => {
               const isClickable = !!product.href;

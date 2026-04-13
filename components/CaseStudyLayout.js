@@ -166,7 +166,7 @@ export default function CaseStudyLayout({ study, backHref = "/work/puckboard", b
         {/* ── Hero ── */}
         <section style={{ padding: "80px clamp(16px, 3vw, 36px) 40px" }}>
           <a href={backHref} style={{
-            fontFamily: FONTS.mono, fontSize: "10px", color: COLORS.accent,
+            fontFamily: FONTS.mono, fontSize: "12px", color: COLORS.accent,
             letterSpacing: "0.2em", textTransform: "uppercase", textDecoration: "none",
             display: "inline-block", marginBottom: "20px",
           }}>← {backLabel}</a>

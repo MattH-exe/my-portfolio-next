@@ -422,7 +422,7 @@ export const PROJECT_CARDS = [
     color: "#10b981",
     href: "/work/parkpal",
     heroImage: "/case-studies/parkpal/hero.jpg",
-    protected: true,
+    protected: false,
   },
 ];
 

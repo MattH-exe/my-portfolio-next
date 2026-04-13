@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 const PROTECTED_ROUTES = [
   "/work/puckboard/logging",
   "/work/puckboard/mydocs",
-  "/work/parkpal",
 ];
 
 export function middleware(request) {
@@ -28,6 +27,5 @@ export const config = {
   matcher: [
     "/work/puckboard/logging/:path*",
     "/work/puckboard/mydocs/:path*",
-    "/work/parkpal/:path*",
   ],
 };

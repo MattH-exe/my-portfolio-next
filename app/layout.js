@@ -1,26 +1,31 @@
-import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 export const metadata = {
-  title: "Hi, I'm Matt",
+  title: {
+    default: "Matthew Henning — Product Designer",
+    template: "%s — Matthew Henning",
+  },
   description:
-    "Research-driven design for systems that matter. M.S. HCI, University of Michigan. Based in Chicago.",
+    "Research-driven design for systems that matter. Nearly 5 years of enterprise UX experience on Puckboard, a multi-product DoD platform. M.S. HCI, University of Michigan. Based in Chicago.",
+  metadataBase: new URL("https://matt-henning.com"),
+  openGraph: {
+    title: "Matthew Henning — Product Designer",
+    description: "Research-driven design for systems that matter. Enterprise UX, DoD, design systems.",
+    url: "https://matt-henning.com",
+    siteName: "Matthew Henning",
+    type: "website",
+  },
 };
- 
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/iconv2.png" type="image/png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-      </head>
-      <body>{children}
-      <Analytics />
-      <SpeedInsights />
+      <body>
+        {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
 }
- 

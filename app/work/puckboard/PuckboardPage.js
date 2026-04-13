@@ -25,7 +25,7 @@ export default function PuckboardPage() {
         {/* Hero */}
         <section aria-label="Puckboard overview" style={{ padding: "80px clamp(16px, 3vw, 36px) 40px" }}>
           <a href="/" style={{ fontFamily: FONTS.mono, fontSize: "10px", color: COLORS.accent, letterSpacing: "0.2em", textTransform: "uppercase", textDecoration: "none", display: "inline-block", marginBottom: "24px" }}>← Back to Portfolio</a>
-          <div style={{ fontFamily: FONTS.mono, fontSize: "10px", color: "#00d4ff", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "12px" }}>Flagship Product · 2020–Present</div>
+          <div style={{ fontFamily: FONTS.mono, fontSize: "10px", color: "#00d4ff", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "12px" }}>Flagship Product · 2022–Present</div>
           <h1 style={{ fontFamily: FONTS.headline, fontSize: "clamp(64px, 10vw, 120px)", fontWeight: "400", color: "#fff", letterSpacing: "0.02em", lineHeight: "0.92", marginBottom: "24px" }}>PUCKBOARD</h1>
           <p style={{ fontFamily: FONTS.body, fontSize: "clamp(18px, 2.5vw, 22px)", color: COLORS.textSecondary, lineHeight: "1.6", maxWidth: "700px", marginBottom: "16px" }}>{data.description}</p>
           <div style={{ fontFamily: FONTS.mono, fontSize: "12px", color: COLORS.textMuted, letterSpacing: "0.08em", marginBottom: "48px" }}>{data.role}</div>

@@ -25,7 +25,7 @@ export const PUCKBOARD_ECOSYSTEM = {
     { value: "95%", label: "Task-Time Reduction (Logging)" },
     { value: "$20M+", label: "Operational Fuel Savings" },
     { value: "375K+", label: "Labor Hours Reclaimed" },
-    { value: "65%", label: "Eval Process Time Reduction (My Docs)" },
+    { value: "980,000+", label: "Events scheduled to date" },
   ],
   products: [
     {

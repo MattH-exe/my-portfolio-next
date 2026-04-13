@@ -19,8 +19,8 @@ export const PUCKBOARD_ECOSYSTEM = {
   title: "Puckboard",
   tagline: "One platform. Every mission.",
   description:
-    "For 5 years, I've shaped Puckboard — the digital backbone of U.S. Air Force flight operations. What started as an iPad logging tool has evolved into a multi-product enterprise suite spanning scheduling, post-mission documentation, personnel records, and readiness testing.",
-  role: "Product Designer → Lead Product Designer · 2020–Present · Active DoD Secret Clearance",
+    "For 5 years, I've shaped Puckboard — the Department of Defense’s first accredited, web-based, collaborative scheduling application. What started as an iPad logging tool & a web-based scheduling tool has evolved into a multi-product enterprise suite spanning scheduling, post-mission documentation, personnel records, and readiness testing.",
+  role: "Product Designer → Senior Product Designer · 2022–Present · Active DoD Secret Clearance",
   stats: [
     { value: "95%", label: "Task-Time Reduction (Logging)" },
     { value: "$20M+", label: "Operational Fuel Savings" },

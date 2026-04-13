@@ -58,7 +58,7 @@ function LoginForm() {
           </h1>
 
           <p style={{ fontFamily: FONTS.body, fontSize: "15px", color: COLORS.textMuted, lineHeight: "1.6", marginBottom: "40px" }}>
-            This case study contains work created under NDA. Enter the password to continue.
+            This case study contains work created under NDA. Enter the password to continue. Password Available on request: mhenn@umich.edu
           </p>
 
           <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "12px" }}>

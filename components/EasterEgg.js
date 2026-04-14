@@ -62,7 +62,7 @@ export default function EasterEggModal({ onClose, onMaster, caught, setCaught, t
     };
   }, [onClose, triggerRef]);
 
-  const caughtCount = Math.min(caught.length, 10);
+  const caughtCount = Math.min(caught.length, 6);
   const isMaster = caught.length >= 10;
 
   const throwBall = () => {
@@ -80,7 +80,7 @@ export default function EasterEggModal({ onClose, onMaster, caught, setCaught, t
           setCatchAnim(false);
           const newCaught = [...caught, current];
           setCaught(newCaught);
-          if (newCaught.length >= 10) onMaster();
+          if (newCaught.length >= 6) onMaster();
           setMessage("Gotcha! " + current.name + " was caught!");
           setTimeout(() => {
             const remaining = POKEMON.filter((p) => !newCaught.some((c) => c.id === p.id));
@@ -175,7 +175,7 @@ export default function EasterEggModal({ onClose, onMaster, caught, setCaught, t
 
         {/* Progress */}
         <div style={{ fontFamily: FONTS.mono, fontSize: "11px", color: "#7b7b7b", letterSpacing: "0.1em" }}>
-          {caughtCount} / 10 caught{isMaster && " · Pokémon Master 🏆"}
+          {caughtCount} / 6 caught{isMaster && " · Pokémon Master 🏆"}
         </div>
 
         {/* Close */}

@@ -307,7 +307,7 @@ export default function CaseStudyLayout({ study, backHref = "/work/puckboard", b
 
         {/* ── Artifacts ── */}
         <section aria-label="Design artifacts" style={{ padding: "0 clamp(16px, 3vw, 36px) 48px" }}>
-          <div style={{ fontFamily: FONTS.mono, fontSize: "10px", color: study.color, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "16px" }}>Design Artifacts</div>
+          <div style={{ fontFamily: FONTS.mono, fontSize: "10px", color: study.color, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "16px" }}>More Design Artifacts</div>
           <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: "16px" }}>
             {study.media.map((item, i) => (
               <MediaItem key={i} item={item} color={study.color} onLightbox={setLightbox} />

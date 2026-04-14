@@ -19,8 +19,10 @@ export default function EasterEggModal({ onClose, onMaster, caught, setCaught, t
   const eggModalRef = useRef(null);
 
   useEffect(() => {
-    setWasAlreadyCaught(caught.some((p) => p.id === current.id));
-  }, [current.id, caught]);
+      if (!throwing) {
+        setWasAlreadyCaught(caught.some((p) => p.id === current.id));
+    }
+  }, [current.id, caught, throwing]);
 
   // Fetch sprite
   useEffect(() => {
@@ -63,7 +65,7 @@ export default function EasterEggModal({ onClose, onMaster, caught, setCaught, t
   }, [onClose, triggerRef]);
 
   const caughtCount = Math.min(caught.length, 6);
-  const isMaster = caught.length >= 10;
+  const isMaster = caught.length >= 6;
 
   const throwBall = () => {
     if (wasAlreadyCaught || throwing) return;

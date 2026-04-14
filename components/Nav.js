@@ -45,7 +45,7 @@ export default function Nav({ onEasterEgg, eggFound, isMaster, eggButtonRef }) {
       <div style={{ display: "flex", gap: mobile ? "16px" : "32px", alignItems: "center" }}>
         {!mobile && (
           <>
-            <a href="/work/puckboard" style={linkStyle}
+            <a href="/#work" style={linkStyle}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
               onMouseLeave={(e) => (e.currentTarget.style.color = COLORS.textMuted)}
               onFocus={(e) => (e.currentTarget.style.color = "#fff")}

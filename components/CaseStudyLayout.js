@@ -240,28 +240,39 @@ export default function CaseStudyLayout({ study, backHref = "/work/puckboard", b
           </div>
         </section>
 
-        {/* ── Context strip (civilian orientation) ── */}
-        {study.context && (
-          <section aria-label="Project context" style={{ padding: "0 clamp(16px, 3vw, 36px) 32px" }}>
-            <p style={{ fontFamily: FONTS.body, fontSize: "clamp(16px, 2vw, 18px)", color: COLORS.textSecondary, lineHeight: "1.7", maxWidth: "780px", borderLeft: `3px solid ${study.color}44`, paddingLeft: "20px" }}>
-              {study.context}
-            </p>
-          </section>
-        )}
-
-        {/* ── Key Insight ── */}
-        {study.keyInsight && (
-          <section aria-label="Key insight" style={{ padding: "0 clamp(16px, 3vw, 36px) 48px" }}>
+        {/* ── Context + Key Insight (side by side on desktop) ── */}
+        {(study.context || study.keyInsight) && (
+          <section aria-label="Project context and key insight" style={{ padding: "0 clamp(16px, 3vw, 36px) 48px" }}>
             <div style={{
-              background: study.color + "08",
-              border: `1px solid ${study.color}22`,
-              borderLeft: `4px solid ${study.color}`,
-              borderRadius: "0 12px 12px 0",
-              padding: "28px 32px",
-              maxWidth: "820px",
+              display: "grid",
+              gridTemplateColumns: mobile ? "1fr" : (study.context && study.keyInsight ? "1fr 1fr" : "1fr"),
+              gap: "20px",
+              alignItems: "stretch",
             }}>
-              <div style={{ fontFamily: FONTS.mono, fontSize: "10px", color: study.color, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "14px" }}>Key Insight</div>
-              <p style={{ fontFamily: FONTS.body, fontSize: "clamp(17px, 2vw, 20px)", color: "#e8e8e8", lineHeight: "1.65", fontStyle: "italic" }}>{study.keyInsight}</p>
+              {study.context && (
+                <div style={{
+                  borderLeft: `3px solid ${study.color}44`,
+                  paddingLeft: "20px",
+                  display: "flex",
+                  alignItems: "center",
+                }}>
+                  <p style={{ fontFamily: FONTS.body, fontSize: "clamp(15px, 1.8vw, 17px)", color: COLORS.textSecondary, lineHeight: "1.7" }}>
+                    {study.context}
+                  </p>
+                </div>
+              )}
+              {study.keyInsight && (
+                <div style={{
+                  background: study.color + "08",
+                  border: `1px solid ${study.color}22`,
+                  borderLeft: `4px solid ${study.color}`,
+                  borderRadius: "0 12px 12px 0",
+                  padding: "24px 28px",
+                }}>
+                  <div style={{ fontFamily: FONTS.mono, fontSize: "10px", color: study.color, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "12px" }}>Key Insight</div>
+                  <p style={{ fontFamily: FONTS.body, fontSize: "clamp(15px, 1.8vw, 17px)", color: "#e8e8e8", lineHeight: "1.65", fontStyle: "italic" }}>{study.keyInsight}</p>
+                </div>
+              )}
             </div>
           </section>
         )}

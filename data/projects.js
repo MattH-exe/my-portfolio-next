@@ -43,23 +43,9 @@ export const PUCKBOARD_ECOSYSTEM = {
       protected: true,
     },
     {
-      name: "Nimbus Design System",
+      name: "+ 3 Features in Active Development",
       platform: "iOS + Web",
-      description: "Token-based design system bridging UIKit (iOS) and web — 42+ components with full state coverage and cross-platform parity.",
-      href: null,
-      wip: true,
-    },
-    {
-      name: "Mission Review Dashboard",
-      platform: "Web",
-      description: "Central hub routing all post-mission event data to systems of record for SARM review and submission.",
-      href: null,
-      wip: true,
-    },
-    {
-      name: "Puckboard Testing",
-      platform: "Web",
-      description: "Test management platform modernizing how units plan, track, and report on readiness testing. Currently in active design.",
+      description: "Nimbus Design System (token-based, 42+ components), Mission Review Dashboard, and Puckboard Testing — currently in design or development.",
       href: null,
       wip: true,
     },
@@ -104,12 +90,14 @@ export const CASE_STUDIES = {
     role: "Product Designer · Cross-functional team of 1 designer, multiple iOS engineers, and a PM · Active DoD Secret Clearance required",
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
+    context:
+      "After every military flight, U.S. Air Force pilots are required to document crew performance, fuel usage, and mission data across paper forms that feed three separate systems of record. For a single C-17 crew, that process took 3+ hours — time spent on paperwork instead of mission readiness.",
     challenge:
-      "Every hour aircrew spent on paperwork was an hour not spent on mission readiness — and with 3+ hours of manual documentation per mission across thousands of flights annually, the operational cost was staggering.",
+      "3+ hours of post-mission paperwork per flight, across thousands of annual missions. The operational cost wasn't just time — error-prone manual entry made downstream fuel reporting unreliable.",
     bet:
-      "We chose to aggressively pre-populate and validate data at the point of entry rather than build a flexible freeform tool, because research showed the majority of errors came from re-keying data that already existed elsewhere.",
+      "Instead of digitizing the forms as-is, I advocated for restructuring the workflow around pre-populated, validated inputs — trading flexibility for accuracy, because research showed re-keyed data was the root cause of most errors.",
     outcome:
-      "Documentation time dropped from 3+ hours to under 10 minutes. Improved data accuracy directly contributed to $20M+ in operational fuel savings through better downstream reporting.",
+      "Documentation dropped from 3+ hours to under 10 minutes. That data accuracy directly enabled $20M+ in fuel savings and reclaimed 375,000+ labor hours across Air Mobility Command.",
     metrics: [
       { value: "3hrs → <10min", label: "Documentation Time" },
       { value: "$20M+", label: "Operational Fuel Savings" },
@@ -218,14 +206,16 @@ export const CASE_STUDIES = {
     role: "Lead Product Designer · Puckboard Office (web) · Active DoD Secret Clearance required",
     cuiDisclaimer:
       "*Operational data for this product is CUI. Any images & artifacts were created under an NDA and from a secure product and are intentionally limited or obscured.",
+    context:
+      "When U.S. Air Force service members transfer to a new base (a PCS move), their evaluation records often don't follow them — because the records were owned by their unit, not by them. The result: lost documentation, broken evaluation timelines, and service members unable to access their own career history.",
     challenge:
-      "Service members were losing access to their own evaluation records during PCS transfers — not because the data didn't exist, but because it was owned by units, not people.",
+      "Service members were losing evaluation records during base transfers — not from carelessness, but because documents were owned by units, not individuals. The system was architecturally broken.",
     bet:
-      "I advocated for fundamentally restructuring ownership from unit-centric to member-centric despite political complexity, because research showed transfer-triggered sync would still fail in a meaningful percentage of cases.",
+      "I advocated for restructuring ownership from unit-centric to member-centric, despite significant political complexity — because adding a sync layer would paper over the root cause rather than fix it.",
     outcome:
-      "End-to-end evaluation process reduced from 17+ hours across 9 steps to ~6 hours — a 65% time-on-task reduction. Documents now persist across a service member's entire career.",
+      "End-to-end eval process cut from 17+ hours to ~6 hours. Documents now persist across a service member's entire career, regardless of where they're stationed.",
     metrics: [
-      { value: "0→1", label: "Net-New System" },
+      { value: "Net New", label: "Built From Scratch" },
       { value: "65%", label: "Eval Process Time Reduction" },
       { value: "17hrs → ~6hrs", label: "End-to-End Eval Cycle" },
       { value: "Career-Spanning", label: "Document Persistence" },
@@ -405,8 +395,8 @@ export const PROJECT_CARDS = [
     title: "Puckboard",
     subtitle: "The digital backbone of U.S. Air Force flight operations.",
     tag: "Enterprise UX · iOS + Web · DoD",
-    impact: "5 Years",
-    impactLabel: "Multi-Product Suite",
+    impact: "95%",
+    impactLabel: "Task Time Reduction",
     color: "#00d4ff",
     href: "/work/puckboard",
     heroImage: "/case-studies/PBL/hero.png",
@@ -417,8 +407,8 @@ export const PROJECT_CARDS = [
     title: "ParkPal",
     subtitle: "Getting outside shouldn't have barriers.",
     tag: "Accessibility · Mobile · UX Research · M.S.I. Capstone",
-    impact: "A11y First",
-    impactLabel: "Design Approach",
+    impact: "↑ 40%",
+    impactLabel: "Task Completion",
     color: "#10b981",
     href: "/work/parkpal",
     heroImage: "/case-studies/parkpal/hero.jpg",

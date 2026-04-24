@@ -204,6 +204,15 @@ export default function CaseStudyLayout({ study, backHref = "/work/puckboard", b
           </div>
         </section>
 
+        {/* ── Context strip (civilian orientation) ── */}
+        {study.context && (
+          <section aria-label="Project context" style={{ padding: "0 clamp(16px, 3vw, 36px) 32px" }}>
+            <p style={{ fontFamily: FONTS.body, fontSize: "clamp(16px, 2vw, 18px)", color: COLORS.textSecondary, lineHeight: "1.7", maxWidth: "780px", borderLeft: `3px solid ${study.color}44`, paddingLeft: "20px" }}>
+              {study.context}
+            </p>
+          </section>
+        )}
+
         {/* ── Challenge / Bet / Outcome ── */}
         <section aria-label="Project summary" style={{ padding: "0 clamp(16px, 3vw, 36px) 48px" }}>
           <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr 1fr", gap: "20px" }}>
@@ -212,9 +221,9 @@ export default function CaseStudyLayout({ study, backHref = "/work/puckboard", b
               { label: "The Bet", text: study.bet },
               { label: "The Outcome", text: study.outcome },
             ].map((section, i) => (
-              <div key={i} style={{ background: "#0a0a0d", borderRadius: "12px", padding: "24px", borderTop: `3px solid ${study.color}${i === 2 ? "" : "44"}` }}>
-                <div style={{ fontFamily: FONTS.mono, fontSize: "10px", color: study.color, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "10px" }}>{section.label}</div>
-                <p style={{ fontFamily: FONTS.body, fontSize: "14px", color: COLORS.textSecondary, lineHeight: "1.6" }}>{section.text}</p>
+              <div key={i} style={{ background: "#0a0a0d", borderRadius: "12px", padding: "32px 28px", borderTop: `3px solid ${study.color}${i === 2 ? "" : "44"}` }}>
+                <div style={{ fontFamily: FONTS.mono, fontSize: "11px", color: study.color, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "14px" }}>{section.label}</div>
+                <p style={{ fontFamily: FONTS.body, fontSize: "15px", color: COLORS.textSecondary, lineHeight: "1.65" }}>{section.text}</p>
               </div>
             ))}
           </div>
@@ -225,7 +234,7 @@ export default function CaseStudyLayout({ study, backHref = "/work/puckboard", b
           <section aria-label="Featured design artifact" style={{ padding: "0 clamp(16px, 3vw, 36px) 48px" }}>
             <div style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid #1e1e1e" }}>
               {study.featuredArtifact.src.endsWith(".mp4") ? (
-                <video src={study.featuredArtifact.src} controls playsInline muted autoPlay loop style={{ width: "100%", display: "block" }} />
+                <video src={study.featuredArtifact.src} controls playsInline muted autoPlay loop style={{ width: "100%", display: "block", maxHeight: "560px", objectFit: "contain", background: "#000" }} />
               ) : (
                 <img src={study.featuredArtifact.src} alt={study.featuredArtifact.caption} style={{ width: "100%", display: "block" }} />
               )}

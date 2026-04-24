@@ -119,9 +119,9 @@ function About() {
       <div style={{ maxWidth: "1100px" }}>
         <div style={{ fontFamily: FONTS.mono, fontSize: "10px", color: COLORS.accent, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "24px" }}>About</div>
         <h2 style={{ fontFamily: FONTS.headline, fontSize: "clamp(40px, 6vw, 80px)", fontWeight: "400", color: "#fff", lineHeight: "0.95", letterSpacing: "0.02em", marginBottom: "56px" }}>
-          DESIGNING<br />
-          <span style={{ color: "transparent", WebkitTextStroke: "1.5px #fff" }}>SOLUTIONS</span> THAT DELIVER<br />
-          & DELIGHT.
+          ENTERPRISE UX<br />
+          <span style={{ color: "transparent", WebkitTextStroke: "1.5px #fff" }}>WHERE</span> CLARITY<br />
+          ISN&apos;T OPTIONAL.
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "280px 1fr", gap: mobile ? "36px" : "56px", alignItems: "start" }}>
           <div style={{ position: "relative", width: "fit-content" }}>
@@ -133,10 +133,10 @@ function About() {
           <div>
             <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: "36px", marginBottom: "40px" }}>
               <p style={{ fontFamily: FONTS.body, fontSize: "17px", color: "#909090", lineHeight: "1.65" }}>
-                Before I learned to design interfaces, I learned to tell stories through a lens studying Film, Television & Digital Media. That background — understanding composition, pacing, what earns attention — still shines through in my product design work.
+                I design complex enterprise systems for users who can&apos;t afford confusion — operational environments where bad UX has real consequences. I research deeply, synthesize rigorously, and build design systems that outlast the project. M.S. in UX Research &amp; Design (HCI) from the University of Michigan. Based in Chicago.
               </p>
               <p style={{ fontFamily: FONTS.body, fontSize: "17px", color: "#909090", lineHeight: "1.65" }}>
-                Today I design complex enterprise systems where clarity isn&apos;t optional. I research deeply, synthesize rigorously, and build design systems that outlast the project. M.S. in UX Research & Design (HCI) from the University of Michigan. Based in Chicago.
+                Before interfaces, I learned to tell stories through a lens — studying Film, Television &amp; Digital Media. That background in composition, pacing, and what earns attention still shows up in how I frame design problems and present work.
               </p>
             </div>
             <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
@@ -219,7 +219,10 @@ function Contact() {
               onBlur={(e) => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.color = "#000"; }}>
               Send Message →
             </button>
-            <p style={{ fontFamily: FONTS.mono, fontSize: "9px", color: COLORS.textDim, letterSpacing: "0.06em", textAlign: "center", marginTop: "4px" }}>Opens your email client · No data stored</p>
+            <p style={{ fontFamily: FONTS.mono, fontSize: "9px", color: COLORS.textDim, letterSpacing: "0.06em", textAlign: "center", marginTop: "4px" }}>
+              Opens your email client · Or reach me directly at{" "}
+              <a href="mailto:mhenn@umich.edu" style={{ color: COLORS.accent, textDecoration: "none" }}>mhenn@umich.edu</a>
+            </p>
           </div>
         </div>
       </div>

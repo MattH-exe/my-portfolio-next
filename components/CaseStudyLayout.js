@@ -116,6 +116,42 @@ function Lightbox({ src, caption, onClose }) {
   );
 }
 
+// ── Featured Image with hover overlay ────────────────────────
+function FeaturedImage({ src, alt, title, color }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      style={{ position: "relative", width: "100%", cursor: "default" }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <img src={src} alt={alt || ""} style={{ width: "100%", display: "block", transition: "transform 0.4s ease", transform: hovered ? "scale(1.015)" : "scale(1)" }} />
+      {title && (
+        <div style={{
+          position: "absolute", inset: 0,
+          background: hovered ? "rgba(0,0,0,0.55)" : "rgba(0,0,0,0)",
+          display: "flex", alignItems: "flex-end",
+          padding: "28px",
+          transition: "background 0.3s ease",
+          pointerEvents: "none",
+        }}>
+          <p style={{
+            fontFamily: FONTS.mono, fontSize: "11px", color,
+            letterSpacing: "0.1em", textTransform: "uppercase",
+            opacity: hovered ? 1 : 0,
+            transform: hovered ? "translateY(0)" : "translateY(6px)",
+            transition: "opacity 0.3s ease, transform 0.3s ease",
+            background: "rgba(0,0,0,0.6)", padding: "6px 12px", borderRadius: "4px",
+            borderLeft: `2px solid ${color}`,
+          }}>
+            {title}
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ── Main Layout ───────────────────────────────────────────────
 export default function CaseStudyLayout({ study, backHref = "/work/puckboard", backLabel = "Back to Puckboard" }) {
   const [activePhase, setActivePhase] = useState(0);
@@ -213,6 +249,23 @@ export default function CaseStudyLayout({ study, backHref = "/work/puckboard", b
           </section>
         )}
 
+        {/* ── Key Insight ── */}
+        {study.keyInsight && (
+          <section aria-label="Key insight" style={{ padding: "0 clamp(16px, 3vw, 36px) 48px" }}>
+            <div style={{
+              background: study.color + "08",
+              border: `1px solid ${study.color}22`,
+              borderLeft: `4px solid ${study.color}`,
+              borderRadius: "0 12px 12px 0",
+              padding: "28px 32px",
+              maxWidth: "820px",
+            }}>
+              <div style={{ fontFamily: FONTS.mono, fontSize: "10px", color: study.color, letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "14px" }}>Key Insight</div>
+              <p style={{ fontFamily: FONTS.body, fontSize: "clamp(17px, 2vw, 20px)", color: "#e8e8e8", lineHeight: "1.65", fontStyle: "italic" }}>{study.keyInsight}</p>
+            </div>
+          </section>
+        )}
+
         {/* ── Challenge / Bet / Outcome ── */}
         <section aria-label="Project summary" style={{ padding: "0 clamp(16px, 3vw, 36px) 48px" }}>
           <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr 1fr", gap: "20px" }}>
@@ -232,16 +285,51 @@ export default function CaseStudyLayout({ study, backHref = "/work/puckboard", b
         {/* ── Featured artifact ── */}
         {study.featuredArtifact && (
           <section aria-label="Featured design artifact" style={{ padding: "0 clamp(16px, 3vw, 36px) 48px" }}>
-            <div style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid #1e1e1e" }}>
+            {/* Visual */}
+            <div style={{ position: "relative", borderRadius: "12px", overflow: "hidden", border: `1px solid ${study.color}22` }}>
               {study.featuredArtifact.src.endsWith(".mp4") ? (
-                <video src={study.featuredArtifact.src} controls playsInline muted autoPlay loop style={{ width: "100%", display: "block", maxHeight: "560px", objectFit: "contain", background: "#000" }} />
+                <video
+                  src={study.featuredArtifact.src}
+                  controls playsInline muted autoPlay loop
+                  style={{ width: "100%", display: "block", maxHeight: "560px", objectFit: "contain", background: "#000" }}
+                />
               ) : (
-                <img src={study.featuredArtifact.src} alt={study.featuredArtifact.caption} style={{ width: "100%", display: "block" }} />
+                <FeaturedImage src={study.featuredArtifact.src} alt={study.featuredArtifact.caption} title={study.featuredArtifact.title} color={study.color} />
               )}
             </div>
-            <p style={{ fontFamily: FONTS.mono, fontSize: "10px", color: COLORS.textMuted, letterSpacing: "0.06em", marginTop: "10px", lineHeight: "1.5", maxWidth: "700px" }}>
-              {study.featuredArtifact.caption}
-            </p>
+
+            {/* Description panel */}
+            <div style={{
+              background: "#0a0a0d",
+              border: `1px solid ${study.color}18`,
+              borderTop: `2px solid ${study.color}`,
+              borderRadius: "0 0 12px 12px",
+              padding: "24px 28px",
+              marginTop: "-1px",
+            }}>
+              {study.featuredArtifact.title && (
+                <h3 style={{
+                  fontFamily: FONTS.headline,
+                  fontSize: "clamp(20px, 2.5vw, 26px)",
+                  color: "#fff",
+                  fontWeight: "400",
+                  letterSpacing: "0.02em",
+                  marginBottom: "10px",
+                  lineHeight: "1.1",
+                }}>
+                  {study.featuredArtifact.title}
+                </h3>
+              )}
+              {study.featuredArtifact.description ? (
+                <p style={{ fontFamily: FONTS.body, fontSize: "15px", color: COLORS.textSecondary, lineHeight: "1.65", maxWidth: "760px" }}>
+                  {study.featuredArtifact.description}
+                </p>
+              ) : (
+                <p style={{ fontFamily: FONTS.mono, fontSize: "11px", color: COLORS.textMuted, letterSpacing: "0.06em", lineHeight: "1.5", maxWidth: "700px" }}>
+                  {study.featuredArtifact.caption}
+                </p>
+              )}
+            </div>
           </section>
         )}
 

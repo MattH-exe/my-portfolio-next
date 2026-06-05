@@ -191,7 +191,7 @@ export const CASE_STUDIES = {
       { type: "image", src: "/case-studies/PBL/Event Subpage - Fuel Metrics - Tanker.png", caption: "Fuel Metric Data was one of the largest sources of errors & data loss on handwritten forms. A Missed 0 could mean millions in Accounting & Billing Errors" },
       { type: "image", src: "/case-studies/PBL/Event Subpage - Mission Data.png", caption: "Compare logged training events with logged time in one view for simpler tracking (Example: A Night Vision Goggle Training Event requires Night Flight Time to be logged" },
       { type: "image", src: "/case-studies/PBL/Event Subpage - Training Events Table.png", caption: "Review Logged Training Events across by All Aircrew across All Sorties in useful easy-to-parse breakdowns" },
-      { type: "image", src: "/case-studies/PBL/Push to ARMS flow MVP.png", caption: "" },
+      { type: "image", src: "/case-studies/PBL/Push to ARMS flow MVP.png", caption: "Designed Data Touchpoint Flow between Puckboard & ARMS. Useful error-state messaging UI for correction of potential upload data loss is critical" },
     ],
     tags: ["iOS", "Contextual Inquiry", "Interaction Design", "Usability Testing", "Figma", "DoD"],
     links: [

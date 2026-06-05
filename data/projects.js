@@ -43,7 +43,7 @@ export const PUCKBOARD_ECOSYSTEM = {
       protected: true,
     },
     {
-      name: "+ 3 Features in Production [Case Studies in Progress]",
+      name: "+ 3 Features in Production",
       platform: "iOS + Web",
       description: "Nimbus Design System (token-based, 42+ components), Mission Review Dashboard, and Puckboard Testing — currently in design or development.",
       href: null,

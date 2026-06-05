@@ -108,6 +108,7 @@ export const CASE_STUDIES = {
       { value: "AMC Wide", label: "Adoption" },
     ],
     contributions: [
+      "Lead Designer on Post-Mission Review Dashboard Interface for Puckboard - Office",
       "Owned the AF Form 651 digitization flow — structured, validated inputs over flexible freeform approach after field research showed majority of errors came from ambiguous entry points",
       "Designed fuel metrics tracking workflows that directly enabled $20M+ in operational cost savings",
       "Contributed to Aircrew Editor interaction patterns — opted for confirmation steps on role assignments despite extra tap, because mis-assignments had real operational consequences",

@@ -185,6 +185,13 @@ export const CASE_STUDIES = {
       { type: "video", src: "/case-studies/PBL/Form651.mp4", caption: "AF Form 651 — structured digital flow with validated inputs and pre-populated data" },
       { type: "image", src: "/case-studies/PBL/PBL_PDF_Navigation_V3_page-0001.jpg", caption: "Early PDF generation workflow exploration" },
       { type: "video", src: "/case-studies/PBL/pdfgen.mp4", caption: "Final PDF generation — validated inputs produce standardized compliance-ready outputs" },
+      { type: "image", src: "/case-studies/PBL/Dashboard v5 - Metrics collapsed.png", caption: "Post-Mission Review Dashboard - Review Post-Mission Flight Data for Validation -> Sign-Off -> Push to Official USAF ARMS Database" },
+      { type: "image", src: "/case-studies/PBL/Event Subpage - Aircrew Data.png", caption: "Review Flight Time & Correct Discrepancies - UI Patterns Matching Familiar Mental Models from PBL UI" },
+        { type: "image", src: "/case-studies/PBL/Event Subpage - All Forms.png", caption: "Supplemental Form Support provides unit-to-unit flexibility & workflow support" },
+      { type: "image", src: "/case-studies/PBL/Event Subpage - Fuel Metrics - Tanker.png", caption: "Fuel Metric Data was one of the largest sources of errors & data loss on handwritten forms. A Missed 0 could mean millions in Accounting & Billing Errors" },
+      { type: "image", src: "/case-studies/PBL/Event Subpage - Mission Data.png", caption: "Compare logged training events with logged time in one view for simpler tracking (Example: A Night Vision Goggle Training Event requires Night Flight Time to be logged" },
+      { type: "image", src: "/case-studies/PBL/Event Subpage - Training Events Table.png", caption: "Review Logged Training Events across by All Aircrew across All Sorties in useful easy-to-parse breakdowns" },
+      { type: "image", src: "/case-studies/PBL/Push to ARMS flow MVP.png", caption: "" },
     ],
     tags: ["iOS", "Contextual Inquiry", "Interaction Design", "Usability Testing", "Figma", "DoD"],
     links: [
